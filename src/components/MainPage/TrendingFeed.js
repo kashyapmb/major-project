@@ -237,9 +237,9 @@ function TrendingFeed() {
 												}}
 											>
 												{item.saved ? (
-													<BsBookmarkPlus size={20} />
-												) : (
 													<BsFillBookmarkCheckFill size={20} />
+												) : (
+													<BsBookmarkPlus size={20} />
 												)}
 											</Box>
 										</div>
