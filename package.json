@@ -26,7 +26,9 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4",
-    "yup": "^1.0.2"
+    "yup": "^1.0.2",
+    "fabric": "^5.3.0",
+    "fabric-history": "^1.7.0"
   },
   "scripts": {
     "start": "react-scripts start",

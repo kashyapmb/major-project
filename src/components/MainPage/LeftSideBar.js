@@ -33,6 +33,7 @@ function LeftSideBar({ selectNum, increment }) {
 					}}
 				>
 					<Typography
+						onClick={() => increment(0)}
 						component={"img"}
 						src="/images/logo.png"
 						href="/"

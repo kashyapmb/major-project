@@ -27,6 +27,12 @@ function Home() {
 		setSelectNum(newNumber)
 	}
 	React.useEffect(() => {}, [selectNum])
+
+	const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
+	
 	return (
 		<>
 			<Grid container component="div" sx={{ height: "100%" }}>
@@ -42,10 +48,13 @@ function Home() {
 							justifyContent: "space-between",
 							alignItems: "center",
 							background: "#00457e",
-							paddingRight:'0.8rem',
+							paddingRight: "0.8rem",
 							paddingY: "0.7rem",
 						}}
 					>
+						<Button onClick={handleLogout}>
+							Logout
+						</Button>
 						<Box>Kashyap</Box>
 						<Box sx={{ display: "flex", alignItems: "center" }}>
 							<Typography
