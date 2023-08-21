@@ -29,10 +29,10 @@ function Home() {
 	React.useEffect(() => {}, [selectNum])
 
 	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-	
+		localStorage.removeItem("token")
+		window.location.reload()
+	}
+
 	return (
 		<>
 			<Grid container component="div" sx={{ height: "100%" }}>
@@ -52,11 +52,21 @@ function Home() {
 							paddingY: "0.7rem",
 						}}
 					>
-						<Button onClick={handleLogout}>
-							Logout
-						</Button>
 						<Box>Kashyap</Box>
 						<Box sx={{ display: "flex", alignItems: "center" }}>
+							<Button
+								onClick={handleLogout}
+								sx={{
+									marginX: "1rem",
+									background: "white",
+									fontSize: "1rem",
+									width: "1rem",
+									height: "1.3rem",
+									":hover": { background: "grey", color: "white" },
+								}}
+							>
+								Logout
+							</Button>
 							<Typography
 								component={"img"}
 								src="/images/crystal.jpg"
