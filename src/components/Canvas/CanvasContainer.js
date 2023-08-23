@@ -6,8 +6,12 @@ import jsPDF from "jspdf"
 import { BiSolidBackpack } from "react-icons/bi"
 import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
 
+export var canvasRef
+export var canvas
+
 const CanvasContainer = () => {
-	const canvasRef = useRef(null)
+	canvasRef = useRef(null)
+	canvas = useRef(null)
 	const [isAddingLine, setIsAddingLine] = useState(false)
 	const [selectedColor, setSelectedColor] = useState("#000000") // Initial color is black
 	const [selectedBorderColor, setSelectedBorderColor] = useState("#000000") // Initial border color is black
@@ -20,14 +24,12 @@ const CanvasContainer = () => {
 	const [letterSpacing, setLetterSpacing] = useState(0)
 	const [lineSpacing, setLineSpacing] = useState(0)
 
-	const canvas = useRef(null)
-
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
 			width: 800,
-			height: 600,
-			backgroundColor: "#fff",
-			selectionBorderColor: "black",
+			height: 450,
+			backgroundColor: "white",
+			selectionBorderColor: "#2563eb",
 		})
 
 		// Enable history management for undo/redo
@@ -39,32 +41,18 @@ const CanvasContainer = () => {
 		canvas.current.selection = true
 
 		// Attach button click events to add shapes
-		const addRectangleButton = document.getElementById("addRectangle")
-		const addCircleButton = document.getElementById("addCircle")
-		const addLineButton = document.getElementById("addLine")
-		const colorPicker = document.getElementById("colorPicker")
-		const bringForwardButton = document.getElementById("bringForward")
-		const sendBackwardButton = document.getElementById("sendBackward")
-		const applySolidBorderButton = document.getElementById("applySolidBorder")
+		// const colorPicker = document.getElementById("colorPicker")
+		// const bringForwardButton = document.getElementById("bringForward")
+		// const sendBackwardButton = document.getElementById("sendBackward")
+		// const applySolidBorderButton = document.getElementById("applySolidBorder")
 
-		addRectangleButton.addEventListener("click", addRectangle)
-		addCircleButton.addEventListener("click", addCircle)
-		addLineButton.addEventListener("click", addLine)
-		colorPicker.addEventListener("change", handleColorChange)
-		bringForwardButton.addEventListener("click", bringForward)
-		sendBackwardButton.addEventListener("click", sendBackward)
-		// Add event listener for the Delete key
+		// colorPicker.addEventListener("change", handleColorChange)
+		// bringForwardButton.addEventListener("click", bringForward)
+		// sendBackwardButton.addEventListener("click", sendBackward)
 		window.addEventListener("keydown", handleDelete)
 
 		return () => {
-			// Cleanup if necessary
 			canvas.current.dispose()
-			addRectangleButton.removeEventListener("click", addRectangle)
-			addCircleButton.removeEventListener("click", addCircle)
-			addLineButton.removeEventListener("click", addLine)
-			colorPicker.removeEventListener("change", handleColorChange)
-			bringForwardButton.removeEventListener("click", bringForward)
-			sendBackwardButton.removeEventListener("click", sendBackward)
 			window.removeEventListener("keydown", handleDelete)
 		}
 	}, [])
@@ -119,6 +107,20 @@ const CanvasContainer = () => {
 			activeObject.set("stroke", selectedBorderColor)
 			canvas.current.renderAll()
 		}
+	}
+
+	const addRectangle = () => {
+		console.log("Clickeddd")
+		const rect = new fabric.Rect({
+			left: 100,
+			top: 100,
+			fill: selectedColor,
+			width: 100,
+			height: 100,
+		})
+		canvas.current.add(rect)
+		canvas.current.setActiveObject(rect) // Select the added rectangle
+		canvas.current.renderAll()
 	}
 
 	const addHeart = () => {
@@ -197,19 +199,6 @@ const CanvasContainer = () => {
 		})
 		canvas.current.add(trapezoidalPath)
 		canvas.current.setActiveObject(trapezoidalPath)
-		canvas.current.renderAll()
-	}
-
-	const addRectangle = () => {
-		const rect = new fabric.Rect({
-			left: 100,
-			top: 100,
-			fill: selectedColor,
-			width: 100,
-			height: 100,
-		})
-		canvas.current.add(rect)
-		canvas.current.setActiveObject(rect) // Select the added rectangle
 		canvas.current.renderAll()
 	}
 
@@ -523,8 +512,12 @@ const CanvasContainer = () => {
 	return (
 		<div>
 			<canvas ref={canvasRef} />
-			<button id="addRectangle">Add Rectangle</button>
-			<button id="addCircle">Add Circle</button>
+			{/* <button id="addRectangle" onClick={addRectangle}>
+				Add Rectangle
+			</button>
+			<button id="addCircle" onClick={addCircle}>
+				Add Circle
+			</button>
 			<button id="addTriangle" onClick={addTriangle}>
 				Add Triangle
 			</button>
@@ -567,7 +560,10 @@ const CanvasContainer = () => {
 			<button id="addTrapezoidal" onClick={addTrapezoidal}>
 				Add Trapezoidal
 			</button>
-			<input
+			<button id="addLine" onClick={addLine}>
+				Add Line
+			</button>*/}
+			{/* <input
 				type="range"
 				id="opacitySlider"
 				min="0"
@@ -576,25 +572,28 @@ const CanvasContainer = () => {
 				value={selectedOpacity}
 				onChange={handleOpacityChange}
 			/>
-			<button id="addLine">Add Line</button>
 			<input
 				type="color"
 				id="colorPicker"
 				value={selectedColor}
 				onChange={handleColorChange}
-			/>
-			<button id="bringForward">Bring Forward</button>
-			<button id="sendBackward">Send Backward</button>
-			<button id="applySolidBorder" onClick={applyBorder}>
-				Apply Solid Border
+			/> */}
+			{/* <button id="bringForward" onClick={bringForward}>
+				Bring Forward
 			</button>
-			<input
+			<button id="sendBackward" onClick={sendBackward}>
+				Send Backward
+			</button> */}
+			{/* <button id="applySolidBorder" onClick={applyBorder}>
+				Apply Solid Border
+			</button> */}
+			{/* <input
 				type="color"
 				id="borderColorPicker"
 				value={selectedBorderColor}
 				onChange={handleBorderColorChange}
-			/>
-			<button id="addTextbox" onClick={addTextBox}>
+			/> */}
+			{/* <button id="addTextbox" onClick={addTextBox}>
 				Add TextBox
 			</button>
 			<input
@@ -625,9 +624,9 @@ const CanvasContainer = () => {
 				step="0.01"
 				value={lineSpacing}
 				onChange={handleLineSpacingChange}
-			/>
-			<button onClick={handleDownloadPNG}>Download as PNG</button>
-			<button onClick={handleDownloadPDF}>Download as PDF</button>
+			/> */}
+			{/* <button onClick={handleDownloadPNG}>Download as PNG</button>
+			<button onClick={handleDownloadPDF}>Download as PDF</button>  */}
 		</div>
 	)
 }

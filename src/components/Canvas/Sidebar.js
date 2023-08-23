@@ -2,6 +2,12 @@ import { Box, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { MdDesignServices } from "react-icons/md"
 import { PiShapes, PiTextTBold, PiUploadSimpleFill } from "react-icons/pi"
+import { HiOutlineBackward } from "react-icons/hi2";
+import { HiDownload } from "react-icons/hi";
+import { FiDownloadCloud } from "react-icons/fi";
+
+
+
 import { SiOpenai } from "react-icons/si"
 
 function Sidebar({ selectNum, setSelectNum }) {
@@ -117,6 +123,45 @@ function Sidebar({ selectNum, setSelectNum }) {
 				>
 					<SiOpenai size={25} />
 					<Typography sx={{ fontSize: "0.8rem" }}>AI</Typography>
+				</Box>
+				<Box
+					sx={{
+						height: "4rem",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						flexDirection: "column",
+						flexWrap: "wrap",
+						background: selectNum == 6 ? "#404040" : "#282828",
+						color: "white",
+						opacity: selectNum == 6 ? "1" : "0.45",
+						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
+					}}
+					onClick={() => {
+						itemSelected(6)
+					}}
+				>
+					<HiDownload size={25} />
+					<Typography sx={{ fontSize: "0.8rem" }}>Download</Typography>
+				</Box>
+				<Box
+					sx={{
+						height: "4rem",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						flexDirection: "column",
+						flexWrap: "wrap",
+						background: "#282828",
+						color: "white",
+
+						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
+					}}
+					onClick={() => {
+						itemSelected(0)
+					}}
+				>
+					<HiOutlineBackward size={25} />
 				</Box>
 			</Box>
 		</>
