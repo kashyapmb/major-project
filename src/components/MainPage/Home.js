@@ -52,7 +52,7 @@ function Home() {
 							paddingY: "0.7rem",
 						}}
 					>
-						<Box>Kashyap</Box>
+						<Box>Header</Box>
 						<Box sx={{ display: "flex", alignItems: "center" }}>
 							<Button
 								onClick={handleLogout}

@@ -2,11 +2,9 @@ import { Box, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { MdDesignServices } from "react-icons/md"
 import { PiShapes, PiTextTBold, PiUploadSimpleFill } from "react-icons/pi"
-import { HiOutlineBackward } from "react-icons/hi2";
-import { HiDownload } from "react-icons/hi";
-import { FiDownloadCloud } from "react-icons/fi";
-
-
+import { HiOutlineBackward } from "react-icons/hi2"
+import { HiDownload } from "react-icons/hi"
+import { FiDownloadCloud } from "react-icons/fi"
 
 import { SiOpenai } from "react-icons/si"
 
@@ -21,7 +19,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 				sx={{
 					maxHeight: "100vh",
 					height: "92vh",
-					background: "#282828",
+					background: "#18191b",
 				}}
 			>
 				<Box
@@ -32,7 +30,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 1 ? "#404040" : "#282828",
+						background: selectNum == 1 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 1 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -52,7 +50,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 2 ? "#404040" : "#282828",
+						background: selectNum == 2 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 2 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -72,7 +70,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 3 ? "#404040" : "#282828",
+						background: selectNum == 3 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 3 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -92,7 +90,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 4 ? "#404040" : "#282828",
+						background: selectNum == 4 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 4 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -112,7 +110,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 5 ? "#404040" : "#282828",
+						background: selectNum == 5 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 5 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -132,7 +130,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: selectNum == 6 ? "#404040" : "#282828",
+						background: selectNum == 6 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 6 ? "1" : "0.45",
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
@@ -152,7 +150,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
-						background: "#282828",
+						background: "#18191b",
 						color: "white",
 
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },

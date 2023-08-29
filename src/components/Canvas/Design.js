@@ -7,11 +7,12 @@ import CanvasHeader from "./CanvasHeader"
 
 function Design() {
 	const [selectNum, setSelectNum] = useState(1)
+	const [objClicked, setObjClicked] = useState(false)
 	const [layoutSize, setLayoutSize] = useState(8)
 	useEffect(() => {
 		if (selectNum == 0) setLayoutSize(11.2)
 		else setLayoutSize(8)
-	}, [selectNum])
+	}, [selectNum,objClicked])
 
 	return (
 		<>
@@ -25,12 +26,12 @@ function Design() {
 
 				{selectNum != 0 && (
 					<Grid item xs={3.2}>
-						<Drawer selectNum={selectNum} />
+						<Drawer selectNum={selectNum} setObjClicked={setObjClicked} />
 					</Grid>
 				)}
 
 				<Grid item xs={layoutSize} sx={{background:'#e6e6e6'}}>
-					<CanvasHeader />
+					<CanvasHeader objClicked={objClicked} />
 					<Box
 						sx={{
 							display: "flex",

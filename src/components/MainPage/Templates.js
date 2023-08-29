@@ -28,57 +28,57 @@ import RightSideBar from "./RightSideBar"
 const itemData = [
 	{
 		img: "/images/templates/t1.png",
-		title: "Breakfast",
+		title: "Hover Effect",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t2.png",
-		title: "Breakfast",
+		title: "Neon Glowing Effect",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t3.png",
-		title: "Breakfast",
+		title: "Login Page",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t4.png",
-		title: "Breakfast",
+		title: "Hover Effect",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t5.png",
-		title: "Breakfast",
+		title: "Animated Button",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t6.png",
-		title: "Breakfast",
+		title: "Password Generator",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t7.png",
-		title: "Breakfast",
+		title: "Button Effect",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t8.png",
-		title: "Breakfast",
+		title: "Login Page",
 		author: "@bkristastucchio",
 	},
 	{
 		img: "/images/templates/t9.png",
-		title: "Burger",
+		title: "Card Hover Effect",
 		author: "@rollelflex_graphy726",
 	},
 	{
 		img: "/images/templates/t10.png",
-		title: "Burger",
+		title: "Animated Button",
 		author: "@rollelflex_graphy726",
 	},
 	{
 		img: "/images/templates/t11.png",
-		title: "Burger",
+		title: "Login Page",
 		author: "@rollelflex_graphy726",
 	},
 ]

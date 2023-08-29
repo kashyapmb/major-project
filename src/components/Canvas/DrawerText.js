@@ -31,11 +31,53 @@ function DrawerText() {
 	const [letterSpacing, setLetterSpacing] = useState(0)
 	const [lineSpacing, setLineSpacing] = useState(0)
 
-	const addTextBox = () => {
-		const text = new fabric.IText("Your text here", {
-			left: 100,
-			top: 100,
-			fill: "red", // Set the initial text color
+	const addTextBoxHeading = () => {
+		const text = new fabric.IText("Add a Heading", {
+			left: 20,
+			top: 20,
+			fill: "black", // Set the initial text color
+			fontSize: 60,
+			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
+			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
+			// underline: isUnderline, // Set initial underline style
+			fontWeight: "600",
+			fontStyle: "normal",
+			underline: false,
+			charSpacing: -10,
+			lineHeight: 1 + 0 / 10,
+			fontFamily: "Arial", // Set the font family
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxSubHeading = () => {
+		const text = new fabric.IText("Add a Subheading", {
+			left: 20,
+			top: 80,
+			fill: "black", // Set the initial text color
+			fontSize: 40,
+			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
+			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
+			// underline: isUnderline, // Set initial underline style
+			fontWeight: "500",
+			fontStyle: "normal",
+			underline: false,
+			charSpacing: -10,
+			lineHeight: 1 + 0 / 10,
+			fontFamily: "Arial", // Set the font family
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxBodyText = () => {
+		const text = new fabric.IText("Add a body Text", {
+			left: 20,
+			top: 125,
+			fill: "black", // Set the initial text color
 			fontSize: 20,
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
@@ -142,89 +184,144 @@ function DrawerText() {
 
 	return (
 		<>
-			<Box sx={{ paddingX: "1rem" }}>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<select
-						id="fontFamilySelect"
-						value={selectedFontFamily}
-						onChange={handleFontFamilyChange}
-					>
-						<option value="Arial">Arial</option>
-						<option value="Verdana">Verdana</option>
-						<option value="Times New Roman">Times New Roman</option>
-						<option value="Georgia">Georgia</option>
-						<option value="Courier New">Courier New</option>
-						<option value="Helvetica">Helvetica</option>
-						<option value="Trebuchet MS">Trebuchet MS</option>
-						<option value="Arial Black">Arial Black</option>
-						<option value="Comic Sans MS">Comic Sans MS</option>
-						<option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-						<option value="Palatino Linotype">Palatino Linotype</option>
-						<option value="Tahoma">Tahoma</option>
-						<option value="Impact">Impact</option>
-						<option value="Book Antiqua">Book Antiqua</option>
-						<option value="Arial Narrow">Arial Narrow</option>
-						{/* Add more font options as needed */}
-					</select>
+			<Box sx={{ p: "1rem" }}>
+				<Typography sx={{ color: "white" }}>Default Text Styles</Typography>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.3rem",
+						color: "white",
+						fontWeight: "600",
+						fontSize: "1.5rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxHeading}
+				>
+					Add a Heading
 				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button id="addTextbox" onClick={addTextBox}>
-						Add TextBox
-					</button>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "500",
+						fontSize: "1.2rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxSubHeading}
+				>
+					Add a subheading
 				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-        <Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Text Color
-					</Typography>
-					<input
-						type="color"
-						id="textColorPicker"
-						value={selectedTextColor}
-						onChange={handleTextColorChange}
-					/>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxBodyText}
+				>
+					Add a little body text
 				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={increaseTextSize}>Increase Text Size</button>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={decreaseTextSize}>Decrease Text Size</button>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={toggleBold}>Bold</button>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={toggleItalic}>Italic</button>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={toggleUnderline}>Underline</button>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Letter Spacing
-					</Typography>
-					<input
-						type="range"
-						id="letterSpacingSlider"
-						min="-10"
-						max="1000"
-						step="1"
-						value={letterSpacing}
-						onChange={handleLetterSpacingChange}
-					/>
-				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Line Spacing
-					</Typography>
-					<input
-						type="range"
-						id="lineSpacingSlider"
-						min="0"
-						max="10"
-						step="0.01"
-						value={lineSpacing}
-						onChange={handleLineSpacingChange}
-					/>
+				<Box sx={{ paddingX: "1rem" }}>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<select
+							id="fontFamilySelect"
+							value={selectedFontFamily}
+							onChange={handleFontFamilyChange}
+						>
+							<option value="Arial">Arial</option>
+							<option value="Verdana">Verdana</option>
+							<option value="Times New Roman">Times New Roman</option>
+							<option value="Georgia">Georgia</option>
+							<option value="Courier New">Courier New</option>
+							<option value="Helvetica">Helvetica</option>
+							<option value="Trebuchet MS">Trebuchet MS</option>
+							<option value="Arial Black">Arial Black</option>
+							<option value="Comic Sans MS">Comic Sans MS</option>
+							<option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+							<option value="Palatino Linotype">Palatino Linotype</option>
+							<option value="Tahoma">Tahoma</option>
+							<option value="Impact">Impact</option>
+							<option value="Book Antiqua">Book Antiqua</option>
+							<option value="Arial Narrow">Arial Narrow</option>
+							{/* Add more font options as needed */}
+						</select>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
+							Text Color
+						</Typography>
+						<input
+							type="color"
+							id="textColorPicker"
+							value={selectedTextColor}
+							onChange={handleTextColorChange}
+						/>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<button onClick={increaseTextSize}>Increase Text Size</button>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<button onClick={decreaseTextSize}>Decrease Text Size</button>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<button onClick={toggleBold}>Bold</button>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<button onClick={toggleItalic}>Italic</button>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<button onClick={toggleUnderline}>Underline</button>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
+							Letter Spacing
+						</Typography>
+						<input
+							type="range"
+							id="letterSpacingSlider"
+							min="-10"
+							max="1000"
+							step="1"
+							value={letterSpacing}
+							onChange={handleLetterSpacingChange}
+						/>
+					</Box>
+					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
+						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
+							Line Spacing
+						</Typography>
+						<input
+							type="range"
+							id="lineSpacingSlider"
+							min="0"
+							max="10"
+							step="0.01"
+							value={lineSpacing}
+							onChange={handleLineSpacingChange}
+						/>
+					</Box>
 				</Box>
 			</Box>
 		</>

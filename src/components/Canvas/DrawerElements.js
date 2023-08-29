@@ -8,6 +8,7 @@ import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
 import { canvas, canvasRef } from "./CanvasContainer"
 import {
 	Avatar,
+	Box,
 	Button,
 	Card,
 	CardActions,
@@ -16,9 +17,57 @@ import {
 	CardMedia,
 	Typography,
 } from "@mui/material"
+import {} from "react-icons/ai"
+import {
+	BsDiamondFill,
+	BsFillHeartFill,
+	BsFillPentagonFill,
+	BsFillSquareFill,
+	BsHeptagonFill,
+	BsHexagonFill,
+	BsOctagonFill,
+	BsStarFill,
+} from "react-icons/bs"
+import { BiSolidSquare } from "react-icons/bi"
+import {} from "react-icons/ci"
+import {} from "react-icons/di"
+import {} from "react-icons/fi"
+import {} from "react-icons/fc"
+import { FaBitbucket, FaCircle } from "react-icons/fa"
+import {} from "react-icons/fa6"
+import { GiPlainSquare } from "react-icons/gi"
+import {} from "react-icons/go"
+import {} from "react-icons/gr"
+import { HiOutlineMinus } from "react-icons/hi"
+import {} from "react-icons/hi2"
+import {
+	ImArrowDown,
+	ImArrowLeft,
+	ImArrowRight,
+	ImArrowUp,
+} from "react-icons/im"
+import {} from "react-icons/lia"
+import {} from "react-icons/io"
+import { IoTriangle } from "react-icons/io5"
+import {} from "react-icons/lu"
+import {} from "react-icons/md"
+import {} from "react-icons/pi"
+import {} from "react-icons/rx"
+import {} from "react-icons/ri"
+import {} from "react-icons/si"
+import {} from "react-icons/sl"
+import { TbRectangleFilled } from "react-icons/tb"
+import {} from "react-icons/tfi"
+import {} from "react-icons/ti"
+import {} from "react-icons/vsc"
+import {} from "react-icons/wi"
+import {} from "react-icons/cg"
 
-function DrawerElements() {
+import { transform } from "lodash"
+
+function DrawerElements({ setObjClicked }) {
 	const selectedColor = "#000"
+
 	const addRectangle = () => {
 		const rect = new fabric.Rect({
 			left: 100,
@@ -27,6 +76,15 @@ function DrawerElements() {
 			width: 100,
 			height: 100,
 		})
+		rect.on("mousedown", function (options) {
+			setObjClicked(true)
+			console.log("Clicked on circle:", this) // 'this' refers to the clicked circle object
+			console.log("Object properties:", this.toObject())
+			const objj = canvas.current.getActiveObject()
+			console.log("objj properties:", objj.height)
+			// Perform any other actions you need for circle
+		})
+
 		canvas.current.add(rect)
 		canvas.current.setActiveObject(rect) // Select the added rectangle
 		canvas.current.renderAll()
@@ -35,7 +93,7 @@ function DrawerElements() {
 		const heart = new fabric.Path(
 			"M50 85 A20 20 0 0 1 90 85 Q100 130 50 175 Q0 130 10 85 A20 20 0 0 1 50 85",
 			{
-				left: 700,
+				left: 70,
 				top: 50,
 				fill: selectedColor,
 			}
@@ -97,7 +155,6 @@ function DrawerElements() {
 		canvas.current.setActiveObject(rightArrowPath)
 		canvas.current.renderAll()
 	}
-
 
 	const addTrapezoidal = () => {
 		const trapezoidalPath = new fabric.Path("M0 0 L40 0 L30 40 L10 40 Z", {
@@ -268,59 +325,187 @@ function DrawerElements() {
 	}
 	return (
 		<>
-			<div>
-				<button id="addRectangle" onClick={addRectangle}>
-					Add Rectangle
-				</button>
-				<button id="addCircle" onClick={addCircle}>
-					Add Circle
-				</button>
-				<button id="addTriangle" onClick={addTriangle}>
-					Add Triangle
-				</button>
-				<button id="addDiamond" onClick={addDiamond}>
-					Add Diamond
-				</button>
-				<button id="addStar" onClick={addStar}>
-					Add Star
-				</button>
-				<button id="addRoundedRectangle" onClick={addRoundedRectangle}>
-					Add Rounded Rectangle
-				</button>
-				<button id="addPentagon" onClick={addPentagon}>
-					Add Pentagon
-				</button>
-				<button id="addHexagon" onClick={addHexagon}>
-					Add Hexagon
-				</button>
-				<button id="addHeptagon" onClick={addHeptagon}>
-					Add Heptagon
-				</button>
-				<button id="addOctagon" onClick={addOctagon}>
-					Add Octagon
-				</button>
-				<button id="addHeart" onClick={addHeart}>
-					Add Heart
-				</button>
-				<button id="addUpArrow" onClick={addUpArrow}>
-					Add Up Arrow
-				</button>
-				<button id="addDownArrow" onClick={addDownArrow}>
-					Add Down Arrow
-				</button>
-				<button id="addLeftArrow" onClick={addLeftArrow}>
-					Add Left Arrow
-				</button>
-				<button id="addRightArrow" onClick={addRightArrow}>
-					Add Right Arrow
-				</button>
-				<button id="addTrapezoidal" onClick={addTrapezoidal}>
-					Add Trapezoidal
-				</button>
-				<button id="addLine" onClick={addLine}>
-					Add Line
-				</button>
-			</div>
+			<Box sx={{ ml: "0.8rem", pt: "1rem" }}>
+				<Typography sx={{ color: "white" }}>Shapes:</Typography>
+			</Box>
+			<Box sx={{ display: "flex", pl: "0.6rem", flexWrap: "wrap" }}>
+				<Box
+					sx={{
+						p: "0.4rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<GiPlainSquare size={40} onClick={addRectangle} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<FaCircle size={45} onClick={addCircle} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<IoTriangle size={45} onClick={addTriangle} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsDiamondFill size={40} onClick={addDiamond} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsStarFill size={40} onClick={addStar} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<TbRectangleFilled size={40} onClick={addRoundedRectangle} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsFillPentagonFill size={40} onClick={addPentagon} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsHexagonFill size={40} onClick={addHexagon} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsHeptagonFill size={40} onClick={addHeptagon} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsOctagonFill size={40} onClick={addOctagon} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<BsFillHeartFill size={40} onClick={addHeart} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<ImArrowUp size={40} onClick={addUpArrow} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<ImArrowRight size={40} onClick={addRightArrow} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<ImArrowDown size={40} onClick={addDownArrow} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<ImArrowLeft size={40} onClick={addLeftArrow} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<FaBitbucket size={40} onClick={addTrapezoidal} />
+				</Box>
+				<Box
+					sx={{
+						p: "0.3rem",
+						overflow: "hidden",
+						transition: "transform 0.2s",
+						":hover": { transform: "scale(1.2)" },
+					}}
+				>
+					<HiOutlineMinus size={40} onClick={addLine} />
+				</Box>
+
+				{/* <Box sx={{ paddingY: "0.3rem", display: "flex" }}>
+					<button id="addLine" onClick={addLine}>
+						Add Line
+					</button>
+				</Box> */}
+			</Box>
 		</>
 	)
 }
