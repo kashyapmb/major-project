@@ -15,10 +15,11 @@ function App() {
 	return (
 		<Routes>
 			<Route exact path="/">
-				{user && <Route path="/" exact element={<Home />} />}
+				{/* {user && <Route path="/" exact element={<Home />} />} */}
+				<Route path="/" exact element={<Design />} />
 				<Route exact path="/login" element={<Login />} />
 				<Route exact path="/signup" element={<Signup />} />
-				<Route exact path="/Design" element={<Design />} />
+				<Route exact path="/design" element={<Design />} />
 				<Route path="/" element={<Navigate replace to="/login" />} />
 				{/* <Route exact path="/following" element={<Following />} />
 					<Route exact path="/answer" element={<Answer />} />

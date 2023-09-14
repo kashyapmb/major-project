@@ -5,30 +5,28 @@ import html2canvas from "html2canvas"
 import jsPDF from "jspdf"
 import { BiSolidBackpack } from "react-icons/bi"
 import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
+import Design from "./Design"
+import Templates from "./Datastore/Templates"
 
 export var canvasRef
 export var canvas
 
-const CanvasContainer = () => {
+const CanvasContainer = ({
+	updateObjectClicked,
+	setSelectedColor,
+	setSelectedOpacity,
+	setSelectedFontSize,
+}) => {
 	canvasRef = useRef(null)
 	canvas = useRef(null)
-	const [isAddingLine, setIsAddingLine] = useState(false)
-	const [selectedColor, setSelectedColor] = useState("#000000") // Initial color is black
-	const [selectedBorderColor, setSelectedBorderColor] = useState("#000000") // Initial border color is black
-	const [selectedOpacity, setSelectedOpacity] = useState(1)
-	const [selectedTextColor, setSelectedTextColor] = useState("red") // Initial text color is red
-	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
-	const [isBold, setIsBold] = useState(false)
-	const [isItalic, setIsItalic] = useState(false)
-	const [isUnderline, setIsUnderline] = useState(false)
-	const [letterSpacing, setLetterSpacing] = useState(0)
-	const [lineSpacing, setLineSpacing] = useState(0)
+
+	const [objId, setObjId] = useState(1)
 
 	// let lastClickTime = 0
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			width: 800,
-			height: 450,
+			width: 720,
+			height: 405,
 			backgroundColor: "white",
 			selectionBorderColor: "#2563eb",
 		})
@@ -73,13 +71,68 @@ const CanvasContainer = () => {
 		// bringForwardButton.addEventListener("click", bringForward)
 		// sendBackwardButton.addEventListener("click", sendBackward)
 		window.addEventListener("keydown", keyboardHandle)
+		window.addEventListener("mousedown", mouseHandle)
+
+		canvas.current.on("selection:created", function (options) {
+			console.log("Selected")
+			var activeObject = canvas.current.getActiveObject()
+			console.log(activeObject)
+
+			if (activeObject) {
+				if (activeObject.type === "text") {
+					updateObjectClicked(2)
+					setSelectedFontSize(activeObject.fontSize)
+					// setFontSize()
+				} else {
+					updateObjectClicked(1)
+				}
+			}
+
+			console.log(canvas.current.getActiveObject())
+			setSelectedColor(canvas.current.getActiveObject().fill)
+			setSelectedOpacity(canvas.current.getActiveObject().opacity)
+		})
+		canvas.current.on("selection:updated", function (options) {
+			console.log("Updated")
+			var activeObject = canvas.current.getActiveObject()
+
+			if (activeObject) {
+				if (activeObject.type === "text") {
+					updateObjectClicked(2)
+					setSelectedFontSize(activeObject.fontSize)
+				} else {
+					updateObjectClicked(1)
+				}
+			}
+			setSelectedColor(canvas.current.getActiveObject().fill)
+			setSelectedOpacity(canvas.current.getActiveObject().opacity)
+		})
+
+		// Event listener for object deselect
+		canvas.current.on("selection:cleared", function (options) {
+			updateObjectClicked(0)
+		})
+
+		// // Event listener for canvas click to deselect
+		// canvas.current.on("mouse:down", function (options) {
+		// 	if (!options.target) {
+		// 		canvas.current.discardActiveObject()
+		// 		console.log("Deselected all objects")
+		// 	}
+		// })
 
 		return () => {
 			canvas.current.dispose()
 			window.removeEventListener("keydown", keyboardHandle)
+			window.removeEventListener("mousedown", mouseHandle)
 		}
 	}, [])
 
+	const mouseHandle = () => {
+		// console.log("Mouse Down")
+		// console.log(objClicked)
+		// setObjClicked(!objClicked)
+	}
 	const keyboardHandle = (event) => {
 		if (event.key === "Delete") {
 			const activeObject = canvas.current.getActiveObject()

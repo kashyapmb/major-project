@@ -7,16 +7,16 @@ import DrawerUpload from "./DrawerUpload"
 import DrawerAI from "./DrawerAI"
 import Download from "./DrawerDownload"
 
-function Drawer({ selectNum, setObjClicked }) {
+function Drawer({ selectNum }) {
 	return (
 		<>
 			<Box sx={{ height: "100%", background: "#252627" }}>
-				{selectNum == 1 && <DrawerDesign setObjClicked={setObjClicked} />}
-				{selectNum == 2 && <DrawerElements setObjClicked={setObjClicked} />}
-				{selectNum == 3 && <DrawerText setObjClicked={setObjClicked} />}
-				{selectNum == 4 && <DrawerUpload setObjClicked={setObjClicked} />}
-				{selectNum == 5 && <DrawerAI setObjClicked={setObjClicked} />}
-				{selectNum == 6 && <Download setObjClicked={setObjClicked} />}
+				{selectNum == 1 && <DrawerDesign />}
+				{selectNum == 2 && <DrawerElements />}
+				{selectNum == 3 && <DrawerText />}
+				{selectNum == 4 && <DrawerUpload />}
+				{selectNum == 5 && <DrawerAI />}
+				{selectNum == 6 && <Download />}
 			</Box>
 		</>
 	)

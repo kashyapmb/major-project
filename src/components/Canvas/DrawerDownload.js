@@ -55,15 +55,135 @@ function Download() {
 			pdf.save("canvas.pdf")
 		})
 	}
+	const handleDownloadJPG = () => {
+		const dataURL = canvas.current.toDataURL({
+			format: "jpeg",
+			quality: 0.8, // Adjust the quality as needed (0 to 1)
+		})
+
+		// Create a temporary anchor element for downloading
+		const a = document.createElement("a")
+		a.href = dataURL
+		a.download = "canvas.jpg" // Set the file name
+		document.body.appendChild(a)
+
+		// Trigger a click event to download the image
+		a.click()
+
+		// Clean up the temporary anchor element
+		document.body.removeChild(a)
+	}
+	const handleDownloadSVG = () => {
+		var svg = canvas.current.toSVG()
+		var blob = new Blob([svg], { type: "image/svg+xml" })
+		var url = window.URL.createObjectURL(blob)
+		var a = document.createElement("a")
+		a.href = url
+		a.download = "canvas.svg"
+		a.click()
+		window.URL.revokeObjectURL(url)
+	}
 
 	return (
 		<>
-			<Box sx={{ paddingX: "1rem" }}>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={handleDownloadPNG}>Download as PNG</button>
+
+			<Box sx={{ p: "1rem" }}>
+				<Typography sx={{ color: "white" }}>Default Text Styles</Typography>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={handleDownloadJPG}
+				>
+					<Box>
+						<Box sx={{ fontSize: "1rem" }}>Download as JPG</Box>
+						<Box sx={{ fontSize: "0.8rem", opacity: "0.7" }}>
+							Best for sharing
+						</Box>
+					</Box>
 				</Box>
-				<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-					<button onClick={handleDownloadPDF}>Download as PDF</button>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={handleDownloadPNG}
+				>
+					<Box>
+						<Box sx={{ fontSize: "1rem" }}> Download as PNG</Box>
+						<Box sx={{ fontSize: "0.8rem", opacity: "0.7" }}>
+							Best for complex images
+						</Box>
+					</Box>
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={handleDownloadPDF}
+				>
+					<Box>
+						<Box sx={{ fontSize: "1rem" }}>Download as PDF</Box>
+						<Box sx={{ fontSize: "0.8rem", opacity: "0.7" }}>
+							Best for documents (for emailing)
+						</Box>
+					</Box>
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={handleDownloadSVG}
+				>
+					<Box>
+						<Box sx={{ fontSize: "1rem" }}>Download as SVG</Box>
+						<Box sx={{ fontSize: "0.8rem", opacity: "0.7" }}>
+							Best for web design and animations
+						</Box>
+					</Box>
 				</Box>
 			</Box>
 		</>

@@ -17,127 +17,270 @@ import {
 	CardMedia,
 	Typography,
 } from "@mui/material"
+import { Templates } from "./Datastore/Templates"
 
 function DrawerDesign() {
-	const [isAddingLine, setIsAddingLine] = useState(false)
-	const [selectedColor, setSelectedColor] = useState("#000000") // Initial color is black
-	const [selectedBorderColor, setSelectedBorderColor] = useState("#000000") // Initial border color is black
-	const [selectedOpacity, setSelectedOpacity] = useState(1)
-	const [selectedTextColor, setSelectedTextColor] = useState("red") // Initial text color is red
-	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
-	const [isBold, setIsBold] = useState(false)
-	const [isItalic, setIsItalic] = useState(false)
-	const [isUnderline, setIsUnderline] = useState(false)
-	const [letterSpacing, setLetterSpacing] = useState(0)
-	const [lineSpacing, setLineSpacing] = useState(0)
+	const [projects, setProjects] = useState([]) // State to store saved projects
+	const [selectedProjectIndex, setSelectedProjectIndex] = useState(null)
+	const [uploadedImages, setUploadedImages] = useState([])
 
-	const handleOpacityChange = (event) => {
-		const newOpacity = parseFloat(event.target.value)
-		setSelectedOpacity(newOpacity)
-
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set("opacity", newOpacity)
-			canvas.current.renderAll()
+	const saveProject = () => {
+		if (selectedProjectIndex !== null) {
+			// If a project is selected, update it
+			const updatedProjects = [...projects]
+			const canvasState = JSON.stringify(canvas.current.toJSON())
+			const thumbnail = generateCanvasThumbnail()
+			updatedProjects[selectedProjectIndex] = {
+				canvasState,
+				thumbnail,
+				images: [...uploadedImages],
+			}
+			setProjects(updatedProjects)
 		}
 	}
-	const handleColorChange = (event) => {
-		setSelectedColor(event.target.value)
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set("fill", selectedColor)
-			activeObject.set("stroke", selectedColor)
-			canvas.current.renderAll()
-		}
+
+	const saveAsNewProject = () => {
+		// const canvasState = canvas.current
+
+		// // Add the captured canvas state as a new project
+		// setProjects([...projects, canvasState])
+
+		// // Clear the canvas selection and set the new project as the selected one
+		// setSelectedProjectIndex(projects.length)
+
+		// console.log("Canvas Object")
+		// console.log(canvasState)
+		// var json = JSON.stringify(canvas.current.toDatalessJSON())
+		// console.log("Canvas Object in json")
+		// console.log(json)
+
+		//Download the image
+		// const imgData = canvas.current.toDataURL("image/png")
+		// const a = document.createElement("a")
+		// a.href = imgData
+		// a.download = "canvas.png"
+		// a.click()
+
+		const canvasState = JSON.stringify(canvas.current.toJSON())
+		const thumbnail = generateCanvasThumbnail()
+
+		// Add the captured canvas state, thumbnail, and images as a new project
+		setProjects([
+			...projects,
+			{
+				canvasState,
+				thumbnail,
+				images: [...uploadedImages],
+			},
+		])
+
+		// Clear the canvas selection and set the new project as the selected one
+		setSelectedProjectIndex(projects.length)
 	}
-	const applyBorder = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set({
-				stroke: selectedBorderColor,
-				strokeWidth: 2, // You can adjust the border width
+
+	// const loadProject = (index) => {
+	// const projectState = JSON.parse(JSON.stringify(Templates[index]))
+	// console.log(projectState)
+
+	// canvas.current.clear()
+	// canvas.current.loadFromJSON(JSON.stringify(Templates[index]))
+
+	// const projectState = JSON.parse(Templates[index])
+	// // Clear the canvas before loading the project
+	// canvas.current.clear()
+
+	// // Load the project state into the canvas
+	// canvas.current.loadFromJSON(projectState, () => {
+	// 	canvas.current.renderAll()
+	// })
+
+	// Set the selected project index
+	// setSelectedProjectIndex(index)
+	// }
+
+	// const loadProject = (index) => {
+	// 	if (index >= 0 && index < Templates.length) {
+	// 		const projectState = JSON.parse(Templates[index])
+
+	// 		// Clear the canvas before loading the project
+	// 		canvas.current.clear()
+
+	// 		// Load the project state into the canvas
+	// 		canvas.current.loadFromJSON(projectState, () => {
+	// 			canvas.current.renderAll()
+	// 		})
+
+	// 		// Set the selected project index
+	// 		setSelectedProjectIndex(index)
+	// 	}
+	// }
+
+	const loadProject = (index) => {
+		// if (index >= 0 && index < projects.length) {
+		// 	const projectState = JSON.parse(projects[index])
+
+		// 	// Clear the canvas before loading the project
+		// 	canvas.current.clear()
+
+		// 	// Load the project state into the canvas
+		// 	canvas.current.loadFromJSON(projectState, () => {
+		// 		canvas.current.renderAll()
+		// 	})
+
+		// 	// Set the selected project index
+		// 	setSelectedProjectIndex(index)
+		// }
+
+		if (index >= 0 && index < projects.length) {
+			const project = projects[index]
+			const projectCanvasState = JSON.parse(project.canvasState)
+
+			// Clear the canvas before loading the project
+			canvas.current.clear()
+
+			// Load the project canvas state into the canvas
+			canvas.current.loadFromJSON(projectCanvasState, () => {
+				canvas.current.renderAll()
 			})
-			canvas.current.renderAll()
-		}
-	}
-	const handleBorderColorChange = (event) => {
-		setSelectedBorderColor(event.target.value)
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.stroke) {
-			activeObject.set("stroke", selectedBorderColor)
-			canvas.current.renderAll()
-		}
-	}
-	const bringForward = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			canvas.current.bringForward(activeObject)
-			canvas.current.renderAll()
+
+			// Set the selected project index
+			setSelectedProjectIndex(index)
+
+			// Load project images onto the canvas
+			setUploadedImages([...project.images])
 		}
 	}
 
-	const sendBackward = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			canvas.current.sendBackwards(activeObject)
-			canvas.current.renderAll()
-		}
+	// Function to generate a thumbnail of the canvas
+	const generateCanvasThumbnail = () => {
+		const thumbnailCanvas = document.createElement("canvas")
+		const thumbnailContext = thumbnailCanvas.getContext("2d")
+		thumbnailCanvas.width = 100 // Set the desired thumbnail width
+		thumbnailCanvas.height = 100 // Set the desired thumbnail height
+
+		// Create a thumbnail by drawing the canvas content onto the thumbnail canvas
+		thumbnailContext.drawImage(
+			canvasRef.current,
+			0,
+			0,
+			canvas.current.width,
+			canvas.current.height,
+			0,
+			0,
+			thumbnailCanvas.width,
+			thumbnailCanvas.height
+		)
+
+		// Convert the thumbnail canvas to a data URL
+		const thumbnailDataUrl = thumbnailCanvas.toDataURL("image/png")
+		return thumbnailDataUrl
 	}
+
+	const deleteProject = (index) => {
+		const updatedProjects = [...projects]
+		updatedProjects.splice(index, 1)
+		setProjects(updatedProjects)
+	}
+
+	// const ImageComponent = (obj) => {
+	// 	canvas.current.clear()
+	// 	const canva = fabric.Canvas()
+	// 	fabric.Canvas.loadFromJSON(obj, (loadedCanvas) => {
+	// 		loadedCanvas.getObjects().loadFromJSON((object) => {
+	// 			canvas.current.add(object)
+	// 		})
+	// 		canvas.current.renderAll()
+	// 	})
+
+	// 	const canvasJson = canvas.current.toJSON()
+
+	// 	// Log the JSON representation (for demonstration purposes)
+	// 	console.log("Canvas JSON:", canvasJson)
+
+	// 	// Reconvert JSON to canvas
+	// 	fabric.Canvas.fromJSON(canvasJson, (loadedCanvas) => {
+	// 		// Clear the original canvas
+	// 		canvas.current.clear()
+
+	// 		// Add the objects from the loaded JSON to the original canvas
+	// 		loadedCanvas.getObjects().forEach((object) => {
+	// 			canvas.current.add(object)
+	// 		})
+
+	// 		// Render the canvas with the loaded objects
+	// 		canvas.current.renderAll()
+	// 	})
+	// }
+
+	// useEffect(() => {
+	// 	projects.clear()
+	// 	{
+	// 		Templates.map((obj, index) => projects.push(obj))
+	// 	}
+	// }, [])
+
 	return (
 		<>
+			
 			<Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Opacity
-					</Typography>
-					<input
-						type="range"
-						id="opacitySlider"
-						min="0"
-						max="1"
-						step="0.01"
-						value={selectedOpacity}
-						onChange={handleOpacityChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Color
-					</Typography>
-					<input
-						type="color"
-						id="colorPicker"
-						value={selectedColor}
-						onChange={handleColorChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="applySolidBorder" onClick={applyBorder}>
-						Apply Solid Border
-					</button>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Border Color
-					</Typography>
-					<input
-						type="color"
-						id="borderColorPicker"
-						value={selectedBorderColor}
-						onChange={handleBorderColorChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="bringForward" onClick={bringForward}>
-						Bring Forward
-					</button>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="sendBackward" onClick={sendBackward}>
-						Send Backward
-					</button>
-				</Box>
+				{Templates.map((obj, index) => (
+					<>
+						<Typography
+							component={"img"}
+							src={`/images/templates/${index + 1}.png`}
+							href="/"
+							width={130}
+							height={73}
+							sx={{
+								cursor: "pointer",
+							}}
+							onClick={() => loadProject(index)}
+						/>
+					</>
+				))}
 			</Box>
+
+			<button onClick={saveProject}>Save Project</button>
+			<button onClick={saveAsNewProject}>Save as New Project</button>
+
+			<div>
+				<h2>Saved Projects</h2>
+				<ul>
+					{projects.map((project, index) => (
+						<li key={index}>
+							<span
+								style={{ cursor: "pointer" }}
+								onClick={() => loadProject(index)}
+							>
+								Project {index + 1}
+							</span>
+							<button onClick={() => deleteProject(index)}>Delete</button>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<div>
+				<h2>Saved Projects</h2>
+				<ul>
+					{projects.map((project, index) => (
+						<ul key={index}>
+							<span
+								style={{ cursor: "pointer" }}
+								onClick={() => loadProject(index)}
+							>
+								<img
+									src={project.thumbnail} // Display the project thumbnail as an image
+									alt={`Project Thumbnail ${index}`}
+									width={50} // Set the desired thumbnail width
+									height={50} // Set the desired thumbnail height
+								/>
+							</span>
+							<button onClick={() => deleteProject(index)}>Delete</button>
+						</ul>
+					))}
+				</ul>
+			</div>
 		</>
 	)
 }

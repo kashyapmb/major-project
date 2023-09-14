@@ -6,75 +6,93 @@ import jsPDF from "jspdf"
 import { BiSolidBackpack } from "react-icons/bi"
 import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
 import { canvas, canvasRef } from "./CanvasContainer"
+import { Box } from "@mui/material"
 
 function DrawerUpload() {
 	const [uploadedImages, setUploadedImages] = useState([]) // State variable to store uploaded images
-	const [selectedImageIndex, setSelectedImageIndex] = useState(-1) // State variable to track the selected image
 
-	const handleUploadImage = (event) => {
-		const file = event.target.files[0] // Get the first selected file
+	// Function to add the selected image to the canvas
+	const addImageToCanvas = (image) => {
+		const fabricImage = new fabric.Image(image, {
+			left: 0,
+			top: 0,
+			scaleX: 0.2, // Set the desired scaleX (e.g., 0.5 for half size)
+			scaleY: 0.2, // Set the desired scaleY (e.g., 0.5 for half size)
+		})
+		canvas.current.add(fabricImage)
+		canvas.current.setActiveObject(fabricImage)
+		canvas.current.renderAll()
+	}
 
+	const hiddenFileInput = useRef(null)
+
+	const handleClick = (event) => {
+		hiddenFileInput.current.click()
+	}
+	const handleChange = (event) => {
+		const file = event.target.files[0]
 		if (file) {
-			// Check if a file was selected
 			const reader = new FileReader()
-
-			// Define a function to run when the FileReader has loaded the image
 			reader.onload = (e) => {
-				const imgSrc = e.target.result
-
-				// Create a fabric.Image object from the uploaded image
-				fabric.Image.fromURL(
-					imgSrc,
-					(img) => {
-						img.set({
-							left: 100,
-							top: 100,
-							scaleX: 0.3, // Adjust the initial scale as needed for zoom-in effect
-							scaleY: 0.3, // Adjust the initial scale as needed for zoom-in effect
-						})
-
-						const newImages = [...uploadedImages, img] // Create a new array with the added image
-						setUploadedImages(newImages) // Update the state with the new array of images
-						setSelectedImageIndex(newImages.length - 1) // Select the newly added image
-					},
-					{ crossOrigin: "Anonymous" } // Required for CORS-enabled images
-				)
+				const image = new Image()
+				image.src = e.target.result
+				image.onload = () => {
+					setUploadedImages([...uploadedImages, image])
+				}
 			}
-
-			// Read the selected file as a Data URL
 			reader.readAsDataURL(file)
 		}
 	}
 
-	const handleImageSelection = (index) => {
-		setSelectedImageIndex(index)
-	}
-
-	useEffect(() => {
-		if (selectedImageIndex !== -1) {
-			// Check if an image is selected
-			const selectedImage = uploadedImages[selectedImageIndex]
-			canvas.current.add(selectedImage) // Add the selected image to the canvas
-			canvas.current.renderAll() // Render the canvas
-		}
-	}, [selectedImageIndex, uploadedImages])
+	useEffect(() => {}, [uploadedImages])
 	return (
 		<>
-			<input type="file" accept="image/*" onChange={handleUploadImage} />
-			<div>
-				<h4>Uploaded Images:</h4>
-				<ul>
-					{uploadedImages.map((img, index) => (
-						<li
+			<Box sx={{ p: "1rem" }}>
+				<Box
+					sx={{
+						px: "1rem",
+						py: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						color: "white",
+						fontWeight: "600",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={handleClick}
+				>
+					Upload a File
+				</Box>
+				<input
+					type="file"
+					onChange={handleChange}
+					ref={hiddenFileInput}
+					style={{ display: "none" }} // Make the file input element invisible
+				/>
+				<Box sx={{mt:'1rem'}}>
+					{uploadedImages.map((image, index) => (
+						<img
 							key={index}
-							onClick={() => handleImageSelection(index)}
-							className={selectedImageIndex === index ? "selected" : ""}
-						>
-							Image {index + 1}
-						</li>
+							src={image.src}
+							alt={`Uploaded ${index}`}
+							onClick={() => addImageToCanvas(image)}
+							style={{
+								cursor: "pointer",
+								marginRight: "10px",
+								width: "100px", // Set the desired width
+								height: "100px", // Maintain aspect ratio
+								objectFit:'contain',
+								backgroundImage:`url(/images/bg.jpg)`,
+								backgroundSize:'150px'
+							}}
+						/>
 					))}
-				</ul>
-			</div>
+				</Box>
+			</Box>
 		</>
 	)
 }

@@ -37,6 +37,7 @@ function DrawerText() {
 			top: 20,
 			fill: "black", // Set the initial text color
 			fontSize: 60,
+			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -58,6 +59,7 @@ function DrawerText() {
 			top: 80,
 			fill: "black", // Set the initial text color
 			fontSize: 40,
+			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -79,6 +81,7 @@ function DrawerText() {
 			top: 125,
 			fill: "black", // Set the initial text color
 			fontSize: 20,
+			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -242,86 +245,6 @@ function DrawerText() {
 					onClick={addTextBoxBodyText}
 				>
 					Add a little body text
-				</Box>
-				<Box sx={{ paddingX: "1rem" }}>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<select
-							id="fontFamilySelect"
-							value={selectedFontFamily}
-							onChange={handleFontFamilyChange}
-						>
-							<option value="Arial">Arial</option>
-							<option value="Verdana">Verdana</option>
-							<option value="Times New Roman">Times New Roman</option>
-							<option value="Georgia">Georgia</option>
-							<option value="Courier New">Courier New</option>
-							<option value="Helvetica">Helvetica</option>
-							<option value="Trebuchet MS">Trebuchet MS</option>
-							<option value="Arial Black">Arial Black</option>
-							<option value="Comic Sans MS">Comic Sans MS</option>
-							<option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
-							<option value="Palatino Linotype">Palatino Linotype</option>
-							<option value="Tahoma">Tahoma</option>
-							<option value="Impact">Impact</option>
-							<option value="Book Antiqua">Book Antiqua</option>
-							<option value="Arial Narrow">Arial Narrow</option>
-							{/* Add more font options as needed */}
-						</select>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-							Text Color
-						</Typography>
-						<input
-							type="color"
-							id="textColorPicker"
-							value={selectedTextColor}
-							onChange={handleTextColorChange}
-						/>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<button onClick={increaseTextSize}>Increase Text Size</button>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<button onClick={decreaseTextSize}>Decrease Text Size</button>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<button onClick={toggleBold}>Bold</button>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<button onClick={toggleItalic}>Italic</button>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<button onClick={toggleUnderline}>Underline</button>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-							Letter Spacing
-						</Typography>
-						<input
-							type="range"
-							id="letterSpacingSlider"
-							min="-10"
-							max="1000"
-							step="1"
-							value={letterSpacing}
-							onChange={handleLetterSpacingChange}
-						/>
-					</Box>
-					<Box sx={{ paddingY: "0.6rem", display: "flex" }}>
-						<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-							Line Spacing
-						</Typography>
-						<input
-							type="range"
-							id="lineSpacingSlider"
-							min="0"
-							max="10"
-							step="0.01"
-							value={lineSpacing}
-							onChange={handleLineSpacingChange}
-						/>
-					</Box>
 				</Box>
 			</Box>
 		</>
