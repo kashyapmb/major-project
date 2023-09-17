@@ -19,6 +19,13 @@ function Design() {
 		setObjectClicked(temp)
 		console.log(objectClicked)
 	}
+
+	const backgroundClicked = (event) => {
+		if (event.target.nodeName === "DIV") {
+			canvas.current.discardActiveObject()
+			canvas.current.requestRenderAll()
+		}
+	}
 	useEffect(() => {
 		if (selectNum == 0) setLayoutSize(11.36)
 		else setLayoutSize(8.56)
@@ -49,6 +56,7 @@ function Design() {
 						setSelectedOpacity={setSelectedOpacity}
 						selectedFontSize={selectedFontSize}
 						setSelectedFontSize={setSelectedFontSize}
+						setSelectNum={setSelectNum}
 					/>
 					<Box
 						sx={{
@@ -57,6 +65,7 @@ function Design() {
 							alignItems: "center",
 							height: "84vh",
 						}}
+						onClick={backgroundClicked}
 					>
 						<CanvasContainer
 							updateObjectClicked={updateObjectClicked}

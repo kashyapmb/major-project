@@ -1,11 +1,12 @@
 import { Box } from "@mui/material"
-import React from "react"
+import React, { useEffect } from "react"
 import DrawerDesign from "./DrawerDesign"
 import DrawerElements from "./DrawerElements"
 import DrawerText from "./DrawerText"
 import DrawerUpload from "./DrawerUpload"
 import DrawerAI from "./DrawerAI"
 import Download from "./DrawerDownload"
+import ColorEffect from "./Editing/ColorEffect"
 
 function Drawer({ selectNum }) {
 	return (
@@ -17,6 +18,7 @@ function Drawer({ selectNum }) {
 				{selectNum == 4 && <DrawerUpload />}
 				{selectNum == 5 && <DrawerAI />}
 				{selectNum == 6 && <Download />}
+				{selectNum == 7 && <ColorEffect />}
 			</Box>
 		</>
 	)
