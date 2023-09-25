@@ -27,8 +27,8 @@ function Design() {
 		}
 	}
 	useEffect(() => {
-		if (selectNum == 0) setLayoutSize(11.36)
-		else setLayoutSize(8.56)
+		if (selectNum == 0) setLayoutSize(11.75)
+		else setLayoutSize(8.95)
 	}, [objectClicked, selectNum])
 
 	return (
@@ -37,12 +37,12 @@ function Design() {
 				Header in Canvas
 			</Box>
 			<Grid container component="div" sx={{ height: "100%" }}>
-				<Grid item xs={0.64}>
+				<Grid item xs={0.55}>
 					<Sidebar selectNum={selectNum} setSelectNum={setSelectNum} />
 				</Grid>
 
 				{selectNum != 0 && (
-					<Grid item xs={2.8}>
+					<Grid item xs={2.5}>
 						<Drawer selectNum={selectNum} setSelectNum={setSelectNum} />
 					</Grid>
 				)}
