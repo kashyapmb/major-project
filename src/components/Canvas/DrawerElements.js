@@ -28,6 +28,8 @@ import {
 	BsOctagonFill,
 	BsStarFill,
 } from "react-icons/bs"
+import axios from "axios"
+
 import { BiSolidSquare } from "react-icons/bi"
 import {} from "react-icons/ci"
 import {} from "react-icons/di"
@@ -69,19 +71,24 @@ const restEndpoint =
 	"https://emoji-api.com/emojis?access_key=3735be5d506be4780b25af3948e9d7c2e7e63b7f"
 
 const callRestApi = async () => {
-	const response = await fetch(restEndpoint)
-	const jsonResponse = await response.json()
-	console.log(jsonResponse)
-	return JSON.stringify(jsonResponse)
+	try {
+		const response = await fetch(restEndpoint)
+		const jsonResponse = await response.json()
+		console.log(jsonResponse)
+		return JSON.stringify(jsonResponse)
+	} catch (error) {
+		console.log(error)
+		return "NaN"
+	}
 }
 
-function DrawerElements({ setObjClicked }) {
+function DrawerElements({ setSelectNum }) {
 	const [apiResponse, setApiResponse] = useState([])
-
 	useEffect(() => {
-		callRestApi().then((result) => setApiResponse(JSON.parse(result)))
+		callRestApi().then((result) => {
+			if (result != "NaN") setApiResponse(JSON.parse(result))
+		})
 	}, [])
-
 	function generateUniqueId() {
 		// Generate a random string
 		const randomString = Math.random().toString(36).substring(7)
@@ -94,12 +101,13 @@ function DrawerElements({ setObjClicked }) {
 
 		return uniqueId
 	}
+
 	const selectedColor = "#000"
 
 	const addRectangle = () => {
 		const rect = new fabric.Rect({
-			left: 100,
-			top: 100,
+			left: 20,
+			top: 20,
 			fill: "#111",
 			width: 100,
 			height: 100,
@@ -122,8 +130,8 @@ function DrawerElements({ setObjClicked }) {
 		const heart = new fabric.Path(
 			"M50 85 A20 20 0 0 1 90 85 Q100 130 50 175 Q0 130 10 85 A20 20 0 0 1 50 85",
 			{
-				left: 70,
-				top: 50,
+				left: 20,
+				top: 20,
 				fill: selectedColor,
 				id: generateUniqueId(),
 			}
@@ -138,8 +146,8 @@ function DrawerElements({ setObjClicked }) {
 		const leftArrowPath = new fabric.Path(
 			"M20 0 L0 20 L20 40 L20 30 L40 30 L40 10 L20 10",
 			{
-				left: 400,
-				top: 50,
+				left: 20,
+				top: 20,
 				fill: selectedColor,
 				id: generateUniqueId(),
 			}
@@ -152,8 +160,8 @@ function DrawerElements({ setObjClicked }) {
 		const upArrowPath = new fabric.Path(
 			"M0 20 L20 0 L40 20 L30 20 L30 40 L10 40 L10 20",
 			{
-				left: 200,
-				top: 50,
+				left: 20,
+				top: 20,
 				fill: selectedColor,
 				id: generateUniqueId(),
 			}
@@ -167,8 +175,8 @@ function DrawerElements({ setObjClicked }) {
 		const downArrowPath = new fabric.Path(
 			"M0 20 L0 20 L10 20 L10 70 L90 0 L0 20 L40 20",
 			{
-				left: 200, // Set the initial left position
-				top: 300, // Set the initial top position
+				left: 20,
+				top: 20,
 				fill: "green", // Use the color you prefer
 				id: generateUniqueId(),
 			}
@@ -180,8 +188,8 @@ function DrawerElements({ setObjClicked }) {
 
 	const addRightArrow = () => {
 		const rightArrowPath = new fabric.Path("M0 20 L20 0 L50 20 L20 40 Z", {
-			left: 350,
-			top: 200,
+			left: 20,
+			top: 20,
 			fill: selectedColor,
 			id: generateUniqueId(),
 		})
@@ -192,8 +200,8 @@ function DrawerElements({ setObjClicked }) {
 
 	const addTrapezoidal = () => {
 		const trapezoidalPath = new fabric.Path("M0 0 L40 0 L30 40 L10 40 Z", {
-			left: 600,
-			top: 50,
+			left: 20,
+			top: 20,
 			fill: selectedColor,
 			id: generateUniqueId(),
 		})
@@ -204,8 +212,8 @@ function DrawerElements({ setObjClicked }) {
 
 	const addCircle = () => {
 		const circle = new fabric.Circle({
-			left: 200,
-			top: 200,
+			left: 20,
+			top: 20,
 			fill: selectedColor,
 			radius: 50,
 			id: generateUniqueId(),
@@ -217,8 +225,8 @@ function DrawerElements({ setObjClicked }) {
 
 	const addTriangle = () => {
 		const triangle = new fabric.Triangle({
-			left: 300,
-			top: 300,
+			left: 20,
+			top: 20,
 			fill: selectedColor,
 			width: 100,
 			height: 100,
@@ -238,8 +246,8 @@ function DrawerElements({ setObjClicked }) {
 				{ x: 400, y: 400 },
 			],
 			{
-				left: 375,
-				top: 325,
+				left: 20,
+				top: 20,
 				fill: selectedColor,
 				id: generateUniqueId(),
 			}
@@ -366,8 +374,8 @@ function DrawerElements({ setObjClicked }) {
 
 	const addEmoji = (stickerData) => {
 		const sticker = new fabric.Text(stickerData.character, {
-			left: 100, // Adjust the position as needed
-			top: 100, // Adjust the position as needed
+			left: 20,
+			top: 20,
 			fontSize: 120, // Customize the font size
 			// Add other properties from your sticker data
 			data: stickerData,
@@ -377,6 +385,7 @@ function DrawerElements({ setObjClicked }) {
 		canvas.current.add(sticker)
 		canvas.current.renderAll()
 	}
+
 	return (
 		<>
 			<Box sx={{ height: "92vh", overflowY: "auto" }}>
@@ -561,26 +570,50 @@ function DrawerElements({ setObjClicked }) {
 					>
 						<HiOutlineMinus size={40} onClick={addLine} />
 					</Box>
-
-					{/* <Box sx={{ paddingY: "0.3rem", display: "flex" }}>
-					<button id="addLine" onClick={addLine}>
-						Add Line
-					</button>
-				</Box> */}
 				</Box>
 				<Box sx={{ ml: "0.8rem", pt: "0.2rem" }}>
 					<Typography sx={{ color: "white" }}>Emojis:</Typography>
 				</Box>
-				<Box sx={{ display: "flex", fontSize: "2.5rem", flexWrap: "wrap" }}>
-					{apiResponse.map((obj) => (
-						<Box
-							sx={{ mx: "0.2rem", cursor: "pointer" }}
-							onClick={() => addEmoji(obj)}
-						>
-							{obj.character}
-						</Box>
+				<Box
+					sx={{
+						display: "flex",
+						fontSize: "2.5rem",
+						flexWrap: "wrap",
+					}}
+				>
+					{apiResponse.slice(0, 10).map((obj, index) => (
+						<>
+							<Box
+								sx={{ mx: "0.2rem", cursor: "pointer" }}
+								onClick={() => addEmoji(obj)}
+							>
+								{obj.character}
+							</Box>
+
+							{index == 9 && (
+								<Box
+									sx={{
+										justifySelf: "end",
+										ml: "1rem",
+									}}
+								>
+									<Typography
+										sx={{
+											color: "white",
+											fontSize: "0.8rem",
+											":hover": {
+												cursor: "pointer",
+												textDecoration: "underline",
+											},
+										}}
+										onClick={() => setSelectNum(9)}
+									>
+										Load More
+									</Typography>
+								</Box>
+							)}
+						</>
 					))}
-					{/* <p>{apiResponse}</p> */}
 				</Box>
 			</Box>
 		</>

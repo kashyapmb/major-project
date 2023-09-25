@@ -25,8 +25,8 @@ const CanvasContainer = ({
 	// let lastClickTime = 0
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			width: 720,
-			height: 405,
+			width: 760,
+			height: 427.5,
 			backgroundColor: "white",
 			selectionBorderColor: "#2563eb",
 		})

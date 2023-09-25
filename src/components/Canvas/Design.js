@@ -43,7 +43,7 @@ function Design() {
 
 				{selectNum != 0 && (
 					<Grid item xs={2.8}>
-						<Drawer selectNum={selectNum} />
+						<Drawer selectNum={selectNum} setSelectNum={setSelectNum} />
 					</Grid>
 				)}
 
@@ -60,6 +60,7 @@ function Design() {
 					/>
 					<Box
 						sx={{
+							pb: "2rem",
 							display: "flex",
 							justifyContent: "center",
 							alignItems: "center",

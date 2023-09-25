@@ -9,9 +9,6 @@ import { FiDownloadCloud } from "react-icons/fi"
 import { SiOpenai } from "react-icons/si"
 
 function Sidebar({ selectNum, setSelectNum }) {
-	const itemSelected = (number) => {
-		setSelectNum(number)
-	}
 	useEffect(() => {}, [selectNum])
 	return (
 		<>
@@ -36,7 +33,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(1)
+						setSelectNum(1)
 					}}
 				>
 					<MdDesignServices size={25} />
@@ -56,7 +53,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(2)
+						setSelectNum(2)
 					}}
 				>
 					<PiShapes size={25} />
@@ -76,7 +73,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(3)
+						setSelectNum(3)
 					}}
 				>
 					<PiTextTBold size={25} />
@@ -96,7 +93,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(4)
+						setSelectNum(4)
 					}}
 				>
 					<PiUploadSimpleFill size={25} />
@@ -116,7 +113,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(5)
+						setSelectNum(5)
 					}}
 				>
 					<SiOpenai size={25} />
@@ -136,7 +133,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(6)
+						setSelectNum(6)
 					}}
 				>
 					<HiDownload size={25} />
@@ -156,7 +153,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
 					}}
 					onClick={() => {
-						itemSelected(0)
+						setSelectNum(0)
 					}}
 				>
 					<HiOutlineBackward size={25} />

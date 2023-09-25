@@ -17,10 +17,10 @@ import {
 	CardMedia,
 	Typography,
 } from "@mui/material"
+
 function DrawerAI() {
-	const [isAddingLine, setIsAddingLine] = useState(false)
-	const [selectedColor, setSelectedColor] = useState("#000000") // Initial color is black
-	const [selectedBorderColor, setSelectedBorderColor] = useState("#000000") // Initial border color is black
+	const [keyword, setKeyword] = useState("") // State to store user-entered keywords
+	const [tagline, setTagline] = useState("") // State to store the user's tagline
 	const [selectedTextColor, setSelectedTextColor] = useState("red") // Initial text color is red
 	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
 	const [isBold, setIsBold] = useState(false)
@@ -28,114 +28,96 @@ function DrawerAI() {
 	const [isUnderline, setIsUnderline] = useState(false)
 	const [letterSpacing, setLetterSpacing] = useState(0)
 	const [lineSpacing, setLineSpacing] = useState(0)
+	const [selectedFontFamily, setSelectedFontFamily] = useState("Arial")
 
-	const [selectedOpacity, setSelectedOpacity] = useState(1)
-	const handleOpacityChange = (event) => {
-		const newOpacity = parseFloat(event.target.value)
-		setSelectedOpacity(newOpacity)
+	// useEffect(() => {
+	// 	canvas.current = new fabric.Canvas(canvasRef.current, {
+	// 		preserveObjectStacking: true,
+	// 		width: 800,
+	// 		height: 600,
+	// 		backgroundColor: "#fff",
+	// 		selectionBorderColor: "black",
+	// 	})
+	// })
 
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set("opacity", newOpacity)
-			canvas.current.renderAll()
-		}
+	const handleKeywordChange = (event) => {
+		setKeyword(event.target.value)
 	}
-	const handleColorChange = (event) => {
-		setSelectedColor(event.target.value)
+
+	const addTaglineToCanvas = () => {
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set("fill", selectedColor)
-			activeObject.set("stroke", selectedColor)
-			canvas.current.renderAll()
-		}
-	}
-	const applyBorder = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			activeObject.set({
-				stroke: selectedBorderColor,
-				strokeWidth: 2, // You can adjust the border width
+		if (activeObject && tagline) {
+			const text = new fabric.Textbox(tagline, {
+				left: 10,
+				top: 10,
+				fill: selectedTextColor,
+				fontSize: selectedTextSize,
+				fontFamily: selectedFontFamily,
+				fontWeight: isBold ? "bold" : "normal",
+				fontStyle: isItalic ? "italic" : "normal",
+				underline: isUnderline,
+				charSpacing: letterSpacing,
+				lineHeight: 1 + lineSpacing / 10,
 			})
-			canvas.current.renderAll()
-		}
-	}
-	const handleBorderColorChange = (event) => {
-		setSelectedBorderColor(event.target.value)
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.stroke) {
-			activeObject.set("stroke", selectedBorderColor)
-			canvas.current.renderAll()
-		}
-	}
-	const bringForward = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			canvas.current.bringForward(activeObject)
+
+			// activeObject.set("tagline", text); // Store the tagline in the active object
+			// canvas.current.add(text);
+			// canvas.current.renderAll();
+			canvas.current.add(text)
+			canvas.current.setActiveObject(text) // Select the added text box
 			canvas.current.renderAll()
 		}
 	}
 
-	const sendBackward = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject) {
-			canvas.current.sendBackwards(activeObject)
-			canvas.current.renderAll()
+	const fetchImageWithTagline = () => {
+		if (keyword) {
+			const imageURL = `https://source.unsplash.com/1280x720/?${keyword}`
+
+			// Create an Image object
+			const image = new Image()
+			image.crossOrigin = "Anonymous" // To avoid CORS issues
+
+			// Set the image source to the fetched URL
+			image.src = imageURL
+
+			// When the image is loaded, add it to the canvas and add the tagline
+			image.onload = () => {
+				addImageToCanvaskeyword(image)
+				addTaglineToCanvas() // Add the tagline to the canvas
+			}
 		}
 	}
+
+	const addImageToCanvaskeyword = (image) => {
+		const fabricImage = new fabric.Image(image, {
+			left: 0,
+			top: 0,
+			scaleX: 0.2, // Set the desired scaleX (e.g., 0.5 for half size)
+			scaleY: 0.2, // Set the desired scaleY (e.g., 0.5 for half size)
+		})
+		canvas.current.add(fabricImage)
+		canvas.current.setActiveObject(fabricImage)
+		canvas.current.renderAll()
+	}
+
 	return (
 		<>
 			<Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Opacity
-					</Typography>
-					<input
-						type="range"
-						id="opacitySlider"
-						min="0"
-						max="1"
-						step="0.01"
-						value={selectedOpacity}
-						onChange={handleOpacityChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Color
-					</Typography>
-					<input
-						type="color"
-						id="colorPicker"
-						value={selectedColor}
-						onChange={handleColorChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="applySolidBorder" onClick={applyBorder}>
-						Apply Solid Border
-					</button>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<Typography sx={{ color: "white", fontWeight: 500, mr: "1rem" }}>
-						Border Color
-					</Typography>
-					<input
-						type="color"
-						id="borderColorPicker"
-						value={selectedBorderColor}
-						onChange={handleBorderColorChange}
-					/>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="bringForward" onClick={bringForward}>
-						Bring Forward
-					</button>
-				</Box>
-				<Box sx={{ padding: "1rem", display: "flex" }}>
-					<button id="sendBackward" onClick={sendBackward}>
-						Send Backward
-					</button>
-				</Box>
+				<input
+					type="text"
+					placeholder="Enter keywords for image search"
+					value={keyword}
+					onChange={handleKeywordChange}
+				/>
+				<input
+					type="text"
+					placeholder="Enter Tagline"
+					value={tagline}
+					onChange={(e) => setTagline(e.target.value)}
+				/>
+				<button onClick={fetchImageWithTagline}>
+					Fetch Image with Tagline
+				</button>
 			</Box>
 		</>
 	)

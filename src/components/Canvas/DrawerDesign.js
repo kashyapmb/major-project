@@ -24,113 +24,83 @@ function DrawerDesign() {
 	const [selectedProjectIndex, setSelectedProjectIndex] = useState(null)
 	const [uploadedImages, setUploadedImages] = useState([])
 
-	const saveProject = () => {
-		if (selectedProjectIndex !== null) {
-			// If a project is selected, update it
-			const updatedProjects = [...projects]
-			const canvasState = JSON.stringify(canvas.current.toJSON())
-			const thumbnail = generateCanvasThumbnail()
-			updatedProjects[selectedProjectIndex] = {
-				canvasState,
-				thumbnail,
-				images: [...uploadedImages],
-			}
-			setProjects(updatedProjects)
-		}
-	}
+	// const saveProject = () => {
+	// 	if (selectedProjectIndex !== null) {
+	// 		// If a project is selected, update it
+	// 		const updatedProjects = [...projects]
+	// 		const canvasState = JSON.stringify(canvas.current.toJSON())
+	// 		const thumbnail = generateCanvasThumbnail()
+	// 		updatedProjects[selectedProjectIndex] = {
+	// 			canvasState,
+	// 			thumbnail,
+	// 			images: [...uploadedImages],
+	// 		}
 
+	// 		// Store the updated projects in localStorage
+	// 		localStorage.setItem("projects", JSON.stringify(updatedProjects))
+
+	// 		setProjects(updatedProjects)
+	// 	}
+	// }
+
+	// Saving a Project as New
 	const saveAsNewProject = () => {
-		// const canvasState = canvas.current
-
-		// // Add the captured canvas state as a new project
-		// setProjects([...projects, canvasState])
-
-		// // Clear the canvas selection and set the new project as the selected one
-		// setSelectedProjectIndex(projects.length)
-
-		// console.log("Canvas Object")
-		// console.log(canvasState)
-		// var json = JSON.stringify(canvas.current.toDatalessJSON())
-		// console.log("Canvas Object in json")
-		// console.log(json)
-
-		//Download the image
-		// const imgData = canvas.current.toDataURL("image/png")
-		// const a = document.createElement("a")
-		// a.href = imgData
-		// a.download = "canvas.png"
-		// a.click()
-
 		const canvasState = JSON.stringify(canvas.current.toJSON())
 		const thumbnail = generateCanvasThumbnail()
 
 		// Add the captured canvas state, thumbnail, and images as a new project
-		setProjects([
-			...projects,
-			{
-				canvasState,
-				thumbnail,
-				images: [...uploadedImages],
-			},
-		])
+		const newProject = {
+			canvasState,
+			thumbnail,
+			images: [...uploadedImages],
+		}
+
+		// Get the existing projects from localStorage and add the new project
+		const existingProjects = JSON.parse(localStorage.getItem("projects")) || []
+		const updatedProjects = [...existingProjects, newProject]
+
+		// Store the updated projects in localStorage
+		localStorage.setItem("projects", JSON.stringify(updatedProjects))
 
 		// Clear the canvas selection and set the new project as the selected one
-		setSelectedProjectIndex(projects.length)
+		setSelectedProjectIndex(updatedProjects.length)
+		setProjects(updatedProjects)
 	}
 
-	// const loadProject = (index) => {
-	// const projectState = JSON.parse(JSON.stringify(Templates[index]))
-	// console.log(projectState)
+	var canvasRef = useRef(null)
+	const loadProjectViaTemplates = (index) => {
+		if (index >= 0 && index < Templates.length) {
+			const project = Templates[index]
+			const projectCanvasState = JSON.parse(project.canvasState)
 
-	// canvas.current.clear()
-	// canvas.current.loadFromJSON(JSON.stringify(Templates[index]))
+			// Clear the canvas before loading the project
+			// canvas.current.clear()
 
-	// const projectState = JSON.parse(Templates[index])
-	// // Clear the canvas before loading the project
-	// canvas.current.clear()
+			var secondCanvas = new fabric.Canvas(canvasRef.current, {
+				width: 200,
+				height: 200,
+			})
 
-	// // Load the project state into the canvas
-	// canvas.current.loadFromJSON(projectState, () => {
-	// 	canvas.current.renderAll()
-	// })
+			// Load the project canvas state into the canvas
+			secondCanvas.loadFromJSON(projectCanvasState, () => {
+				secondCanvas.renderAll()
+			})
 
-	// Set the selected project index
-	// setSelectedProjectIndex(index)
-	// }
+			const group = new fabric.Group([secondCanvas], {
+				left: 100, // Set the position of the group within the first canvas
+				top: 100,
+			})
 
-	// const loadProject = (index) => {
-	// 	if (index >= 0 && index < Templates.length) {
-	// 		const projectState = JSON.parse(Templates[index])
+			canvas.current.add(group)
 
-	// 		// Clear the canvas before loading the project
-	// 		canvas.current.clear()
+			// Set the selected project index
+			setSelectedProjectIndex(index)
 
-	// 		// Load the project state into the canvas
-	// 		canvas.current.loadFromJSON(projectState, () => {
-	// 			canvas.current.renderAll()
-	// 		})
-
-	// 		// Set the selected project index
-	// 		setSelectedProjectIndex(index)
-	// 	}
-	// }
-
+			// Load project images onto the canvas
+			setUploadedImages([...project.images])
+		}
+	}
 	const loadProject = (index) => {
-		// if (index >= 0 && index < projects.length) {
-		// 	const projectState = JSON.parse(projects[index])
-
-		// 	// Clear the canvas before loading the project
-		// 	canvas.current.clear()
-
-		// 	// Load the project state into the canvas
-		// 	canvas.current.loadFromJSON(projectState, () => {
-		// 		canvas.current.renderAll()
-		// 	})
-
-		// 	// Set the selected project index
-		// 	setSelectedProjectIndex(index)
-		// }
-
 		if (index >= 0 && index < projects.length) {
 			const project = projects[index]
 			const projectCanvasState = JSON.parse(project.canvasState)
@@ -150,6 +120,10 @@ function DrawerDesign() {
 			setUploadedImages([...project.images])
 		}
 	}
+	useEffect(() => {
+		const storedProjects = JSON.parse(localStorage.getItem("projects")) || []
+		setProjects(storedProjects)
+	}, [])
 
 	// Function to generate a thumbnail of the canvas
 	const generateCanvasThumbnail = () => {
@@ -176,52 +150,8 @@ function DrawerDesign() {
 		return thumbnailDataUrl
 	}
 
-	const deleteProject = (index) => {
-		const updatedProjects = [...projects]
-		updatedProjects.splice(index, 1)
-		setProjects(updatedProjects)
-	}
-
-	// const ImageComponent = (obj) => {
-	// 	canvas.current.clear()
-	// 	const canva = fabric.Canvas()
-	// 	fabric.Canvas.loadFromJSON(obj, (loadedCanvas) => {
-	// 		loadedCanvas.getObjects().loadFromJSON((object) => {
-	// 			canvas.current.add(object)
-	// 		})
-	// 		canvas.current.renderAll()
-	// 	})
-
-	// 	const canvasJson = canvas.current.toJSON()
-
-	// 	// Log the JSON representation (for demonstration purposes)
-	// 	console.log("Canvas JSON:", canvasJson)
-
-	// 	// Reconvert JSON to canvas
-	// 	fabric.Canvas.fromJSON(canvasJson, (loadedCanvas) => {
-	// 		// Clear the original canvas
-	// 		canvas.current.clear()
-
-	// 		// Add the objects from the loaded JSON to the original canvas
-	// 		loadedCanvas.getObjects().forEach((object) => {
-	// 			canvas.current.add(object)
-	// 		})
-
-	// 		// Render the canvas with the loaded objects
-	// 		canvas.current.renderAll()
-	// 	})
-	// }
-
-	// useEffect(() => {
-	// 	projects.clear()
-	// 	{
-	// 		Templates.map((obj, index) => projects.push(obj))
-	// 	}
-	// }, [])
-
 	return (
 		<>
-			
 			<Box>
 				{Templates.map((obj, index) => (
 					<>
@@ -234,34 +164,16 @@ function DrawerDesign() {
 							sx={{
 								cursor: "pointer",
 							}}
-							onClick={() => loadProject(index)}
+							onClick={() => loadProjectViaTemplates(index)}
 						/>
 					</>
 				))}
 			</Box>
 
-			<button onClick={saveProject}>Save Project</button>
+			{/* <button onClick={saveProject}>Save Project</button> */}
 			<button onClick={saveAsNewProject}>Save as New Project</button>
 
 			<div>
-				<h2>Saved Projects</h2>
-				<ul>
-					{projects.map((project, index) => (
-						<li key={index}>
-							<span
-								style={{ cursor: "pointer" }}
-								onClick={() => loadProject(index)}
-							>
-								Project {index + 1}
-							</span>
-							<button onClick={() => deleteProject(index)}>Delete</button>
-						</li>
-					))}
-				</ul>
-			</div>
-
-			<div>
-				<h2>Saved Projects</h2>
 				<ul>
 					{projects.map((project, index) => (
 						<ul key={index}>
@@ -276,7 +188,6 @@ function DrawerDesign() {
 									height={50} // Set the desired thumbnail height
 								/>
 							</span>
-							<button onClick={() => deleteProject(index)}>Delete</button>
 						</ul>
 					))}
 				</ul>

@@ -297,6 +297,12 @@ function CanvasHeader({
 							>
 								<AiOutlineBgColors size={25} color="black" />
 							</Box>
+							<Box
+								sx={{ height: "2rem", width: "2rem", cursor: "pointer" }}
+								onClick={() => setSelectNum(8)}
+							>
+								<Typography>Position</Typography>
+							</Box>
 						</Box>
 					</>
 				)}
@@ -329,7 +335,524 @@ function CanvasHeader({
 							<option value="Impact">Impact</option>
 							<option value="Book Antiqua">Book Antiqua</option>
 							<option value="Arial Narrow">Arial Narrow</option>
+							<option value="Arial Narrow">Arial Narrow</option>
 							{/* Add more font options as needed */}
+							<option value="Bookman, serif">Bookman</option>
+							<option value="Comic Sans MS, cursive">Comic Sans MS</option>
+							<option value="Palatino, serif">Palatino</option>
+							<option value="Arial Black, sans-serif">Arial Black</option>
+							<option value="Cursive, cursive">Cursive</option>
+							<option value="Lucida Sans, sans-serif">Lucida Sans</option>
+							<option value="Impact, sans-serif">Impact</option>
+							<option value="Garamond, serif">Garamond</option>
+							<option value="Century Gothic, sans-serif">Century Gothic</option>
+							<option value="Franklin Gothic Medium, sans-serif">
+								Franklin Gothic Medium
+							</option>
+							<option value="Consolas, monospace">Consolas</option>
+							<option value="Cambria, serif">Cambria</option>
+							<option value="Rockwell, serif">Rockwell</option>
+							<option value="Arial Narrow, sans-serif">Arial Narrow</option>
+							<option value="Copperplate, sans-serif">Copperplate</option>
+							<option value="Futura, sans-serif">Futura</option>
+							<option value="Avant Garde, sans-serif">Avant Garde</option>
+							<option value="Didot, serif">Didot</option>
+							<option value="Baskerville, serif">Baskerville</option>
+							<option value="Bodoni MT, serif">Bodoni MT</option>
+							<option value="Gill Sans, sans-serif">Gill Sans</option>
+							<option value="Perpetua, serif">Perpetua</option>
+							<option value="Brush Script MT, cursive">Brush Script MT</option>
+							<option value="Papyrus, sans-serif">Papyrus</option>
+							<option value="Courier, monospace">Courier</option>
+							<option value="Monaco, monospace">Monaco</option>
+							<option value="Comic Sans, cursive">Comic Sans</option>
+							<option value="Verdana Pro, sans-serif">Verdana Pro</option>
+							<option value="Trebuchet MS Pro, sans-serif">
+								Trebuchet MS Pro
+							</option>
+							<option value="Bookman Old Style, serif">
+								Bookman Old Style
+							</option>
+							<option value="Century Schoolbook, serif">
+								Century Schoolbook
+							</option>
+							<option value="Franklin Gothic, sans-serif">
+								Franklin Gothic
+							</option>
+							<option value="Palatino Linotype, serif">
+								Palatino Linotype
+							</option>
+							<option value="Lucida Bright, serif">Lucida Bright</option>
+							<option value="Tahoma, sans-serif">Tahoma</option>
+							<option value="Geneva, sans-serif">Geneva</option>
+							<option value="Optima, sans-serif">Optima</option>
+							<option value="Courier New Pro, monospace">
+								Courier New Pro
+							</option>
+							<option value="Calibri, sans-serif">Calibri</option>
+							<option value="Candara, sans-serif">Candara</option>
+							<option value="Corbel, sans-serif">Corbel</option>
+							<option value="Ebrima, sans-serif">Ebrima</option>
+							<option value="Frank Ruhl Libre, serif">Frank Ruhl Libre</option>
+							<option value="Harrington, cursive">Harrington</option>
+							<option value="Gill Sans Nova, sans-serif">Gill Sans Nova</option>
+							<option value="Century Gothic Pro, sans-serif">
+								Century Gothic Pro
+							</option>
+							<option value="Rockwell Nova, serif">Rockwell Nova</option>
+							<option value="Tahoma Pro, sans-serif">Tahoma Pro</option>
+							<option value="Bell MT, serif">Bell MT</option>
+							<option value="Century, serif">Century</option>
+							<option value="Mistral, cursive">Mistral</option>
+							<option value="Arial Nova, sans-serif">Arial Nova</option>
+							<option value="Palatino Linotype, serif">
+								Palatino Linotype
+							</option>
+							<option value="Andale Mono, monospace">Andale Mono</option>
+							<option value="Rockwell Condensed, serif">
+								Rockwell Condensed
+							</option>
+							<option value="Bodoni MT Condensed, serif">
+								Bodoni MT Condensed
+							</option>
+							<option value="Garamond Premier Pro, serif">
+								Garamond Premier Pro
+							</option>
+							<option value="Myriad Pro, sans-serif">Myriad Pro</option>
+							<option value="Gill Sans MT, sans-serif">Gill Sans MT</option>
+							<option value="Century Gothic Nova, sans-serif">
+								Century Gothic Nova
+							</option>
+							<option value="Trajan Pro, serif">Trajan Pro</option>
+							<option value="Consolas Pro, monospace">Consolas Pro</option>
+							<option value="Monaco Pro, monospace">Monaco Pro</option>
+							<option value="Lucida Sans Typewriter, monospace">
+								Lucida Sans Typewriter
+							</option>
+							<option value="Lucida Fax, monospace">Lucida Fax</option>
+							<option value="Palatino Nova, serif">Palatino Nova</option>
+							<option value="Cochin, serif">Cochin</option>
+							<option value="Bradley Hand, cursive">Bradley Hand</option>
+							<option value="Lucida Calligraphy, cursive">
+								Lucida Calligraphy
+							</option>
+							<option value="Berlin Sans FB, sans-serif">Berlin Sans FB</option>
+							<option value="Edwardian Script ITC, cursive">
+								Edwardian Script ITC
+							</option>
+							<option value="Calisto MT, serif">Calisto MT</option>
+							<option value="Vladimir Script, cursive">Vladimir Script</option>
+							<option value="Bauhaus 93, sans-serif">Bauhaus 93</option>
+							<option value="Elephant, sans-serif">Elephant</option>
+							<option value="Tempus Sans ITC, sans-serif">
+								Tempus Sans ITC
+							</option>
+							<option value="Chiller, sans-serif">Chiller</option>
+							<option value="High Tower Text, serif">High Tower Text</option>
+							<option value="Arial Unicode MS, sans-serif">
+								Arial Unicode MS
+							</option>
+							<option value="Cambria Math, serif">Cambria Math</option>
+							<option value="Symbol, sans-serif">Symbol</option>
+							<option value="Webdings, sans-serif">Webdings</option>
+							<option value="Wingdings, sans-serif">Wingdings</option>
+							<option value="Wingdings 2, sans-serif">Wingdings 2</option>
+							<option value="Wingdings 3, sans-serif">Wingdings 3</option>
+							<option value="Zapf Dingbats, sans-serif">Zapf Dingbats</option>
+							<option value="MS Gothic, sans-serif">MS Gothic</option>
+							<option value="MS Mincho, serif">MS Mincho</option>
+							<option value="MS PGothic, sans-serif">MS PGothic</option>
+							<option value="MS PMincho, serif">MS PMincho</option>
+							<option value="MS UI Gothic, sans-serif">MS UI Gothic</option>
+							<option value="Century Gothic, sans-serif">Century Gothic</option>
+							<option value="Gill Sans, sans-serif">Gill Sans</option>
+							<option value="Palatino, serif">Palatino</option>
+							<option value="Tahoma, sans-serif">Tahoma</option>
+							<option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+							<option value="Arial Black, sans-serif">Arial Black</option>
+							<option value="Bookman Old Style, serif">
+								Bookman Old Style
+							</option>
+							<option value="Copperplate Gothic, sans-serif">
+								Copperplate Gothic
+							</option>
+							<option value="Lucida Console, monospace">Lucida Console</option>
+							<option value="Arial Narrow, sans-serif">Arial Narrow</option>
+							<option value="Geneva, sans-serif">Geneva</option>
+							<option value="Optima, sans-serif">Optima</option>
+							<option value="Courier New Pro, monospace">
+								Courier New Pro
+							</option>
+							<option value="Calibri, sans-serif">Calibri</option>
+							<option value="Candara, sans-serif">Candara</option>
+							<option value="Corbel, sans-serif">Corbel</option>
+							<option value="Ebrima, sans-serif">Ebrima</option>
+							<option value="Frank Ruhl Libre, serif">Frank Ruhl Libre</option>
+							<option value="Harrington, cursive">Harrington</option>
+							<option value="Gill Sans Nova, sans-serif">Gill Sans Nova</option>
+							<option value="Century Gothic Pro, sans-serif">
+								Century Gothic Pro
+							</option>
+							<option value="Rockwell Nova, serif">Rockwell Nova</option>
+							<option value="Tahoma Pro, sans-serif">Tahoma Pro</option>
+							<option value="Bell MT, serif">Bell MT</option>
+							<option value="Century, serif">Century</option>
+							<option value="Mistral, cursive">Mistral</option>
+							<option value="Arial Nova, sans-serif">Arial Nova</option>
+							<option value="Palatino Linotype, serif">
+								Palatino Linotype
+							</option>
+							<option value="Andale Mono, monospace">Andale Mono</option>
+							<option value="Monotype Corsiva, cursive">
+								Monotype Corsiva
+							</option>
+							<option value="Century Schoolbook, serif">
+								Century Schoolbook
+							</option>
+							<option value="Franklin Gothic, sans-serif">
+								Franklin Gothic
+							</option>
+							<option value="Palatino Nova, serif">Palatino Nova</option>
+							<option value="Cochin, serif">Cochin</option>
+							<option value="Bradley Hand, cursive">Bradley Hand</option>
+							<option value="Lucida Calligraphy, cursive">
+								Lucida Calligraphy
+							</option>
+							<option value="Berlin Sans FB, sans-serif">Berlin Sans FB</option>
+							<option value="Edwardian Script ITC, cursive">
+								Edwardian Script ITC
+							</option>
+							<option value="Calisto MT, serif">Calisto MT</option>
+							<option value="Vladimir Script, cursive">Vladimir Script</option>
+							<option value="Bauhaus 93, sans-serif">Bauhaus 93</option>
+							<option value="Elephant, sans-serif">Elephant</option>
+							<option value="Tempus Sans ITC, sans-serif">
+								Tempus Sans ITC
+							</option>
+							<option value="Chiller, sans-serif">Chiller</option>
+							<option value="Matura MT Script Capitals, cursive">
+								Matura MT Script Capitals
+							</option>
+							<option value="Algerian, sans-serif">Algerian</option>
+							<option value="Blackadder ITC, cursive">Blackadder ITC</option>
+							<option value="Felix Titling, sans-serif">Felix Titling</option>
+							<option value="Old English Text MT, serif">
+								Old English Text MT
+							</option>
+							<option value="Ravie, cursive">Ravie</option>
+							<option value="Showcard Gothic, sans-serif">
+								Showcard Gothic
+							</option>
+							<option value="Stencil, sans-serif">Stencil</option>
+							<option value="Magneto, cursive">Magneto</option>
+							<option value="Wide Latin, sans-serif">Wide Latin</option>
+							<option value="Cooper Black, sans-serif">Cooper Black</option>
+							<option value="Agency FB, sans-serif">Agency FB</option>
+							<option value="Goudy Stout, serif">Goudy Stout</option>
+							<option value="Segoe Script, cursive">Segoe Script</option>
+							<option value="Bernard MT Condensed, sans-serif">
+								Bernard MT Condensed
+							</option>
+							<option value="Freestyle Script, cursive">
+								Freestyle Script
+							</option>
+							<option value="Brush Script Std, cursive">
+								Brush Script Std
+							</option>
+							<option value="Book Antiqua, serif">Book Antiqua</option>
+							<option value="Century Gothic, sans-serif">Century Gothic</option>
+							<option value="French Script MT, cursive">
+								French Script MT
+							</option>
+							<option value="Wide Latin, sans-serif">Wide Latin</option>
+							<option value="Curlz MT, cursive">Curlz MT</option>
+							<option value="Lucida Handwriting, cursive">
+								Lucida Handwriting
+							</option>
+							<option value="Bodoni MT, serif">Bodoni MT</option>
+							<option value="Franklin Gothic Medium, sans-serif">
+								Franklin Gothic Medium
+							</option>
+							<option value="Gloucester MT Extra Condensed, sans-serif">
+								Gloucester MT Extra Condensed
+							</option>
+							<option value="Brush Script MT, cursive">Brush Script MT</option>
+							<option value="Vivaldi, cursive">Vivaldi</option>
+							<option value="Maiandra GD, sans-serif">Maiandra GD</option>
+							<option value="Constantia, serif">Constantia</option>
+							<option value="Tw Cen MT, sans-serif">Tw Cen MT</option>
+							<option value="Onyx, sans-serif">Onyx</option>
+							<option value="Perpetua Titling MT, sans-serif">
+								Perpetua Titling MT
+							</option>
+							<option value="Gill Sans Ultra Bold, sans-serif">
+								Gill Sans Ultra Bold
+							</option>
+							<option value="Franklin Gothic Heavy, sans-serif">
+								Franklin Gothic Heavy
+							</option>
+							<option value="OCR A Extended, monospace">OCR A Extended</option>
+							<option value="Bookman Old Style Bold, serif">
+								Bookman Old Style Bold
+							</option>
+							<option value="Century Gothic Bold, sans-serif">
+								Century Gothic Bold
+							</option>
+							<option value="Cambria Bold, serif">Cambria Bold</option>
+							<option value="Verdana Bold, sans-serif">Verdana Bold</option>
+							<option value="Trebuchet MS Bold, sans-serif">
+								Trebuchet MS Bold
+							</option>
+							<option value="Arial Black, sans-serif">Arial Black</option>
+							<option value="Impact, sans-serif">Impact</option>
+							<option value="Lucida Sans Bold, sans-serif">
+								Lucida Sans Bold
+							</option>
+							<option value="Palatino Bold, serif">Palatino Bold</option>
+							<option value="Rockwell Bold, serif">Rockwell Bold</option>
+							<option value="Tahoma Bold, sans-serif">Tahoma Bold</option>
+							<option value="Geneva Bold, sans-serif">Geneva Bold</option>
+							<option value="Optima Bold, sans-serif">Optima Bold</option>
+							<option value="Calibri Bold, sans-serif">Calibri Bold</option>
+							<option value="Candara Bold, sans-serif">Candara Bold</option>
+							<option value="Corbel Bold, sans-serif">Corbel Bold</option>
+							<option value="Ebrima Bold, sans-serif">Ebrima Bold</option>
+							<option value="Gill Sans Nova Bold, sans-serif">
+								Gill Sans Nova Bold
+							</option>
+							<option value="Century Gothic Pro Bold, sans-serif">
+								Century Gothic Pro Bold
+							</option>
+							<option value="Rockwell Nova Bold, serif">
+								Rockwell Nova Bold
+							</option>
+							<option value="Tahoma Pro Bold, sans-serif">
+								Tahoma Pro Bold
+							</option>
+							<option value="Bell MT Bold, serif">Bell MT Bold</option>
+							<option value="Century Bold, serif">Century Bold</option>
+							<option value="Arial Narrow Bold, sans-serif">
+								Arial Narrow Bold
+							</option>
+							<option value="Geneva Bold, sans-serif">Geneva Bold</option>
+							<option value="Optima Bold, sans-serif">Optima Bold</option>
+							<option value="Courier New Pro Bold, monospace">
+								Courier New Pro Bold
+							</option>
+							<option value="Calibri Bold, sans-serif">Calibri Bold</option>
+							<option value="Candara Bold, sans-serif">Candara Bold</option>
+							<option value="Corbel Bold, sans-serif">Corbel Bold</option>
+							<option value="Ebrima Bold, sans-serif">Ebrima Bold</option>
+							<option value="Frank Ruhl Libre Bold, serif">
+								Frank Ruhl Libre Bold
+							</option>
+							<option value="Harrington Bold, cursive">Harrington Bold</option>
+							<option value="Gill Sans Nova Bold, sans-serif">
+								Gill Sans Nova Bold
+							</option>
+							<option value="Century Gothic Pro Bold, sans-serif">
+								Century Gothic Pro Bold
+							</option>
+							<option value="Rockwell Nova Bold, serif">
+								Rockwell Nova Bold
+							</option>
+							<option value="Tahoma Pro Bold, sans-serif">
+								Tahoma Pro Bold
+							</option>
+							<option value="Bell MT Bold, serif">Bell MT Bold</option>
+							<option value="Century Bold, serif">Century Bold</option>
+							<option value="Arial Narrow Bold, sans-serif">
+								Arial Narrow Bold
+							</option>
+							<option value="Geneva Bold, sans-serif">Geneva Bold</option>
+							<option value="Optima Bold, sans-serif">Optima Bold</option>
+							<option value="Courier New Pro Bold, monospace">
+								Courier New Pro Bold
+							</option>
+							<option value="Bodoni Poster, serif">Bodoni Poster</option>
+							<option value="Century Gothic Pro Condensed, sans-serif">
+								Century Gothic Pro Condensed
+							</option>
+							<option value="Rockwell Condensed Bold, serif">
+								Rockwell Condensed Bold
+							</option>
+							<option value="Verdana Pro Condensed, sans-serif">
+								Verdana Pro Condensed
+							</option>
+							<option value="Palatino Nova Condensed, serif">
+								Palatino Nova Condensed
+							</option>
+							<option value="Copperplate Gothic Bold, sans-serif">
+								Copperplate Gothic Bold
+							</option>
+							<option value="Arial Unicode MS Bold, sans-serif">
+								Arial Unicode MS Bold
+							</option>
+							<option value="Book Antiqua Bold, serif">
+								Book Antiqua Bold
+							</option>
+							<option value="Corbel Light, sans-serif">Corbel Light</option>
+							<option value="Lucida Sans Italic, sans-serif">
+								Lucida Sans Italic
+							</option>
+							<option value="Felix Titling Italic, sans-serif">
+								Felix Titling Italic
+							</option>
+							<option value="Agency FB Bold, sans-serif">Agency FB Bold</option>
+							<option value="Elephant Bold, sans-serif">Elephant Bold</option>
+							<option value="Tempus Sans ITC Bold, sans-serif">
+								Tempus Sans ITC Bold
+							</option>
+							<option value="Chiller Bold, sans-serif">Chiller Bold</option>
+							<option value="Matura MT Script Capitals Bold, cursive">
+								Matura MT Script Capitals Bold
+							</option>
+							<option value="Algerian Bold, sans-serif">Algerian Bold</option>
+							<option value="Blackadder ITC Bold, cursive">
+								Blackadder ITC Bold
+							</option>
+							<option value="Felix Titling Bold, sans-serif">
+								Felix Titling Bold
+							</option>
+							<option value="Old English Text MT Bold, serif">
+								Old English Text MT Bold
+							</option>
+							<option value="Ravie Bold, cursive">Ravie Bold</option>
+							<option value="Showcard Gothic Bold, sans-serif">
+								Showcard Gothic Bold
+							</option>
+							<option value="Stencil Bold, sans-serif">Stencil Bold</option>
+							<option value="Magneto Bold, cursive">Magneto Bold</option>
+							<option value="Wide Latin Bold, sans-serif">
+								Wide Latin Bold
+							</option>
+							<option value="Cooper Black Bold, sans-serif">
+								Cooper Black Bold
+							</option>
+							<option value="Agency FB Bold, sans-serif">Agency FB Bold</option>
+							<option value="Goudy Stout Bold, serif">Goudy Stout Bold</option>
+							<option value="Segoe Script Bold, cursive">
+								Segoe Script Bold
+							</option>
+							<option value="Bernard MT Condensed Bold, sans-serif">
+								Bernard MT Condensed Bold
+							</option>
+							<option value="Freestyle Script Bold, cursive">
+								Freestyle Script Bold
+							</option>
+							<option value="Brush Script Std Bold, cursive">
+								Brush Script Std Bold
+							</option>
+							<option value="Century Bold, serif">Century Bold</option>
+							<option value="French Script MT Bold, cursive">
+								French Script MT Bold
+							</option>
+							<option value="Wide Latin Bold, sans-serif">
+								Wide Latin Bold
+							</option>
+							<option value="Curlz MT Bold, cursive">Curlz MT Bold</option>
+							<option value="Lucida Handwriting Bold, cursive">
+								Lucida Handwriting Bold
+							</option>
+							<option value="Bodoni MT Bold, serif">Bodoni MT Bold</option>
+							<option value="Franklin Gothic Medium Bold, sans-serif">
+								Franklin Gothic Medium Bold
+							</option>
+							<option value="Gloucester MT Extra Condensed Bold, sans-serif">
+								Gloucester MT Extra Condensed Bold
+							</option>
+							<option value="Brush Script MT Bold, cursive">
+								Brush Script MT Bold
+							</option>
+							<option value="Vivaldi Bold, cursive">Vivaldi Bold</option>
+							<option value="Maiandra GD Bold, sans-serif">
+								Maiandra GD Bold
+							</option>
+							<option value="Constantia Bold, serif">Constantia Bold</option>
+							<option value="Tw Cen MT Bold, sans-serif">Tw Cen MT Bold</option>
+							<option value="Onyx Bold, sans-serif">Onyx Bold</option>
+							<option value="Perpetua Titling MT Bold, sans-serif">
+								Perpetua Titling MT Bold
+							</option>
+							<option value="Didot, serif">Didot</option>
+							<option value="American Typewriter, serif">
+								American Typewriter
+							</option>
+							<option value="Avant Garde Gothic, sans-serif">
+								Avant Garde Gothic
+							</option>
+							<option value="Century Schoolbook, serif">
+								Century Schoolbook
+							</option>
+							<option value="Euphemia UCAS, sans-serif">Euphemia UCAS</option>
+							<option value="Gill Sans Nova Light, sans-serif">
+								Gill Sans Nova Light
+							</option>
+							<option value="Hoefler Text, serif">Hoefler Text</option>
+							<option value="Iowan Old Style, serif">Iowan Old Style</option>
+							<option value="Noteworthy, sans-serif">Noteworthy</option>
+							<option value="Oriya MN, sans-serif">Oriya MN</option>
+							<option value="PingFang HK, sans-serif">PingFang HK</option>
+							<option value="Plantagenet Cherokee, sans-serif">
+								Plantagenet Cherokee
+							</option>
+							<option value="Telugu MN, sans-serif">Telugu MN</option>
+							<option value="Thonburi, sans-serif">Thonburi</option>
+							<option value="Trattatello, sans-serif">Trattatello</option>
+							<option value="Verdana Pro Light, sans-serif">
+								Verdana Pro Light
+							</option>
+							<option value="Zapfino, cursive">Zapfino</option>
+							<option value="Arno Pro, serif">Arno Pro</option>
+							<option value="Bodoni 72, serif">Bodoni 72</option>
+							<option value="Clarendon, sans-serif">Clarendon</option>
+							<option value="Cooper Black, sans-serif">Cooper Black</option>
+							<option value="Didot, serif">Didot</option>
+							<option value="Franklin Gothic, sans-serif">
+								Franklin Gothic
+							</option>
+							<option value="Futura, sans-serif">Futura</option>
+							<option value="Gill Sans, sans-serif">Gill Sans</option>
+							<option value="Herculanum, sans-serif">Herculanum</option>
+							<option value="Hoefler Text, serif">Hoefler Text</option>
+							<option value="Lucida Grande, sans-serif">Lucida Grande</option>
+							<option value="Menlo, monospace">Menlo</option>
+							<option value="Optima, sans-serif">Optima</option>
+							<option value="Papyrus, sans-serif">Papyrus</option>
+							<option value="Rockwell, serif">Rockwell</option>
+							<option value="Symbol, sans-serif">Symbol</option>
+							<option value="Tahoma, sans-serif">Tahoma</option>
+							<option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+							<option value="Verdana, sans-serif">Verdana</option>
+							<option value="Zapf Dingbats, sans-serif">Zapf Dingbats</option>
+							<option value="Bodoni 72 Oldstyle, serif">
+								Bodoni 72 Oldstyle
+							</option>
+							<option value="Bradley Hand, cursive">Bradley Hand</option>
+							<option value="Chalkboard, sans-serif">Chalkboard</option>
+							<option value="Chalkduster, sans-serif">Chalkduster</option>
+							<option value="Cochin, serif">Cochin</option>
+							<option value="Copperplate, sans-serif">Copperplate</option>
+							<option value="Courier, monospace">Courier</option>
+							<option value="Courier New, monospace">Courier New</option>
+							<option value="Futura Condensed ExtraBold, sans-serif">
+								Futura Condensed ExtraBold
+							</option>
+							<option value="Georgia, serif">Georgia</option>
+							<option value="Gill Sans MT, sans-serif">Gill Sans MT</option>
+							<option value="Herculanum, sans-serif">Herculanum</option>
+							<option value="Impact, sans-serif">Impact</option>
+							<option value="Marker Felt, sans-serif">Marker Felt</option>
+							<option value="Optima, sans-serif">Optima</option>
+							<option value="Papyrus, sans-serif">Papyrus</option>
+							<option value="Plantagenet Cherokee, sans-serif">
+								Plantagenet Cherokee
+							</option>
+							<option value="Tahoma, sans-serif">Tahoma</option>
+							<option value="Times New Roman, serif">Times New Roman</option>
+							<option value="Verdana, sans-serif">Verdana</option>
+							<option value="Webdings, sans-serif">Webdings</option>
+							<option value="Zapfino, cursive">Zapfino</option>
 						</select>
 
 						<Box sx={{ display: "flex" }}>
