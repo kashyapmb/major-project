@@ -1,61 +1,53 @@
+import React, { useRef, useEffect, useState } from "react"
+import { fabric } from "fabric"
+import "fabric-history"
+import html2canvas from "html2canvas"
+import jsPDF from "jspdf"
+import { BiSolidBackpack } from "react-icons/bi"
+import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
+import { canvas, canvasRef } from "./CanvasContainer"
 import { Box, Typography } from "@mui/material"
-import React, { useRef, useState } from "react"
 
-function EmojiLoad() {
+function EmojiLoad({ emojiApiResponce }) {
+	const addEmoji = (stickerData) => {
+		const sticker = new fabric.Text(stickerData.character, {
+			left: 20,
+			top: 20,
+			fontSize: 120, // Customize the font size
+			// Add other properties from your sticker data
+			data: stickerData,
+		})
+
+		// Add the custom sticker to the canvas
+		canvas.current.add(sticker)
+		canvas.current.renderAll()
+	}
+
 	return (
 		<>
-			{/* <Box sx={{ p: "1rem", height: "92vh", overflowY: "auto" }}>
-				<Typography
+			<Box sx={{ height: "92vh", overflowY: "auto", pt: "0.5rem" }}>
+				<Box sx={{ ml: "0.8rem", pt: "0.2rem" }}>
+					<Typography sx={{ color: "white" }}>Emojis:</Typography>
+				</Box>
+				<Box
 					sx={{
-						color: "white",
-						mb: "0.6rem",
-						fontSize: "1rem",
-						fontWeight: "600",
+						display: "flex",
+						fontSize: "2.5rem",
+						flexWrap: "wrap",
 					}}
 				>
-					Solid Colors
-				</Typography>
-
-				<Box sx={{ display: "flex", flexWrap: "wrap" }}>
-					{colorData.map((obj, index) => {
-						return (
-							<>
-								{index == 0 && (
-									<Box>
-										<input
-											type="color"
-											id="colorPicker"
-											onChange={handleColorChange}
-											style={{
-												marginRight: "0.6rem",
-												marginBottom: "0.6rem",
-												width: "2.3rem",
-												height: "2.3rem",
-												cursor: "pointer",
-												borderRadius: "0.2rem",
-												// display: "None", // Make the file input element invisible
-											}}
-										/>
-									</Box>
-								)}
-								<Box
-									sx={{
-										mr: "0.6rem",
-										mb: "0.6rem",
-										height: "2.3rem",
-										width: "2.3rem",
-										background: `${obj.code}`,
-										cursor: "pointer",
-										borderRadius: "0.2rem",
-										":hover": { border: "2px solid white" },
-									}}
-									onClick={() => changeColor(obj.code)}
-								></Box>
-							</>
-						)
-					})}
+					{emojiApiResponce.map((obj, index) => (
+						<>
+							<Box
+								sx={{ mx: "0.2rem", cursor: "pointer" }}
+								onClick={() => addEmoji(obj)}
+							>
+								{obj.character}
+							</Box>
+						</>
+					))}
 				</Box>
-			</Box> */}
+			</Box>
 		</>
 	)
 }

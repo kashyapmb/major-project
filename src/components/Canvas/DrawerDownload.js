@@ -86,7 +86,6 @@ function Download() {
 
 	return (
 		<>
-
 			<Box sx={{ p: "1rem" }}>
 				<Typography sx={{ color: "white" }}>Default Text Styles</Typography>
 				<Box
@@ -98,6 +97,7 @@ function Download() {
 						color: "white",
 						fontWeight: "400",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -122,6 +122,7 @@ function Download() {
 						color: "white",
 						fontWeight: "400",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -146,6 +147,7 @@ function Download() {
 						color: "white",
 						fontWeight: "400",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -170,6 +172,7 @@ function Download() {
 						color: "white",
 						fontWeight: "400",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",

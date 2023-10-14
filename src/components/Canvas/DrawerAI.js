@@ -1,123 +1,506 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { fabric } from "fabric"
 import "fabric-history"
-import html2canvas from "html2canvas"
-import jsPDF from "jspdf"
-import { BiSolidBackpack } from "react-icons/bi"
-import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
-import { canvas, canvasRef } from "./CanvasContainer"
-import {
-	Avatar,
-	Box,
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	CardHeader,
-	CardMedia,
-	Typography,
-} from "@mui/material"
+import { canvas } from "./CanvasContainer"
+import "./Loader.css"
+import { Box } from "@mui/material"
 
 function DrawerAI() {
-	const [keyword, setKeyword] = useState("") // State to store user-entered keywords
-	const [tagline, setTagline] = useState("") // State to store the user's tagline
-	const [selectedTextColor, setSelectedTextColor] = useState("red") // Initial text color is red
-	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
-	const [isBold, setIsBold] = useState(false)
-	const [isItalic, setIsItalic] = useState(false)
-	const [isUnderline, setIsUnderline] = useState(false)
-	const [letterSpacing, setLetterSpacing] = useState(0)
-	const [lineSpacing, setLineSpacing] = useState(0)
-	const [selectedFontFamily, setSelectedFontFamily] = useState("Arial")
-
-	// useEffect(() => {
-	// 	canvas.current = new fabric.Canvas(canvasRef.current, {
-	// 		preserveObjectStacking: true,
-	// 		width: 800,
-	// 		height: 600,
-	// 		backgroundColor: "#fff",
-	// 		selectionBorderColor: "black",
-	// 	})
-	// })
+	const [keyword, setKeyword] = useState("")
+	const [tagline, setTagline] = useState("")
+	const [suggestedImages, setSuggestedImages] = useState([])
+	const [fabricImage, setFabricImage] = useState(null)
+	const [fabricText, setFabricText] = useState(null) // Track the text object
+	const [isLoading, setIsLoading] = useState(false) // Loading state
 
 	const handleKeywordChange = (event) => {
 		setKeyword(event.target.value)
 	}
 
-	const addTaglineToCanvas = () => {
-		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && tagline) {
-			const text = new fabric.Textbox(tagline, {
-				left: 10,
-				top: 10,
-				fill: selectedTextColor,
-				fontSize: selectedTextSize,
-				fontFamily: selectedFontFamily,
-				fontWeight: isBold ? "bold" : "normal",
-				fontStyle: isItalic ? "italic" : "normal",
-				underline: isUnderline,
-				charSpacing: letterSpacing,
-				lineHeight: 1 + lineSpacing / 10,
-			})
+	const fetchImages = async () => {
+		setIsLoading(true) // Start loading
+		const suggestions = []
 
-			// activeObject.set("tagline", text); // Store the tagline in the active object
-			// canvas.current.add(text);
-			// canvas.current.renderAll();
-			canvas.current.add(text)
-			canvas.current.setActiveObject(text) // Select the added text box
-			canvas.current.renderAll()
+		for (let i = 0; i < 20; i++) {
+			try {
+				const response = await fetch(
+					`https://source.unsplash.com/800x450/?${keyword}`
+				)
+				const imageURL = response.url
+
+				if (
+					imageURL ===
+					"https://images.unsplash.com/source-404?fit=crop&fm=jpg&h=800&q=60&w=1200"
+				) {
+					const res = await fetch(
+						"https://source.unsplash.com/800x450/?gradient"
+					)
+					const imgURL = res.url
+					suggestions.push(imgURL)
+				} else {
+					suggestions.push(imageURL)
+				}
+			} catch (error) {
+				console.error("Error fetching images:", error)
+			}
 		}
+
+		setSuggestedImages(suggestions)
+		setIsLoading(false) // Stop loading
 	}
 
-	const fetchImageWithTagline = () => {
-		if (keyword) {
-			const imageURL = `https://source.unsplash.com/1280x720/?${keyword}`
-
-			// Create an Image object
+	const handleImageClick = (imageURL, index) => {
+		if (imageURL) {
 			const image = new Image()
-			image.crossOrigin = "Anonymous" // To avoid CORS issues
+			image.crossOrigin = "Anonymous"
 
-			// Set the image source to the fetched URL
 			image.src = imageURL
 
-			// When the image is loaded, add it to the canvas and add the tagline
+			// Remove the previous image and text objects
+			if (fabricImage) {
+				canvas.current.remove(fabricImage)
+			}
+			if (fabricText) {
+				canvas.current.remove(fabricText)
+			}
+
 			image.onload = () => {
-				addImageToCanvaskeyword(image)
-				addTaglineToCanvas() // Add the tagline to the canvas
+				addImageToCanvas(image)
+
+				switch (index) {
+					case 0: // First image
+						setTaglineProperties(
+							"top",
+							"left",
+							"red",
+							true,
+							false,
+							"Arial",
+							"yellow"
+						)
+						break
+					case 1: // Second image
+						setTaglineProperties(
+							"bottom",
+							"left",
+							"black",
+							false,
+							true,
+							"Cursive",
+							"pink"
+						)
+						break
+					case 2: // Second image
+						setTaglineProperties(
+							"bottom",
+							"right",
+							"yellow",
+							true,
+							true,
+							"sans-serif",
+							"green"
+						)
+						break
+					case 3: // Second image
+						setTaglineProperties(
+							"bottom",
+							"left",
+							"black",
+							false,
+							true,
+							"Cursive",
+							"pink"
+						)
+						break
+					case 4: // Second image
+						setTaglineProperties(
+							"bottom",
+							"right",
+							"#43215c",
+							false,
+							true,
+							"Cursive",
+							"#75c9be"
+						)
+						break
+					case 5: // Second image
+						setTaglineProperties(
+							"center",
+							"center",
+							"black",
+							false,
+							true,
+							"Raleway",
+							"#c9a675"
+						)
+						break
+					case 6: // Second image
+						setTaglineProperties(
+							"bottom",
+							"center",
+							"#734e61",
+							false,
+							true,
+							"Teko",
+							"#3e1463"
+						)
+						break
+					case 7: // Second image
+						setTaglineProperties(
+							"center",
+							"top",
+							"#63141f",
+							false,
+							true,
+							"Orbitron",
+							"#f7ca36"
+						)
+						break
+					case 8: // Second image
+						setTaglineProperties(
+							"top",
+							"left",
+							"#f78036",
+							false,
+							true,
+							"Raleway",
+							"black"
+						)
+						break
+					case 9: // Second image
+						setTaglineProperties(
+							"center",
+							"right",
+							"#63bf8e",
+							false,
+							true,
+							"Monoton",
+							"#203a6e"
+						)
+						break
+					case 10: // Second image
+						setTaglineProperties(
+							"bottom",
+							"center",
+							"pink",
+							false,
+							true,
+							"Sacramento",
+							"#32206e"
+						)
+						break
+					case 11: // Second image
+						setTaglineProperties(
+							"center",
+							"right",
+							"white",
+							false,
+							true,
+							"Dancing Script",
+							"#62206e"
+						)
+						break
+					case 12: // Second image
+						setTaglineProperties(
+							"bottom",
+							"center",
+							"black",
+							false,
+							true,
+							"Teko",
+							"#e3d510"
+						)
+						break
+					case 13: // Second image
+						setTaglineProperties(
+							"top",
+							"left",
+							"red",
+							false,
+							true,
+							"Dancing Script",
+							"#b0db14"
+						)
+						break
+					case 14: // Second image
+						setTaglineProperties(
+							"bottom",
+							"left",
+							"yellow",
+							false,
+							true,
+							"Monoton",
+							"#224727"
+						)
+						break
+					case 15: // Second image
+						setTaglineProperties(
+							"center",
+							"right",
+							"#0ee848",
+							false,
+							true,
+							"Sacramento",
+							"black"
+						)
+						break
+					case 16: // Second image
+						setTaglineProperties(
+							"bottom",
+							"center",
+							"white",
+							false,
+							true,
+							"Teko",
+							"black"
+						)
+						break
+					case 17: // Second image
+						setTaglineProperties(
+							"top",
+							"right",
+							"red",
+							false,
+							true,
+							"Dancing Script",
+							"green"
+						)
+						break
+					case 18: // Second image
+						setTaglineProperties(
+							"bottom",
+							"center",
+							"green",
+							false,
+							true,
+							"Monoton",
+							"red"
+						)
+						break
+					case 19: // Second image
+						setTaglineProperties(
+							"center",
+							"center",
+							"blue",
+							false,
+							true,
+							"Raleway",
+							"pink"
+						)
+						break
+					default:
+						setTaglineProperties(
+							"top",
+							"right",
+							"blue",
+							false,
+							false,
+							"Times New Roman",
+							"black"
+						)
+				}
+
+				addTaglineToCanvas()
 			}
 		}
 	}
 
-	const addImageToCanvaskeyword = (image) => {
+	const setTaglineProperties = (
+		verticalAlign,
+		horizontalAlign,
+		textColor,
+		isBold,
+		isItalic,
+		fontFamily,
+		textBackgroundColor
+	) => {
+		setTaglineTagProperties({
+			verticalAlign,
+			horizontalAlign,
+			textColor,
+			isBold,
+			isItalic,
+			fontFamily,
+			textBackgroundColor,
+		})
+		// addTaglineToCanvas();
+	}
+
+	const [taglineTagProperties, setTaglineTagProperties] = useState({
+		verticalAlign: "top",
+		horizontalAlign: "left",
+		textColor: "red",
+		isBold: false,
+		isItalic: false,
+		fontFamily: "Arial",
+		textBackgroundColor: "yellow",
+	})
+
+	const addImageToCanvas = (image) => {
 		const fabricImage = new fabric.Image(image, {
+			type: "image",
 			left: 0,
 			top: 0,
-			scaleX: 0.2, // Set the desired scaleX (e.g., 0.5 for half size)
-			scaleY: 0.2, // Set the desired scaleY (e.g., 0.5 for half size)
+			scaleX: 1,
+			scaleY: 1,
 		})
+
 		canvas.current.add(fabricImage)
 		canvas.current.setActiveObject(fabricImage)
 		canvas.current.renderAll()
+
+		setFabricImage(fabricImage)
+	}
+
+	const addTaglineToCanvas = () => {
+		const activeObject = fabricImage || canvas.current.getActiveObject()
+
+		if (activeObject && tagline) {
+			const text = new fabric.Textbox(tagline, {
+				left: 10,
+				top: 10,
+				type: "text",
+				fontSize: 80,
+				fill: taglineTagProperties.textColor,
+				fontWeight: taglineTagProperties.isBold ? "bold" : "normal",
+				fontStyle: taglineTagProperties.isItalic ? "italic" : "normal",
+				fontFamily: taglineTagProperties.fontFamily,
+				textBackgroundColor: taglineTagProperties.textBackgroundColor,
+			})
+
+			switch (taglineTagProperties.verticalAlign) {
+				case "top":
+					text.top = 10
+					break
+				case "bottom":
+					text.top = canvas.current.height - text.height - 10
+					break
+				default:
+					text.top = canvas.current.height / 2 - text.height / 2
+			}
+
+			switch (taglineTagProperties.horizontalAlign) {
+				case "left":
+					text.left = 10
+					break
+				case "right":
+					text.left = canvas.current.width - text.width - 10
+					break
+				default:
+					text.left = canvas.current.width / 2 - text.width / 2
+			}
+
+			canvas.current.add(text)
+			canvas.current.setActiveObject(text)
+			canvas.current.renderAll()
+
+			// Track the text object
+			setFabricText(text)
+		}
 	}
 
 	return (
 		<>
-			<Box>
-				<input
-					type="text"
-					placeholder="Enter keywords for image search"
-					value={keyword}
-					onChange={handleKeywordChange}
-				/>
-				<input
-					type="text"
-					placeholder="Enter Tagline"
-					value={tagline}
-					onChange={(e) => setTagline(e.target.value)}
-				/>
-				<button onClick={fetchImageWithTagline}>
-					Fetch Image with Tagline
-				</button>
+			<Box
+				sx={{
+					height: "92vh",
+					overflowY: "auto",
+				}}
+			>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+				>
+					<input
+						type="text"
+						placeholder="Enter keyword"
+						value={keyword}
+						onChange={handleKeywordChange}
+						maxLength={10}
+						style={{
+							textIndent: "0.3rem",
+							marginTop: "1rem",
+							height: "2.2rem",
+							fontSize: "1rem",
+							width: "15rem",
+							borderRadius: "0.3rem",
+						}}
+					/>
+					<input
+						type="text"
+						placeholder="Enter Tagline"
+						value={tagline}
+						onChange={(e) => setTagline(e.target.value)}
+						style={{
+							textIndent: "0.3rem",
+							marginTop: "0.5rem",
+							height: "2.2rem",
+							fontSize: "1rem",
+							width: "15rem",
+							borderRadius: "0.3rem",
+						}}
+					/>
+					<button
+						onClick={fetchImages}
+						style={{
+							marginTop: "0.5rem",
+							height: "2.2rem",
+							fontSize: "1rem",
+							borderRadius: "0.3rem",
+							width: "15rem",
+						}}
+					>
+						Fetch Suggested Images
+					</button>
+				</Box>
+
+				{/* <div className="suggested-images">
+        
+        {suggestedImages.map((imageURL, index) => (
+          <img
+            key={index}
+            src={imageURL}
+            alt={Suggested Image ${index + 1}}
+            onClick={() => handleImageClick(imageURL, index)}
+            style={{
+              width: "120px",
+              height: "75px",
+              margin: "10px",
+              cursor: "pointer",
+            }}
+          />
+        ))}
+      </div> */}
+				<div className="suggested-images" style={{ marginTop: "0.8rem" }}>
+					{isLoading ? (
+						<Box
+							sx={{
+								display: "flex",
+								justifyContent: "center",
+							}}
+						>
+							<div className="loading-spinner"></div>
+						</Box>
+					) : (
+						suggestedImages.map((imageURL, index) => (
+							<img
+								key={index}
+								src={imageURL}
+								alt={`Suggested Image ${index + 1}`}
+								onClick={() => handleImageClick(imageURL, index)}
+								style={{
+									width: "113px",
+									height: "70px",
+									margin: "10px",
+									cursor: "pointer",
+								}}
+							/>
+						))
+					)}
+				</div>
 			</Box>
 		</>
 	)

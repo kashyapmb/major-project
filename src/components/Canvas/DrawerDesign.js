@@ -24,24 +24,24 @@ function DrawerDesign() {
 	const [selectedProjectIndex, setSelectedProjectIndex] = useState(null)
 	const [uploadedImages, setUploadedImages] = useState([])
 
-	// const saveProject = () => {
-	// 	if (selectedProjectIndex !== null) {
-	// 		// If a project is selected, update it
-	// 		const updatedProjects = [...projects]
-	// 		const canvasState = JSON.stringify(canvas.current.toJSON())
-	// 		const thumbnail = generateCanvasThumbnail()
-	// 		updatedProjects[selectedProjectIndex] = {
-	// 			canvasState,
-	// 			thumbnail,
-	// 			images: [...uploadedImages],
-	// 		}
+	const saveProject = () => {
+		if (selectedProjectIndex !== null) {
+			// If a project is selected, update it
+			const updatedProjects = [...projects]
+			const canvasState = JSON.stringify(canvas.current.toJSON())
+			const thumbnail = generateCanvasThumbnail()
+			updatedProjects[selectedProjectIndex] = {
+				canvasState,
+				thumbnail,
+				images: [...uploadedImages],
+			}
 
-	// 		// Store the updated projects in localStorage
-	// 		localStorage.setItem("projects", JSON.stringify(updatedProjects))
+			// Store the updated projects in localStorage
+			localStorage.setItem("projects", JSON.stringify(updatedProjects))
 
-	// 		setProjects(updatedProjects)
-	// 	}
-	// }
+			setProjects(updatedProjects)
+		}
+	}
 
 	// Saving a Project as New
 	const saveAsNewProject = () => {
@@ -67,39 +67,6 @@ function DrawerDesign() {
 		setProjects(updatedProjects)
 	}
 
-	var canvasRef = useRef(null)
-	const loadProjectViaTemplates = (index) => {
-		if (index >= 0 && index < Templates.length) {
-			const project = Templates[index]
-			const projectCanvasState = JSON.parse(project.canvasState)
-
-			// Clear the canvas before loading the project
-			// canvas.current.clear()
-
-			var secondCanvas = new fabric.Canvas(canvasRef.current, {
-				width: 200,
-				height: 200,
-			})
-
-			// Load the project canvas state into the canvas
-			secondCanvas.loadFromJSON(projectCanvasState, () => {
-				secondCanvas.renderAll()
-			})
-
-			const group = new fabric.Group([secondCanvas], {
-				left: 100, // Set the position of the group within the first canvas
-				top: 100,
-			})
-
-			canvas.current.add(group)
-
-			// Set the selected project index
-			setSelectedProjectIndex(index)
-
-			// Load project images onto the canvas
-			setUploadedImages([...project.images])
-		}
-	}
 	const loadProject = (index) => {
 		if (index >= 0 && index < projects.length) {
 			const project = projects[index]
@@ -150,48 +117,44 @@ function DrawerDesign() {
 		return thumbnailDataUrl
 	}
 
+	const deleteProject = (index) => {
+		const updatedProjects = [...projects]
+		updatedProjects.splice(index, 1)
+		setProjects(updatedProjects)
+	}
+
 	return (
 		<>
-			<Box>
-				{Templates.map((obj, index) => (
-					<>
-						<Typography
-							component={"img"}
-							src={`/images/templates/${index + 1}.png`}
-							href="/"
-							width={130}
-							height={73}
-							sx={{
-								cursor: "pointer",
-							}}
-							onClick={() => loadProjectViaTemplates(index)}
-						/>
-					</>
-				))}
-			</Box>
-
-			{/* <button onClick={saveProject}>Save Project</button> */}
-			<button onClick={saveAsNewProject}>Save as New Project</button>
-
-			<div>
-				<ul>
+			<Box sx={{height:'92vh', overflowY:'auto'}}>
+				<Box>
+					<button onClick={saveProject}>Save Project</button>
+					<button onClick={saveAsNewProject}>Save as New Project</button>
+				</Box>
+				<Box
+					sx={{
+						display: "flex",
+						justifyContent: "space-around",
+						flexWrap: "wrap",
+					}}
+				>
 					{projects.map((project, index) => (
-						<ul key={index}>
-							<span
+						<Box key={index}>
+							<Box
 								style={{ cursor: "pointer" }}
 								onClick={() => loadProject(index)}
 							>
 								<img
 									src={project.thumbnail} // Display the project thumbnail as an image
 									alt={`Project Thumbnail ${index}`}
-									width={50} // Set the desired thumbnail width
-									height={50} // Set the desired thumbnail height
+									width={120} // Set the desired thumbnail width
+									height={75} // Set the desired thumbnail height
 								/>
-							</span>
-						</ul>
+							</Box>
+							<button onClick={() => deleteProject(index)}>Delete</button>
+						</Box>
 					))}
-				</ul>
-			</div>
+				</Box>
+			</Box>
 		</>
 	)
 }

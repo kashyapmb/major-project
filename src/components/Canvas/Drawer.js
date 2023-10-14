@@ -9,20 +9,22 @@ import Download from "./DrawerDownload"
 import ColorEffect from "./Editing/ColorEffect"
 import Position from "./Editing/Position"
 import EmojiLoad from "./EmojiLoad"
+import BackgroundColorEffect from "./Editing/BackgroundColorEffect"
 
-function Drawer({ selectNum, setSelectNum }) {
+function Drawer({ selectNum, setSelectNum, setEmojiApiResponce, emojiApiResponce }) {
 	return (
 		<>
 			<Box sx={{ height: "100%", background: "#252627" }}>
 				{selectNum == 1 && <DrawerDesign />}
-				{selectNum == 2 && <DrawerElements setSelectNum={setSelectNum} />}
+				{selectNum == 2 && <DrawerElements setSelectNum={setSelectNum}  setEmojiApiResponce={setEmojiApiResponce} />}
 				{selectNum == 3 && <DrawerText />}
 				{selectNum == 4 && <DrawerUpload />}
 				{selectNum == 5 && <DrawerAI />}
 				{selectNum == 6 && <Download />}
 				{selectNum == 7 && <ColorEffect />}
+				{selectNum == 10 && <BackgroundColorEffect />}
 				{selectNum == 8 && <Position />}
-				{selectNum == 9 && <EmojiLoad />}
+				{selectNum == 9 && <EmojiLoad emojiApiResponce={emojiApiResponce} />}
 			</Box>
 		</>
 	)

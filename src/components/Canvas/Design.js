@@ -27,8 +27,8 @@ function Design() {
 		}
 	}
 	useEffect(() => {
-		if (selectNum == 0) setLayoutSize(11.75)
-		else setLayoutSize(8.95)
+		if (selectNum == 0) setLayoutSize(11.45)
+		else setLayoutSize(9)
 	}, [objectClicked, selectNum])
 
 	return (
@@ -42,7 +42,7 @@ function Design() {
 				</Grid>
 
 				{selectNum != 0 && (
-					<Grid item xs={2.5}>
+					<Grid item xs={2.45}>
 						<Drawer selectNum={selectNum} setSelectNum={setSelectNum} />
 					</Grid>
 				)}

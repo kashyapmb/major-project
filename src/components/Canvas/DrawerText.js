@@ -33,6 +33,7 @@ function DrawerText() {
 
 	const addTextBoxHeading = () => {
 		const text = new fabric.IText("Add a Heading", {
+			textBackgroundColor: "transparent",
 			left: 20,
 			top: 20,
 			fill: "black", // Set the initial text color
@@ -55,6 +56,7 @@ function DrawerText() {
 	}
 	const addTextBoxSubHeading = () => {
 		const text = new fabric.IText("Add a Subheading", {
+			textBackgroundColor: "transparent",
 			left: 20,
 			top: 80,
 			fill: "black", // Set the initial text color
@@ -77,6 +79,7 @@ function DrawerText() {
 	}
 	const addTextBoxBodyText = () => {
 		const text = new fabric.IText("Add a body Text", {
+			textBackgroundColor: "transparent",
 			left: 20,
 			top: 125,
 			fill: "black", // Set the initial text color
@@ -91,6 +94,132 @@ function DrawerText() {
 			charSpacing: -10,
 			lineHeight: 1 + 0 / 10,
 			fontFamily: "Arial", // Set the font family
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme1 = () => {
+		const text = new fabric.IText("Add a Theme 1 Text", {
+			left: 20,
+			top: 170,
+			fill: "red", // Set the text color to red
+			strokeWidth: 1, // Adjust the border width as needed
+			fontSize: 24, // Adjust the font size as needed
+			type: "text",
+			fontWeight: "normal",
+			fontStyle: "normal",
+			underline: false,
+			charSpacing: -10,
+			lineHeight: 1 + 0 / 10,
+			fontFamily: "Arial", // Set the font family to Arial
+			shadow: {
+				color: "red", // Glowing color
+				blur: 10, // Glowing blur radius
+				offsetX: 0,
+				offsetY: 0,
+			},
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme2 = () => {
+		const text = new fabric.IText("Add Theme 2 Text", {
+			left: 20,
+			top: 220,
+			fill: "#fff6a9", // Set the text color to blue
+			strokeWidth: 1, // Adjust the border width as needed
+			fontSize: 70, // Adjust the font size as needed
+			type: "text",
+			fontWeight: "bold", // You can adjust the font weight
+			charSpacing: 5, // You can adjust the character spacing
+			lineHeight: 1.5, // Adjust the line height as needed
+			fontFamily: "Sacramento", // Set the font family Sacramento
+			backgroundColor: "black",
+			shadow: {
+				color: "#fff6a9", // Glowing color
+				blur: 5, // Glowing blur radius
+				offsetX: 0,
+				offsetY: 0,
+			},
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme3 = () => {
+		const text = new fabric.IText("Add Theme 3 Text", {
+			left: 20,
+			top: 220,
+			fill: "#03fc2c", // Set the text color to blue
+			strokeWidth: 1, // Adjust the border width as needed
+			fontSize: 70, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Monoton", // Set the font family Sacramento
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme4 = () => {
+		const text = new fabric.IText("Add Theme 4 Text", {
+			left: 20,
+			top: 220,
+			fontWeight: "bold",
+			fill: "#3b075c", // Set the text color to blue
+			strokeWidth: 1, // Adjust the border width as needed
+			fontSize: 60, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Orbitron", // Set the font family
+
+			stroke: "#e312af",
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme5 = () => {
+		const text = new fabric.IText("Add Theme 5 Text", {
+			left: 20,
+			top: 220,
+			fill: "#e31948", // Set the text color to blue
+			strokeWidth: 1, // Adjust the border width as needed
+			fontSize: 60, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Teko", // Set the font family
+			fontStyle: "italic",
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme6 = () => {
+		const text = new fabric.IText("Add Theme 6 Text", {
+			left: 20,
+			top: 270,
+			fill: "transparent", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "white", // Set the stroke color to white
+			fontSize: 60, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Raleway", // Use the imported Google Font
+			shadow: {
+				color: "#ff1f8f", // Shadow color
+				blur: 8, // Shadow blur radius
+				offsetX: 8, // Shadow offset on X-axis
+				offsetY: 8, // Shadow offset on Y-axis
+			},
 		})
 
 		canvas.current.add(text)
@@ -198,6 +327,7 @@ function DrawerText() {
 						color: "white",
 						fontWeight: "600",
 						fontSize: "1.5rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -217,6 +347,7 @@ function DrawerText() {
 						color: "white",
 						fontWeight: "500",
 						fontSize: "1.2rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -236,6 +367,7 @@ function DrawerText() {
 						color: "white",
 						fontWeight: "400",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -245,6 +377,121 @@ function DrawerText() {
 					onClick={addTextBoxBodyText}
 				>
 					Add a little body text
+				</Box>
+
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme1}
+				>
+					Add a little style1 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme2}
+				>
+					Add a little style2 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme3}
+				>
+					Add a little style3 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme4}
+				>
+					Add a little style4 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme5}
+				>
+					Add a little style5 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme6}
+				>
+					Add a little style6 text
 				</Box>
 			</Box>
 		</>

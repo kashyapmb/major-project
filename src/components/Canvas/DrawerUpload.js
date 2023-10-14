@@ -16,6 +16,7 @@ function DrawerUpload() {
 		const fabricImage = new fabric.Image(image, {
 			left: 0,
 			top: 0,
+			type: "image",
 			scaleX: 0.2, // Set the desired scaleX (e.g., 0.5 for half size)
 			scaleY: 0.2, // Set the desired scaleY (e.g., 0.5 for half size)
 		})
@@ -57,6 +58,7 @@ function DrawerUpload() {
 						color: "white",
 						fontWeight: "600",
 						fontSize: "1rem",
+						borderRadius: "0.3rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -73,7 +75,7 @@ function DrawerUpload() {
 					ref={hiddenFileInput}
 					style={{ display: "none" }} // Make the file input element invisible
 				/>
-				<Box sx={{mt:'1rem'}}>
+				<Box sx={{ mt: "1rem" }}>
 					{uploadedImages.map((image, index) => (
 						<img
 							key={index}
@@ -85,9 +87,9 @@ function DrawerUpload() {
 								marginRight: "10px",
 								width: "100px", // Set the desired width
 								height: "100px", // Maintain aspect ratio
-								objectFit:'contain',
-								backgroundImage:`url(/images/bg.jpg)`,
-								backgroundSize:'150px'
+								objectFit: "contain",
+								backgroundImage: `url(/images/bg.jpg)`,
+								backgroundSize: "150px",
 							}}
 						/>
 					))}

@@ -25,8 +25,9 @@ const CanvasContainer = ({
 	// let lastClickTime = 0
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			width: 760,
-			height: 427.5,
+			// preserveObjectStacking: true,
+			width: 800,
+			height: 450,
 			backgroundColor: "white",
 			selectionBorderColor: "#2563eb",
 		})

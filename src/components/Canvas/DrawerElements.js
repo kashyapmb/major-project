@@ -64,6 +64,7 @@ import {} from "react-icons/ti"
 import {} from "react-icons/vsc"
 import {} from "react-icons/wi"
 import {} from "react-icons/cg"
+import "./Loader.css"
 
 import { transform } from "lodash"
 
@@ -82,27 +83,31 @@ const callRestApi = async () => {
 	}
 }
 
-function DrawerElements({ setSelectNum }) {
+function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
+	const selectedColor = "#000"
 	const [apiResponse, setApiResponse] = useState([])
+	const [isLoading, setIsLoading] = useState(false) // Loading state
+
 	useEffect(() => {
 		callRestApi().then((result) => {
-			if (result != "NaN") setApiResponse(JSON.parse(result))
+			if (result != "NaN") {
+				setApiResponse(JSON.parse(result))
+				setIsLoading(false)
+			}
 		})
-	}, [])
+	}, [isLoading])
+
 	function generateUniqueId() {
-		// Generate a random string
 		const randomString = Math.random().toString(36).substring(7)
-
-		// Get the current timestamp
 		const timestamp = new Date().getTime()
-
-		// Combine the random string and timestamp to create a unique ID
 		const uniqueId = randomString + timestamp
-
 		return uniqueId
 	}
 
-	const selectedColor = "#000"
+	const moreEmoji = () => {
+		setEmojiApiResponce(apiResponse)
+		setSelectNum(9)
+	}
 
 	const addRectangle = () => {
 		const rect = new fabric.Rect({
@@ -114,18 +119,12 @@ function DrawerElements({ setSelectNum }) {
 			type: "shape",
 			id: generateUniqueId(),
 		})
-		// rect.on("mousedown", function (options) {
-		// 	console.log("Clicked on circle:", this) // 'this' refers to the clicked circle object
-		// 	console.log("Object properties:", this.toObject())
-		// 	const objj = canvas.current.getActiveObject()
-		// 	console.log("objj properties:", objj.height)
-		// 	// Perform any other actions you need for circle
-		// })
 
 		canvas.current.add(rect)
 		canvas.current.setActiveObject(rect) // Select the added rectangle
 		canvas.current.renderAll()
 	}
+
 	const addHeart = () => {
 		const heart = new fabric.Path(
 			"M50 85 A20 20 0 0 1 90 85 Q100 130 50 175 Q0 130 10 85 A20 20 0 0 1 50 85",
@@ -156,12 +155,15 @@ function DrawerElements({ setSelectNum }) {
 		canvas.current.setActiveObject(leftArrowPath)
 		canvas.current.renderAll()
 	}
+
 	const addUpArrow = () => {
 		const upArrowPath = new fabric.Path(
 			"M0 20 L20 0 L40 20 L30 20 L30 40 L10 40 L10 20",
 			{
 				left: 20,
 				top: 20,
+				width: 200,
+				height: 200,
 				fill: selectedColor,
 				id: generateUniqueId(),
 			}
@@ -172,27 +174,49 @@ function DrawerElements({ setSelectNum }) {
 	}
 
 	const addDownArrow = () => {
-		const downArrowPath = new fabric.Path(
-			"M0 20 L0 20 L10 20 L10 70 L90 0 L0 20 L40 20",
+		// Create a down arrow
+		const downArrowPath = new fabric.Polygon(
+			[
+				{ x: 25, y: 0 },
+				{ x: 50, y: 0 },
+				{ x: 50, y: 40 },
+				{ x: 75, y: 40 },
+				{ x: 37, y: 100 },
+				{ x: 0, y: 40 },
+				{ x: 25, y: 40 },
+			],
 			{
 				left: 20,
 				top: 20,
-				fill: "green", // Use the color you prefer
+				fill: selectedColor,
 				id: generateUniqueId(),
 			}
 		)
+
 		canvas.current.add(downArrowPath)
 		canvas.current.setActiveObject(downArrowPath)
 		canvas.current.renderAll()
 	}
 
 	const addRightArrow = () => {
-		const rightArrowPath = new fabric.Path("M0 20 L20 0 L50 20 L20 40 Z", {
-			left: 20,
-			top: 20,
-			fill: selectedColor,
-			id: generateUniqueId(),
-		})
+		const rightArrowPath = new fabric.Polygon(
+			[
+				{ x: 0, y: 10 },
+				{ x: 25, y: 10 },
+				{ x: 25, y: 0 },
+				{ x: 50, y: 25 },
+				{ x: 25, y: 50 },
+				{ x: 25, y: 40 },
+				{ x: 0, y: 40 },
+				{ x: 0, y: 10 },
+			],
+			{
+				left: 20,
+				top: 20,
+				fill: selectedColor,
+				id: generateUniqueId(),
+			}
+		)
 		canvas.current.add(rightArrowPath)
 		canvas.current.setActiveObject(rightArrowPath)
 		canvas.current.renderAll()
@@ -281,6 +305,7 @@ function DrawerElements({ setSelectNum }) {
 		canvas.current.setActiveObject(star)
 		canvas.current.renderAll()
 	}
+
 	const addRoundedRectangle = () => {
 		const roundedRect = new fabric.Rect({
 			left: 20,
@@ -296,6 +321,7 @@ function DrawerElements({ setSelectNum }) {
 		canvas.current.setActiveObject(roundedRect)
 		canvas.current.renderAll()
 	}
+
 	const addPentagon = () => {
 		const pentagon = new fabric.Polygon(
 			[
@@ -349,6 +375,7 @@ function DrawerElements({ setSelectNum }) {
 		canvas.current.setActiveObject(heptagon)
 		canvas.current.renderAll()
 	}
+
 	const addOctagon = () => {
 		const octagonPath = new fabric.Path(
 			"M100 0 L200 0 L250 50 L250 150 L200 200 L100 200 L50 150 L50 50 Z"
@@ -362,6 +389,7 @@ function DrawerElements({ setSelectNum }) {
 		canvas.current.setActiveObject(octagonPath)
 		canvas.current.renderAll()
 	}
+
 	const addLine = () => {
 		const line = new fabric.Line([50, 50, 200, 50], {
 			stroke: selectedColor,
@@ -581,39 +609,43 @@ function DrawerElements({ setSelectNum }) {
 						flexWrap: "wrap",
 					}}
 				>
-					{apiResponse.slice(0, 10).map((obj, index) => (
-						<>
-							<Box
-								sx={{ mx: "0.2rem", cursor: "pointer" }}
-								onClick={() => addEmoji(obj)}
-							>
-								{obj.character}
-							</Box>
-
-							{index == 9 && (
+					{isLoading ? (
+						<div className="loading-spinner"></div>
+					) : (
+						apiResponse.slice(0, 12).map((obj, index) => (
+							<>
 								<Box
-									sx={{
-										justifySelf: "end",
-										ml: "1rem",
-									}}
+									sx={{ mx: "0.2rem", cursor: "pointer" }}
+									onClick={() => addEmoji(obj)}
 								>
-									<Typography
-										sx={{
-											color: "white",
-											fontSize: "0.8rem",
-											":hover": {
-												cursor: "pointer",
-												textDecoration: "underline",
-											},
-										}}
-										onClick={() => setSelectNum(9)}
-									>
-										Load More
-									</Typography>
+									{obj.character}
 								</Box>
-							)}
-						</>
-					))}
+
+								{index == 11 && (
+									<Box
+										sx={{
+											justifySelf: "end",
+											ml: "1rem",
+										}}
+									>
+										<Typography
+											sx={{
+												color: "white",
+												fontSize: "0.8rem",
+												":hover": {
+													cursor: "pointer",
+													textDecoration: "underline",
+												},
+											}}
+											onClick={moreEmoji}
+										>
+											Load More
+										</Typography>
+									</Box>
+								)}
+							</>
+						))
+					)}
 				</Box>
 			</Box>
 		</>

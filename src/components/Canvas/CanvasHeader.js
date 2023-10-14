@@ -11,7 +11,7 @@ import { MdFormatLineSpacing } from "react-icons/md"
 import { RiBold } from "react-icons/ri"
 import { LuItalic, LuUnderline } from "react-icons/lu"
 import { fabric } from "fabric"
-import { AiOutlineBgColors } from "react-icons/ai"
+import { AiOutlineBgColors, AiOutlineFontColors } from "react-icons/ai"
 
 function CanvasHeader({
 	objectClicked,
@@ -28,7 +28,7 @@ function CanvasHeader({
 	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
 	const [isBold, setIsBold] = useState(false)
 	const [isItalic, setIsItalic] = useState(false)
-	const [isUnderline, setIsUnderline] = useState(false)
+	const [isUnderline, setIsUnderline] = useState(true)
 	const [letterSpacing, setLetterSpacing] = useState(0)
 	const [lineSpacing, setLineSpacing] = useState(0)
 
@@ -148,7 +148,7 @@ function CanvasHeader({
 		const activeObject = canvas.current.getActiveObject()
 		setSelectedFontSize(activeObject.fontSize + 1)
 		if (activeObject && activeObject.isType("text")) {
-			activeObject.set("fontSize", activeObject.fontSize + 1)
+			activeObject.set("fontSize", selectedFontSize)
 			canvas.current.renderAll()
 		}
 	}
@@ -157,7 +157,7 @@ function CanvasHeader({
 		const activeObject = canvas.current.getActiveObject()
 		setSelectedFontSize(activeObject.fontSize - 1)
 		if (activeObject && activeObject.isType("text")) {
-			activeObject.set("fontSize", activeObject.fontSize - 1)
+			activeObject.set("fontSize", selectedFontSize)
 			canvas.current.renderAll()
 		}
 	}
@@ -256,7 +256,14 @@ function CanvasHeader({
 			<Box sx={{ height: "3rem", background: "white" }}>
 				{objectClicked === 1 && (
 					<>
-						<Box sx={{ display: "flex" }}>
+						<Box
+							sx={{
+								pl: "1rem",
+								height: "3rem",
+								display: "flex",
+								alignItems: "center",
+							}}
+						>
 							<Button
 								id="basic-button"
 								aria-controls={open ? "basic-menu" : undefined}
@@ -319,6 +326,11 @@ function CanvasHeader({
 							id="fontFamilySelect"
 							value={selectedFontFamily}
 							onChange={handleFontFamilyChange}
+							style={{
+								height: "1.8rem",
+								width: "15rem",
+								borderRadius: "0.3rem",
+							}}
 						>
 							<option value="Arial">Arial</option>
 							<option value="Verdana">Verdana</option>
@@ -856,7 +868,18 @@ function CanvasHeader({
 						</select>
 
 						<Box sx={{ display: "flex" }}>
-							<button onClick={handleDecrement}>
+							<button
+								onClick={handleDecrement}
+								style={{
+									width: "2rem",
+									height: "1.8rem",
+									marginLeft: "1rem",
+									background: "white",
+									border: "1px solid black",
+									paddingTop: "0.3rem",
+									borderRadius: "0.3rem",
+								}}
+							>
 								<BiMinus />
 							</button>
 							<input
@@ -864,29 +887,110 @@ function CanvasHeader({
 								value={selectedFontSize}
 								onChange={textSizeChanged}
 								maxLength={10}
+								style={{
+									height: "1.8rem",
+									marginLeft: "0.3rem",
+									width: "2rem",
+									borderRadius: "0.3rem",
+								}}
 							/>
-							<button onClick={handleIncrement}>
-								<BsPlus />
+							<button
+								onClick={handleIncrement}
+								style={{
+									width: "2rem",
+									height: "1.8rem",
+									marginLeft: "0.3rem",
+									border: "1px solid black",
+									background: "white",
+									paddingTop: "0.2rem",
+									borderRadius: "0.3rem",
+								}}
+							>
+								<BsPlus size={18} />
 							</button>
 						</Box>
-						<Box sx={{ ml: "1rem" }}>
-							<input
-								type="color"
-								id="colorPicker"
-								value={selectedColor}
-								onChange={handleColorChange}
-							/>
+
+						<Box
+							sx={{
+								ml: "1.2rem",
+								border: "1px solid transparent",
+								borderRadius: "0.3rem",
+								transition: "0.5s",
+								":hover": { border: "1px solid black" },
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								width: "2.5rem",
+								height: "2rem",
+								borderRadius: "0.3rem",
+							}}
+						>
+							<Box
+								sx={{
+									cursor: "pointer",
+									height: "1.7rem",
+								}}
+								onClick={() => setSelectNum(7)}
+							>
+								<AiOutlineFontColors size={25} color="black" />
+							</Box>
 						</Box>
 
-						<Button
-							id="basic-button"
-							aria-controls={open ? "basic-menu" : undefined}
-							aria-haspopup="true"
-							aria-expanded={open ? "true" : undefined}
-							onClick={handleClick}
+						<Box
+							sx={{
+								ml: "1.2rem",
+								border: "1px solid transparent",
+								borderRadius: "0.3rem",
+								transition: "0.5s",
+								":hover": { border: "1px solid black" },
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								width: "2.5rem",
+								height: "2rem",
+								borderRadius: "0.3rem",
+							}}
 						>
-							<RxTransparencyGrid size={25} color="black" />
-						</Button>
+							<Box
+								sx={{
+									cursor: "pointer",
+									height: "1.7rem",
+								}}
+								onClick={() => setSelectNum(10)}
+							>
+								<AiOutlineBgColors size={25} color="black" />
+							</Box>
+						</Box>
+
+						<Box
+							sx={{
+								width: "2.5rem",
+								height: "2rem",
+								ml: "0.7rem",
+								border: "1px solid transparent",
+								borderRadius: "0.3rem",
+								transition: "0.5s",
+								":hover": { border: "1px solid black" },
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<button
+								id="basic-button"
+								aria-controls={open ? "basic-menu" : undefined}
+								aria-haspopup="true"
+								aria-expanded={open ? "true" : undefined}
+								onClick={handleClick}
+								style={{
+									background: "white",
+									border: "none",
+									padding: "0",
+								}}
+							>
+								<RxTransparencyGrid size={19} color="black" />
+							</button>
+						</Box>
 						<Menu
 							id="basic-menu"
 							anchorEl={anchorEl}
@@ -895,6 +999,7 @@ function CanvasHeader({
 							MenuListProps={{
 								"aria-labelledby": "basic-button",
 							}}
+							style={{ marginTop: "0.7rem" }}
 						>
 							<MenuItem>
 								<input
@@ -909,25 +1014,98 @@ function CanvasHeader({
 							</MenuItem>
 						</Menu>
 
-						<Button onClick={toggleBold}>
-							<RiBold size={25} color="black" />
-						</Button>
-						<Button onClick={toggleItalic}>
-							<LuItalic size={25} color="black" />
-						</Button>
-						<Button onClick={toggleUnderline}>
-							<LuUnderline size={25} color="black" />
-						</Button>
+						<button
+							onClick={toggleBold}
+							style={
+								isBold
+									? {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "2.4px solid black",
+									  }
+									: {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "0.3px solid black",
+									  }
+							}
+						>
+							<RiBold size={20} color="black" />
+						</button>
 
-						<Button
+						<button
+							onClick={toggleItalic}
+							style={
+								isItalic
+									? {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "2.4px solid black",
+									  }
+									: {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "0.3px solid black",
+									  }
+							}
+						>
+							<LuItalic size={20} color="black" />
+						</button>
+
+						<button
+							onClick={toggleUnderline}
+							style={
+								isUnderline
+									? {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "2.4px solid black",
+									  }
+									: {
+											width: "2.5rem",
+											height: "2rem",
+											borderRadius: "0.3rem",
+											marginLeft: "1rem",
+											background: "white",
+											border: "0.3px solid black",
+									  }
+							}
+						>
+							<LuUnderline size={20} color="black" />
+						</button>
+
+						<button
 							id="basic-button-2"
 							aria-controls={open2 ? "basic-menu-2" : undefined}
 							aria-haspopup="true"
 							aria-expanded={open2 ? "true" : undefined}
 							onClick={handleClick2}
+							style={{
+								width: "2.5rem",
+								height: "2rem",
+								borderRadius: "0.3rem",
+								marginLeft: "1rem",
+								background: "white",
+								border: "0.4px solid black",
+							}}
 						>
 							<MdFormatLineSpacing size={25} color="black" />
-						</Button>
+						</button>
 						<Menu
 							id="basic-menu-2"
 							anchorEl={anchorE2}
