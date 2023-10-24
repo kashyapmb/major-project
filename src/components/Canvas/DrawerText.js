@@ -38,7 +38,6 @@ function DrawerText() {
 			top: 20,
 			fill: "black", // Set the initial text color
 			fontSize: 60,
-			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -61,7 +60,6 @@ function DrawerText() {
 			top: 80,
 			fill: "black", // Set the initial text color
 			fontSize: 40,
-			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -84,7 +82,6 @@ function DrawerText() {
 			top: 125,
 			fill: "black", // Set the initial text color
 			fontSize: 20,
-			type: "text",
 			// fontWeight: isBold ? "bold" : "normal", // Set initial bold style
 			// fontStyle: isItalic ? "italic" : "normal", // Set initial italic style
 			// underline: isUnderline, // Set initial underline style
@@ -102,13 +99,12 @@ function DrawerText() {
 	}
 
 	const addTextBoxTheme1 = () => {
-		const text = new fabric.IText("Add a Theme 1 Text", {
+		const text = new fabric.IText("Subscribe", {
 			left: 20,
 			top: 170,
 			fill: "red", // Set the text color to red
 			strokeWidth: 1, // Adjust the border width as needed
-			fontSize: 24, // Adjust the font size as needed
-			type: "text",
+			fontSize: 40, // Adjust the font size as needed
 			fontWeight: "normal",
 			fontStyle: "normal",
 			underline: false,
@@ -129,13 +125,12 @@ function DrawerText() {
 	}
 
 	const addTextBoxTheme2 = () => {
-		const text = new fabric.IText("Add Theme 2 Text", {
+		const text = new fabric.IText("Like & Share", {
 			left: 20,
 			top: 220,
 			fill: "#fff6a9", // Set the text color to blue
 			strokeWidth: 1, // Adjust the border width as needed
-			fontSize: 70, // Adjust the font size as needed
-			type: "text",
+			fontSize: 50, // Adjust the font size as needed
 			fontWeight: "bold", // You can adjust the font weight
 			charSpacing: 5, // You can adjust the character spacing
 			lineHeight: 1.5, // Adjust the line height as needed
@@ -155,13 +150,13 @@ function DrawerText() {
 	}
 
 	const addTextBoxTheme3 = () => {
-		const text = new fabric.IText("Add Theme 3 Text", {
+		const text = new fabric.IText("Happy Birthday", {
 			left: 20,
 			top: 220,
+			width: "10rem",
 			fill: "#03fc2c", // Set the text color to blue
 			strokeWidth: 1, // Adjust the border width as needed
-			fontSize: 70, // Adjust the font size as needed
-			type: "text",
+			fontSize: 50, // Adjust the font size as needed
 			fontFamily: "Monoton", // Set the font family Sacramento
 		})
 
@@ -178,9 +173,7 @@ function DrawerText() {
 			fill: "#3b075c", // Set the text color to blue
 			strokeWidth: 1, // Adjust the border width as needed
 			fontSize: 60, // Adjust the font size as needed
-			type: "text",
 			fontFamily: "Orbitron", // Set the font family
-
 			stroke: "#e312af",
 		})
 
@@ -195,7 +188,6 @@ function DrawerText() {
 			fill: "#e31948", // Set the text color to blue
 			strokeWidth: 1, // Adjust the border width as needed
 			fontSize: 60, // Adjust the font size as needed
-			type: "text",
 			fontFamily: "Teko", // Set the font family
 			fontStyle: "italic",
 		})
@@ -212,7 +204,6 @@ function DrawerText() {
 			strokeWidth: 3, // Set the stroke width
 			stroke: "white", // Set the stroke color to white
 			fontSize: 60, // Adjust the font size as needed
-			type: "text",
 			fontFamily: "Raleway", // Use the imported Google Font
 			shadow: {
 				color: "#ff1f8f", // Shadow color
@@ -358,13 +349,14 @@ function DrawerText() {
 				>
 					Add a subheading
 				</Box>
+
 				<Box
 					sx={{
 						padding: "0.6rem",
 						display: "flex",
 						background: "#343536",
-						mt: "0.7rem",
 						color: "white",
+						mt: "0.7rem",
 						fontWeight: "400",
 						fontSize: "1rem",
 						borderRadius: "0.3rem",
@@ -378,16 +370,22 @@ function DrawerText() {
 				>
 					Add a little body text
 				</Box>
+				<Typography sx={{ color: "white", mt: "1rem" }}>
+					Predefined Text Styles
+				</Typography>
 
 				<Box
 					sx={{
 						padding: "0.6rem",
 						display: "flex",
 						background: "#343536",
-						mt: "0.7rem",
-						color: "white",
+						mt: "0.3rem",
+						color: "red",
+						strokeWidth: "1",
+						fontFamily: "Arial",
+						boxShadow: "1",
 						fontWeight: "400",
-						fontSize: "1rem",
+						fontSize: "2rem",
 						":hover": {
 							background: "#5f6160",
 							transition: "0.3s",
@@ -396,7 +394,7 @@ function DrawerText() {
 					}}
 					onClick={addTextBoxTheme1}
 				>
-					Add a little style1 text
+					Subscribe
 				</Box>
 				<Box
 					sx={{

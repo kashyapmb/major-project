@@ -5,6 +5,9 @@ import { canvas } from "./CanvasContainer"
 import "./Loader.css"
 import { Box } from "@mui/material"
 
+import "./search_bar.css"
+var data = require("./words.json")
+
 function DrawerAI() {
 	const [keyword, setKeyword] = useState("")
 	const [tagline, setTagline] = useState("")
@@ -47,6 +50,37 @@ function DrawerAI() {
 
 		setSuggestedImages(suggestions)
 		setIsLoading(false) // Stop loading
+	}
+
+	const [taglineTagProperties, setTaglineTagProperties] = useState({
+		verticalAlign: "top",
+		horizontalAlign: "left",
+		textColor: "red",
+		isBold: false,
+		isItalic: false,
+		fontFamily: "Arial",
+		textBackgroundColor: "yellow",
+	})
+
+	const setTaglineProperties = (
+		verticalAlign,
+		horizontalAlign,
+		textColor,
+		isBold,
+		isItalic,
+		fontFamily,
+		textBackgroundColor
+	) => {
+		setTaglineTagProperties({
+			verticalAlign,
+			horizontalAlign,
+			textColor,
+			isBold,
+			isItalic,
+			fontFamily,
+			textBackgroundColor,
+		})
+		// addTaglineToCanvas();
 	}
 
 	const handleImageClick = (imageURL, index) => {
@@ -305,37 +339,6 @@ function DrawerAI() {
 		}
 	}
 
-	const setTaglineProperties = (
-		verticalAlign,
-		horizontalAlign,
-		textColor,
-		isBold,
-		isItalic,
-		fontFamily,
-		textBackgroundColor
-	) => {
-		setTaglineTagProperties({
-			verticalAlign,
-			horizontalAlign,
-			textColor,
-			isBold,
-			isItalic,
-			fontFamily,
-			textBackgroundColor,
-		})
-		// addTaglineToCanvas();
-	}
-
-	const [taglineTagProperties, setTaglineTagProperties] = useState({
-		verticalAlign: "top",
-		horizontalAlign: "left",
-		textColor: "red",
-		isBold: false,
-		isItalic: false,
-		fontFamily: "Arial",
-		textBackgroundColor: "yellow",
-	})
-
 	const addImageToCanvas = (image) => {
 		const fabricImage = new fabric.Image(image, {
 			type: "image",
@@ -355,12 +358,12 @@ function DrawerAI() {
 	const addTaglineToCanvas = () => {
 		const activeObject = fabricImage || canvas.current.getActiveObject()
 
-		if (activeObject && tagline) {
+		if (tagline) {
 			const text = new fabric.Textbox(tagline, {
 				left: 10,
 				top: 10,
 				type: "text",
-				fontSize: 80,
+				fontSize: 60,
 				fill: taglineTagProperties.textColor,
 				fontWeight: taglineTagProperties.isBold ? "bold" : "normal",
 				fontStyle: taglineTagProperties.isItalic ? "italic" : "normal",
@@ -399,6 +402,11 @@ function DrawerAI() {
 		}
 	}
 
+	const onSearch = (searchTerm) => {
+		setKeyword(searchTerm)
+		console.log("search", keyword)
+	}
+
 	return (
 		<>
 			<Box
@@ -419,7 +427,7 @@ function DrawerAI() {
 						placeholder="Enter keyword"
 						value={keyword}
 						onChange={handleKeywordChange}
-						maxLength={10}
+						maxLength={20}
 						style={{
 							textIndent: "0.3rem",
 							marginTop: "1rem",
@@ -429,6 +437,46 @@ function DrawerAI() {
 							borderRadius: "0.3rem",
 						}}
 					/>
+
+					<Box
+						sx={{
+							width: "15rem",
+							background: "white",
+							position: "absolute",
+							zIndex: "1",
+							top: "7rem",
+							border: "1px solid gray",
+						}}
+					>
+						<Box>
+							{data
+								.filter((item) => {
+									const searchTerm = keyword.toLocaleLowerCase()
+									const words = item.words.toLocaleLowerCase()
+									return (
+										searchTerm &&
+										words.startsWith(searchTerm) &&
+										words != searchTerm
+									)
+								})
+								.slice(0, 10)
+								.map((item) => (
+									<Box
+										onClick={() => onSearch(item.words)}
+										className="dropdown-row"
+										sx={{
+											cursor: "pointer",
+											textAlign: "start",
+											margin: "2px 0",
+										}}
+										key={item.words}
+									>
+										{item.words}
+									</Box>
+								))}
+						</Box>
+					</Box>
+
 					<input
 						type="text"
 						placeholder="Enter Tagline"
@@ -474,6 +522,7 @@ function DrawerAI() {
           />
         ))}
       </div> */}
+
 				<div className="suggested-images" style={{ marginTop: "0.8rem" }}>
 					{isLoading ? (
 						<Box

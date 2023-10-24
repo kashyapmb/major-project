@@ -6,6 +6,8 @@ import jsPDF from "jspdf"
 import { BiSolidBackpack } from "react-icons/bi"
 import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
 import { canvas, canvasRef } from "./CanvasContainer"
+import StickerSearch from "./StickerSearch" // Import the StickerSearch component
+
 import {
 	Avatar,
 	Box,
@@ -23,6 +25,21 @@ function DrawerDesign() {
 	const [projects, setProjects] = useState([]) // State to store saved projects
 	const [selectedProjectIndex, setSelectedProjectIndex] = useState(null)
 	const [uploadedImages, setUploadedImages] = useState([])
+
+	const addStickerToCanvas = (stickerUrl) => {
+		fabric.Image.fromURL(stickerUrl, (img) => {
+			img.scale(0.1)
+			img.set({ left: 10, top: 10 })
+			img.set({
+				hasControls: false,
+				hasBorders: false,
+				lockScalingX: true,
+				lockScalingY: true,
+			})
+			canvas.current.add(img)
+			canvas.current.renderAll()
+		})
+	}
 
 	const saveProject = () => {
 		if (selectedProjectIndex !== null) {
@@ -45,6 +62,7 @@ function DrawerDesign() {
 
 	// Saving a Project as New
 	const saveAsNewProject = () => {
+		// const projectName = prompt("Enter a name for your new project:");
 		const canvasState = JSON.stringify(canvas.current.toJSON())
 		const thumbnail = generateCanvasThumbnail()
 
@@ -96,16 +114,12 @@ function DrawerDesign() {
 	const generateCanvasThumbnail = () => {
 		const thumbnailCanvas = document.createElement("canvas")
 		const thumbnailContext = thumbnailCanvas.getContext("2d")
-		thumbnailCanvas.width = 100 // Set the desired thumbnail width
-		thumbnailCanvas.height = 100 // Set the desired thumbnail height
+		thumbnailCanvas.width = 797 // Set the desired thumbnail width
+		thumbnailCanvas.height = 447 // Set the desired thumbnail height
 
 		// Create a thumbnail by drawing the canvas content onto the thumbnail canvas
 		thumbnailContext.drawImage(
 			canvasRef.current,
-			0,
-			0,
-			canvas.current.width,
-			canvas.current.height,
 			0,
 			0,
 			thumbnailCanvas.width,
@@ -125,7 +139,7 @@ function DrawerDesign() {
 
 	return (
 		<>
-			<Box sx={{height:'92vh', overflowY:'auto'}}>
+			<Box sx={{ height: "92vh", overflowY: "auto" }}>
 				<Box>
 					<button onClick={saveProject}>Save Project</button>
 					<button onClick={saveAsNewProject}>Save as New Project</button>
@@ -147,12 +161,15 @@ function DrawerDesign() {
 									src={project.thumbnail} // Display the project thumbnail as an image
 									alt={`Project Thumbnail ${index}`}
 									width={120} // Set the desired thumbnail width
-									height={75} // Set the desired thumbnail height
+									height={67.5} // Set the desired thumbnail height
 								/>
 							</Box>
 							<button onClick={() => deleteProject(index)}>Delete</button>
 						</Box>
 					))}
+				</Box>
+				<Box>
+					<StickerSearch onStickerClick={addStickerToCanvas} />
 				</Box>
 			</Box>
 		</>

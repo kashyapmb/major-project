@@ -25,7 +25,7 @@ const CanvasContainer = ({
 	// let lastClickTime = 0
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			// preserveObjectStacking: true,
+			preserveObjectStacking: true,
 			width: 800,
 			height: 450,
 			backgroundColor: "white",
@@ -80,7 +80,7 @@ const CanvasContainer = ({
 			console.log(activeObject)
 
 			if (activeObject) {
-				if (activeObject.type === "text") {
+				if (activeObject.type === "i-text") {
 					updateObjectClicked(2)
 					setSelectedFontSize(activeObject.fontSize)
 					// setFontSize()
@@ -98,7 +98,7 @@ const CanvasContainer = ({
 			var activeObject = canvas.current.getActiveObject()
 
 			if (activeObject) {
-				if (activeObject.type === "text") {
+				if (activeObject.type === "i-text") {
 					updateObjectClicked(2)
 					setSelectedFontSize(activeObject.fontSize)
 				} else {

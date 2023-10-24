@@ -107,6 +107,26 @@ function Sidebar({ selectNum, setSelectNum }) {
 						alignItems: "center",
 						flexDirection: "column",
 						flexWrap: "wrap",
+						background: selectNum == 11 ? "#252627" : "#18191b",
+						color: "white",
+						opacity: selectNum == 11 ? "1" : "0.45",
+						":hover": { cursor: "pointer", opacity: "1", transition: "0.5s" },
+					}}
+					onClick={() => {
+						setSelectNum(11)
+					}}
+				>
+					<PiUploadSimpleFill size={25} />
+					<Typography sx={{ fontSize: "0.8rem" }}>Draw</Typography>
+				</Box>
+				<Box
+					sx={{
+						height: "4rem",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						flexDirection: "column",
+						flexWrap: "wrap",
 						background: selectNum == 5 ? "#252627" : "#18191b",
 						color: "white",
 						opacity: selectNum == 5 ? "1" : "0.45",

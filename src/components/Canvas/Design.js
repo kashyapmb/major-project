@@ -11,6 +11,7 @@ function Design() {
 	const [selectedColor, setSelectedColor] = useState("#000000")
 	const [selectedOpacity, setSelectedOpacity] = useState(1)
 	const [selectedFontSize, setSelectedFontSize] = useState(10)
+	const [emojiApiResponce, setEmojiApiResponce] = useState()
 
 	const [selectNum, setSelectNum] = useState(1)
 	const [layoutSize, setLayoutSize] = useState(8)
@@ -43,7 +44,12 @@ function Design() {
 
 				{selectNum != 0 && (
 					<Grid item xs={2.45}>
-						<Drawer selectNum={selectNum} setSelectNum={setSelectNum} />
+						<Drawer
+							selectNum={selectNum}
+							setSelectNum={setSelectNum}
+							emojiApiResponce={emojiApiResponce}
+							setEmojiApiResponce={setEmojiApiResponce}
+						/>
 					</Grid>
 				)}
 

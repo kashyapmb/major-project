@@ -28,7 +28,7 @@ function CanvasHeader({
 	const [selectedTextSize, setSelectedTextSize] = useState(20) // Initial text size is 20
 	const [isBold, setIsBold] = useState(false)
 	const [isItalic, setIsItalic] = useState(false)
-	const [isUnderline, setIsUnderline] = useState(true)
+	const [isUnderline, setIsUnderline] = useState(false)
 	const [letterSpacing, setLetterSpacing] = useState(0)
 	const [lineSpacing, setLineSpacing] = useState(0)
 

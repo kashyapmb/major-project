@@ -10,6 +10,7 @@ import ColorEffect from "./Editing/ColorEffect"
 import Position from "./Editing/Position"
 import EmojiLoad from "./EmojiLoad"
 import BackgroundColorEffect from "./Editing/BackgroundColorEffect"
+import DrawerDrawing from "./DrawerDrawing"
 
 function Drawer({ selectNum, setSelectNum, setEmojiApiResponce, emojiApiResponce }) {
 	return (
@@ -21,6 +22,7 @@ function Drawer({ selectNum, setSelectNum, setEmojiApiResponce, emojiApiResponce
 				{selectNum == 4 && <DrawerUpload />}
 				{selectNum == 5 && <DrawerAI />}
 				{selectNum == 6 && <Download />}
+				{selectNum == 11 && <DrawerDrawing />}
 				{selectNum == 7 && <ColorEffect />}
 				{selectNum == 10 && <BackgroundColorEffect />}
 				{selectNum == 8 && <Position />}
