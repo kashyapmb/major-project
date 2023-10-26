@@ -251,6 +251,36 @@ function CanvasHeader({
 		}
 	}
 
+	const shapeChanged = (shape) => {
+		const img = canvas.current.getActiveObject()
+		if (img) {
+			if (shape == "square") {
+				img.set({
+					clipPath: new fabric.Circle({
+						radius: 400,
+						originX: "center",
+						originY: "center",
+					}),
+				})
+			} else if (shape == "circle") {
+				img.set({
+					clipPath: new fabric.Circle({
+						radius: 300,
+						originX: "center",
+						originY: "center",
+					}),
+				})
+			} else if (shape == "polygon") {
+				img.set({
+					clipTo: function (ctx) {
+						ctx.rect(-img.width / 2, -img.height / 2, img.width, img.height)
+					},
+				})
+			}
+			canvas.current.renderAll()
+		}
+	}
+
 	return (
 		<>
 			<Box sx={{ height: "3rem", background: "white" }}>
@@ -298,6 +328,28 @@ function CanvasHeader({
 								</MenuItem>
 							</Menu>
 
+							<Box>
+								<Typography
+									onClick={() => shapeChanged("square")}
+									sx={{ cursor: "pointer" }}
+								>
+									Square
+								</Typography>
+							</Box>
+							<Box>
+								<Typography
+									onClick={() => shapeChanged("circle")}
+									sx={{ cursor: "pointer" }}
+								>
+									Circle
+								</Typography>
+							</Box>
+							<Box>
+								<Typography onClick={shapeChanged("polygon")}>
+									Polygon
+								</Typography>
+							</Box>
+
 							<Box
 								sx={{ height: "2rem", width: "2rem", cursor: "pointer" }}
 								onClick={() => setSelectNum(7)}
@@ -309,6 +361,33 @@ function CanvasHeader({
 								onClick={() => setSelectNum(8)}
 							>
 								<Typography>Position</Typography>
+							</Box>
+
+							<Box sx={{ ml: "2rem" }}>
+								<Button
+									id="basic-button2"
+									aria-controls={open2 ? "basic-menu2" : undefined}
+									aria-haspopup="true"
+									aria-expanded={open2 ? "true" : undefined}
+									onClick={handleClick2}
+								>
+									<RxTransparencyGrid size={25} color="black" />
+								</Button>
+								<Menu
+									id="basic-menu2"
+									anchorEl={anchorE2}
+									open={open2}
+									onClose={handleClose2}
+									MenuListProps={{
+										"aria-labelledby": "basic-button2",
+									}}
+								>
+									<MenuItem>
+										<Box
+											sx={{ display: "flex", flexDirection: "column" }}
+										></Box>
+									</MenuItem>
+								</Menu>
 							</Box>
 						</Box>
 					</>

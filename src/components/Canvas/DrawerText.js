@@ -217,6 +217,138 @@ function DrawerText() {
 		canvas.current.setActiveObject(text) // Select the added text box
 		canvas.current.renderAll()
 	}
+	const addTextBoxTheme7 = () => {
+		const text = new fabric.IText("Add Theme 7 Text", {
+			left: 20,
+			top: 270,
+			fill: "#ec42f5", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "white", // Set the stroke color to white
+			fontSize: 60, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Faster One", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme8 = () => {
+		const text = new fabric.IText("Add Theme 8 Text", {
+			left: 20,
+			top: 270,
+			fill: "#e6f511", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "#eb17a1", // Set the stroke color to white
+			fontSize: 60, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Rampart One", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme9 = () => {
+		const text = new fabric.IText("Add Theme 9 Text", {
+			left: 20,
+			top: 270,
+			fill: "#1df0ec", // Set the text fill color to transparent
+			//strokeWidth: 3, // Set the stroke width
+			//stroke: "white", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Nosifer", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme10 = () => {
+		const text = new fabric.IText("Add Theme 10 Text", {
+			left: 20,
+			top: 270,
+			fill: "#51e60b", // Set the text fill color to transparent
+			//strokeWidth: 3, // Set the stroke width
+			//stroke: "white", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			backgroundColor: "#eb17c0",
+			fontWeight: "bold",
+			fontFamily: "Tilt Prism", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+
+	const addTextBoxTheme11 = () => {
+		const text = new fabric.IText("Add Theme 11 Text", {
+			left: 20,
+			top: 270,
+			fill: "#edbf07", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "black", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Rubik Beastly", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme12 = () => {
+		const text = new fabric.IText("Add Theme 12 Text", {
+			left: 20,
+			top: 270,
+			fill: "#a1f511", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "#402975", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Bungee Shade", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme13 = () => {
+		const text = new fabric.IText("Add Theme 13 Text", {
+			left: 20,
+			top: 270,
+			fill: "#a1f511", // Set the text fill color to transparent
+			strokeWidth: 3, // Set the stroke width
+			stroke: "#402975", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Butcherman", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
+	const addTextBoxTheme14 = () => {
+		const text = new fabric.IText("Add Theme 14 Text", {
+			left: 20,
+			top: 270,
+			fill: "blue", // Set the text fill color to transparent
+			//   strokeWidth: 3, // Set the stroke width
+			//   stroke: "#402975", // Set the stroke color to white
+			fontSize: 50, // Adjust the font size as needed
+			type: "text",
+			fontFamily: "Train One", // Use the imported Google Font
+		})
+
+		canvas.current.add(text)
+		canvas.current.setActiveObject(text) // Select the added text box
+		canvas.current.renderAll()
+	}
 
 	const handleTextColorChange = (event) => {
 		setSelectedTextColor(event.target.value)
@@ -307,7 +439,7 @@ function DrawerText() {
 
 	return (
 		<>
-			<Box sx={{ p: "1rem" }}>
+			<Box sx={{ p: "1rem", height: "92vh", overflowY: "auto" }}>
 				<Typography sx={{ color: "white" }}>Default Text Styles</Typography>
 				<Box
 					sx={{
@@ -490,6 +622,158 @@ function DrawerText() {
 					onClick={addTextBoxTheme6}
 				>
 					Add a little style6 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme7}
+				>
+					Add a little style7 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme8}
+				>
+					Add a little style8 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme9}
+				>
+					Add a little style9 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme10}
+				>
+					Add a little style10 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme11}
+				>
+					Add a little style11 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme12}
+				>
+					Add a little style12 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme13}
+				>
+					Add a little style13 text
+				</Box>
+				<Box
+					sx={{
+						padding: "0.6rem",
+						display: "flex",
+						background: "#343536",
+						mt: "0.7rem",
+						color: "white",
+						fontWeight: "400",
+						fontSize: "1rem",
+						":hover": {
+							background: "#5f6160",
+							transition: "0.3s",
+							cursor: "pointer",
+						},
+					}}
+					onClick={addTextBoxTheme14}
+				>
+					Add a little style14 text
 				</Box>
 			</Box>
 		</>
