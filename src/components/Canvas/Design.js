@@ -34,8 +34,17 @@ function Design() {
 
 	return (
 		<>
-			<Box sx={{ paddingY: "1rem", background: "#15528b", color: "white" }}>
-				Header in Canvas
+			<Box
+				sx={{
+					pl: "2rem",
+					paddingY: "1rem",
+					color: "white",
+					background: "linear-gradient(90deg, rgba(8,75,155,1) 0%, rgba(205,0,255,1) 100%)",
+					// background: "#ff9493",
+					color: "white",
+				}}
+			>
+				Project: Youtube Thumbnail Maker
 			</Box>
 			<Grid container component="div" sx={{ height: "100%" }}>
 				<Grid item xs={0.55}>

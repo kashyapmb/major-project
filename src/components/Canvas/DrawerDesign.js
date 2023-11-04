@@ -140,10 +140,10 @@ function DrawerDesign() {
 	return (
 		<>
 			<Box sx={{ height: "92vh", overflowY: "auto" }}>
-				<Box>
-					<button onClick={saveProject}>Save Project</button>
-					<button onClick={saveAsNewProject}>Save as New Project</button>
-				</Box>
+				<Typography sx={{ color: "white", m: "1rem" }}>
+					Unique Designs:
+				</Typography>
+
 				<Box
 					sx={{
 						display: "flex",
@@ -164,13 +164,19 @@ function DrawerDesign() {
 									height={67.5} // Set the desired thumbnail height
 								/>
 							</Box>
-							<button onClick={() => deleteProject(index)}>Delete</button>
+							{/* <button onClick={() => deleteProject(index)}>Delete</button> */}
 						</Box>
 					))}
 				</Box>
-				<Box>
+
+				{/* <Box>
+					<button onClick={saveProject}>Save Project</button>
+					<button onClick={saveAsNewProject}>Save as New Project</button>
+				</Box> */}
+
+				{/* <Box>
 					<StickerSearch onStickerClick={addStickerToCanvas} />
-				</Box>
+				</Box> */}
 			</Box>
 		</>
 	)

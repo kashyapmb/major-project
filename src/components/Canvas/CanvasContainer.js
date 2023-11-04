@@ -7,6 +7,7 @@ import { BiSolidBackpack } from "react-icons/bi"
 import { Hexagon, Pentagon, Heptagon, Octagon } from "react-shapes"
 import Design from "./Design"
 import Templates from "./Datastore/Templates"
+import "fabric-history"
 
 export var canvasRef
 export var canvas
@@ -20,22 +21,20 @@ const CanvasContainer = ({
 	canvasRef = useRef(null)
 	canvas = useRef(null)
 
-	const [objId, setObjId] = useState(1)
-
-	// let lastClickTime = 0
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			preserveObjectStacking: true,
+			// preserveObjectStacking: true,
 			width: 800,
 			height: 450,
 			backgroundColor: "white",
 			selectionBorderColor: "#2563eb",
 		})
 
+		// canvas.current.history = new fabric.History(canvas.current)
+
 		// Enable history management for undo/redo
 		canvas.current.uniScaleTransform = true
 		canvas.current.uniScaleKey = "shiftKey"
-		canvas.current.uniScaleTransform = true
 
 		// Enable selection for resizing
 		canvas.current.selection = true
@@ -92,6 +91,8 @@ const CanvasContainer = ({
 			console.log(canvas.current.getActiveObject())
 			setSelectedColor(canvas.current.getActiveObject().fill)
 			setSelectedOpacity(canvas.current.getActiveObject().opacity)
+
+			saveCanvasState()
 		})
 		canvas.current.on("selection:updated", function (options) {
 			console.log("Updated")
@@ -107,6 +108,8 @@ const CanvasContainer = ({
 			}
 			setSelectedColor(canvas.current.getActiveObject().fill)
 			setSelectedOpacity(canvas.current.getActiveObject().opacity)
+
+			saveCanvasState()
 		})
 
 		// Event listener for object deselect
@@ -114,13 +117,15 @@ const CanvasContainer = ({
 			updateObjectClicked(0)
 		})
 
-		// // Event listener for canvas click to deselect
-		// canvas.current.on("mouse:down", function (options) {
-		// 	if (!options.target) {
-		// 		canvas.current.discardActiveObject()
-		// 		console.log("Deselected all objects")
-		// 	}
-		// })
+		canvas.current.on("object:modified", function () {
+			saveCanvasState()
+		})
+		
+		
+		//canvas.current.discardActiveObject()
+
+
+		saveCanvasState()
 
 		return () => {
 			canvas.current.dispose()
@@ -128,6 +133,40 @@ const CanvasContainer = ({
 			window.removeEventListener("mousedown", mouseHandle)
 		}
 	}, [])
+
+	var canvasHistory = []
+	var currentStateIndex = -1
+
+	// Function to save current canvas state
+	function saveCanvasState() {
+		console.log(canvasHistory)
+		var state = JSON.stringify(canvas.current)
+		var newCanvasHistory = [...canvasHistory, state]
+		canvasHistory = newCanvasHistory
+		currentStateIndex++
+	}
+
+	// Function to undo
+	function undo() {
+		if (currentStateIndex > 0) {
+			console.log(currentStateIndex)
+			currentStateIndex--
+			canvas.current.loadFromJSON(canvasHistory[currentStateIndex], () => {
+				canvas.current.renderAll()
+			})
+		}
+	}
+
+	// Function to redo
+	function redo() {
+		if (currentStateIndex < canvasHistory.length - 1) {
+			console.log(currentStateIndex)
+			currentStateIndex++
+			canvas.current.loadFromJSON(canvasHistory[currentStateIndex], () => {
+				canvas.current.renderAll()
+			})
+		}
+	}
 
 	const mouseHandle = () => {
 		// console.log("Mouse Down")
@@ -142,6 +181,12 @@ const CanvasContainer = ({
 				canvas.current.discardActiveObject()
 				canvas.current.renderAll()
 			}
+		} else if (event.ctrlKey && event.key === "z") {
+			console.log("Undo operations performed")
+			undo()
+		} else if (event.ctrlKey && event.key === "y") {
+			console.log("Redo operations performed")
+			redo()
 		}
 	}
 

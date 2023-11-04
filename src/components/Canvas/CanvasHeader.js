@@ -86,7 +86,7 @@ function CanvasHeader({
 
 	const toggleBold = () => {
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			setIsBold(!isBold)
 			activeObject.set("fontWeight", isBold ? "normal" : "bold")
 			canvas.current.renderAll()
@@ -95,7 +95,7 @@ function CanvasHeader({
 
 	const toggleItalic = () => {
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			setIsItalic(!isItalic)
 			activeObject.set("fontStyle", isItalic ? "normal" : "italic")
 			canvas.current.renderAll()
@@ -104,7 +104,7 @@ function CanvasHeader({
 
 	const toggleUnderline = () => {
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			setIsUnderline(!isUnderline)
 			activeObject.set("underline", isUnderline)
 			canvas.current.renderAll()
@@ -116,7 +116,7 @@ function CanvasHeader({
 		setLetterSpacing(newLetterSpacing)
 
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("charSpacing", newLetterSpacing)
 			canvas.current.renderAll()
 		}
@@ -126,7 +126,7 @@ function CanvasHeader({
 		setLineSpacing(newLineSpacing)
 
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("lineHeight", 1 + newLineSpacing / 10) // Adjust the factor as needed
 			canvas.current.renderAll()
 		}
@@ -138,7 +138,7 @@ function CanvasHeader({
 		setSelectedFontFamily(newFontFamily)
 
 		const activeObject = canvas.current.getActiveObject()
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("fontFamily", newFontFamily)
 			canvas.current.renderAll()
 		}
@@ -147,7 +147,7 @@ function CanvasHeader({
 	const handleIncrement = () => {
 		const activeObject = canvas.current.getActiveObject()
 		setSelectedFontSize(activeObject.fontSize + 1)
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("fontSize", selectedFontSize)
 			canvas.current.renderAll()
 		}
@@ -156,7 +156,7 @@ function CanvasHeader({
 	const handleDecrement = () => {
 		const activeObject = canvas.current.getActiveObject()
 		setSelectedFontSize(activeObject.fontSize - 1)
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("fontSize", selectedFontSize)
 			canvas.current.renderAll()
 		}
@@ -167,7 +167,7 @@ function CanvasHeader({
 		var size = 1
 		if (event.target.value != "NaN") size = event.target.value
 		setSelectedFontSize(size)
-		if (activeObject && activeObject.isType("text")) {
+		if (activeObject && activeObject.isType("i-text")) {
 			activeObject.set("fontSize", size)
 			canvas.current.renderAll()
 		}
@@ -257,7 +257,7 @@ function CanvasHeader({
 			if (shape == "square") {
 				img.set({
 					clipPath: new fabric.Circle({
-						radius: 400,
+						radius: 100000,
 						originX: "center",
 						originY: "center",
 					}),
@@ -277,6 +277,22 @@ function CanvasHeader({
 					},
 				})
 			}
+			canvas.current.renderAll()
+		}
+	}
+
+	const bringForward = () => {
+		const activeObject = canvas.current.getActiveObject()
+		if (activeObject) {
+			canvas.current.bringForward(activeObject)
+			canvas.current.renderAll()
+		}
+	}
+
+	const sendBackward = () => {
+		const activeObject = canvas.current.getActiveObject()
+		if (activeObject) {
+			canvas.current.sendBackwards(activeObject)
 			canvas.current.renderAll()
 		}
 	}
@@ -328,15 +344,24 @@ function CanvasHeader({
 								</MenuItem>
 							</Menu>
 
-							<Box>
+							{/* <Box>
 								<Typography
 									onClick={() => shapeChanged("square")}
 									sx={{ cursor: "pointer" }}
 								>
 									Square
 								</Typography>
-							</Box>
-							<Box>
+							</Box> */}
+							<Box
+								sx={{
+									width: "4rem",
+									p: "0.2rem",
+									border: "1px solid black",
+									borderRadius: "0.3rem",
+									display:'flex',
+
+								}}
+							>
 								<Typography
 									onClick={() => shapeChanged("circle")}
 									sx={{ cursor: "pointer" }}
@@ -344,27 +369,72 @@ function CanvasHeader({
 									Circle
 								</Typography>
 							</Box>
-							<Box>
+							{/* <Box>
 								<Typography onClick={shapeChanged("polygon")}>
 									Polygon
 								</Typography>
-							</Box>
+							</Box> */}
 
 							<Box
-								sx={{ height: "2rem", width: "2rem", cursor: "pointer" }}
+								sx={{
+									ml: "0.8rem",
+									height: "2rem",
+									width: "2rem",
+									cursor: "pointer",
+									p: "0.2rem",
+									border: "1px solid black",
+									borderRadius: "0.3rem",
+								}}
 								onClick={() => setSelectNum(7)}
 							>
 								<AiOutlineBgColors size={25} color="black" />
 							</Box>
 							<Box
-								sx={{ height: "2rem", width: "2rem", cursor: "pointer" }}
+								sx={{
+									ml: "0.8rem",
+									height: "2rem",
+									width: "4.6rem",
+									cursor: "pointer",
+									p: "0.2rem",
+									border: "1px solid black",
+									borderRadius: "0.3rem",
+								}}
 								onClick={() => setSelectNum(8)}
 							>
 								<Typography>Position</Typography>
 							</Box>
 
-							<Box sx={{ ml: "2rem" }}>
-								<Button
+							<Box sx={{ display: "flex" }}>
+								<Box
+									sx={{
+										ml: "0.8rem",
+										height: "2rem",
+										width: "5rem",
+										cursor: "pointer",
+										p: "0.2rem",
+										border: "1px solid black",
+										borderRadius: "0.3rem",
+									}}
+									onClick={bringForward}
+								>
+									<Typography>Forward</Typography>
+								</Box>
+								<Box
+									sx={{
+										ml: "0.8rem",
+										height: "2rem",
+										width: "5rem",
+										cursor: "pointer",
+										p: "0.2rem",
+										border: "1px solid black",
+										borderRadius: "0.3rem",
+									}}
+									onClick={sendBackward}
+								>
+									<Typography>Backward</Typography>
+								</Box>
+
+								{/* <Button
 									id="basic-button2"
 									aria-controls={open2 ? "basic-menu2" : undefined}
 									aria-haspopup="true"
@@ -387,7 +457,7 @@ function CanvasHeader({
 											sx={{ display: "flex", flexDirection: "column" }}
 										></Box>
 									</MenuItem>
-								</Menu>
+								</Menu> */}
 							</Box>
 						</Box>
 					</>

@@ -99,7 +99,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 					<PiUploadSimpleFill size={25} />
 					<Typography sx={{ fontSize: "0.8rem" }}>Upload</Typography>
 				</Box>
-				<Box
+				{/* <Box
 					sx={{
 						height: "4rem",
 						display: "flex",
@@ -118,7 +118,7 @@ function Sidebar({ selectNum, setSelectNum }) {
 				>
 					<PiUploadSimpleFill size={25} />
 					<Typography sx={{ fontSize: "0.8rem" }}>Draw</Typography>
-				</Box>
+				</Box> */}
 				<Box
 					sx={{
 						height: "4rem",

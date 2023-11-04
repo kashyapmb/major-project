@@ -362,7 +362,7 @@ function DrawerAI() {
 			const text = new fabric.Textbox(tagline, {
 				left: 10,
 				top: 10,
-				type: "text",
+				type: "i-text",
 				fontSize: 60,
 				fill: taglineTagProperties.textColor,
 				fontWeight: taglineTagProperties.isBold ? "bold" : "normal",
@@ -448,7 +448,7 @@ function DrawerAI() {
 							border: "1px solid gray",
 						}}
 					>
-						<Box>
+						{/* <Box>
 							{data
 								.filter((item) => {
 									const searchTerm = keyword.toLocaleLowerCase()
@@ -474,7 +474,7 @@ function DrawerAI() {
 										{item.words}
 									</Box>
 								))}
-						</Box>
+						</Box> */}
 					</Box>
 
 					<input
