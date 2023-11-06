@@ -14,6 +14,7 @@ function DrawerUpload() {
 	// Function to add the selected image to the canvas
 	const addImageToCanvas = (image) => {
 		const fabricImage = new fabric.Image(image, {
+			objName: "Image",
 			left: 0,
 			top: 0,
 			type: "image",

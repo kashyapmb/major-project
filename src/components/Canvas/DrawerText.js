@@ -33,6 +33,7 @@ function DrawerText() {
 
 	const addTextBoxHeading = () => {
 		const text = new fabric.IText("Add a Heading", {
+			objName: "Heading Text",
 			textBackgroundColor: "transparent",
 			left: 20,
 			top: 20,
@@ -55,6 +56,7 @@ function DrawerText() {
 	}
 	const addTextBoxSubHeading = () => {
 		const text = new fabric.IText("Add a Subheading", {
+			objName: "SubHeading Text",
 			textBackgroundColor: "transparent",
 			left: 20,
 			top: 80,
@@ -77,6 +79,7 @@ function DrawerText() {
 	}
 	const addTextBoxBodyText = () => {
 		const text = new fabric.IText("Add a body Text", {
+			objName: "Body Text",
 			textBackgroundColor: "transparent",
 			left: 20,
 			top: 125,
@@ -100,6 +103,7 @@ function DrawerText() {
 
 	const addTextBoxTheme1 = () => {
 		const text = new fabric.IText("Subscribe", {
+			objName: "Text",
 			left: 20,
 			top: 170,
 			fill: "red", // Set the text color to red
@@ -126,6 +130,7 @@ function DrawerText() {
 
 	const addTextBoxTheme2 = () => {
 		const text = new fabric.IText("Like & Share", {
+			objName: "Text",
 			left: 20,
 			top: 220,
 			fill: "#fff6a9", // Set the text color to blue
@@ -151,6 +156,7 @@ function DrawerText() {
 
 	const addTextBoxTheme3 = () => {
 		const text = new fabric.IText("Happy Birthday", {
+			objName: "Text",
 			left: 20,
 			top: 220,
 			width: "10rem",
@@ -167,6 +173,7 @@ function DrawerText() {
 
 	const addTextBoxTheme4 = () => {
 		const text = new fabric.IText("Add Theme 4 Text", {
+			objName: "Text",
 			left: 20,
 			top: 220,
 			fontWeight: "bold",
@@ -183,6 +190,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme5 = () => {
 		const text = new fabric.IText("Add Theme 5 Text", {
+			objName: "Text",
 			left: 20,
 			top: 220,
 			fill: "#e31948", // Set the text color to blue
@@ -198,6 +206,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme6 = () => {
 		const text = new fabric.IText("Add Theme 6 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "transparent", // Set the text fill color to transparent
@@ -219,6 +228,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme7 = () => {
 		const text = new fabric.IText("Add Theme 7 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#ec42f5", // Set the text fill color to transparent
@@ -235,6 +245,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme8 = () => {
 		const text = new fabric.IText("Add Theme 8 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#e6f511", // Set the text fill color to transparent
@@ -251,6 +262,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme9 = () => {
 		const text = new fabric.IText("Add Theme 9 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#1df0ec", // Set the text fill color to transparent
@@ -268,6 +280,7 @@ function DrawerText() {
 
 	const addTextBoxTheme10 = () => {
 		const text = new fabric.IText("Add Theme 10 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#51e60b", // Set the text fill color to transparent
@@ -287,6 +300,7 @@ function DrawerText() {
 
 	const addTextBoxTheme11 = () => {
 		const text = new fabric.IText("Add Theme 11 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#edbf07", // Set the text fill color to transparent
@@ -303,6 +317,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme12 = () => {
 		const text = new fabric.IText("Add Theme 12 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#a1f511", // Set the text fill color to transparent
@@ -319,6 +334,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme13 = () => {
 		const text = new fabric.IText("Add Theme 13 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "#a1f511", // Set the text fill color to transparent
@@ -335,6 +351,7 @@ function DrawerText() {
 	}
 	const addTextBoxTheme14 = () => {
 		const text = new fabric.IText("Add Theme 14 Text", {
+			objName: "Text",
 			left: 20,
 			top: 270,
 			fill: "blue", // Set the text fill color to transparent

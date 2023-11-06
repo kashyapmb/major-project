@@ -23,7 +23,7 @@ const CanvasContainer = ({
 
 	useEffect(() => {
 		canvas.current = new fabric.Canvas(canvasRef.current, {
-			// preserveObjectStacking: true,
+			preserveObjectStacking: true,
 			width: 800,
 			height: 450,
 			backgroundColor: "white",
@@ -187,6 +187,9 @@ const CanvasContainer = ({
 		} else if (event.ctrlKey && event.key === "y") {
 			console.log("Redo operations performed")
 			redo()
+		} else if (event.ctrlKey && event.key === 'm'){
+			const activeObject = canvas.current.getObjects()
+			console.log(activeObject)
 		}
 	}
 

@@ -116,6 +116,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addRectangle = () => {
 		const rect = new fabric.Rect({
+			objName: "Rectangle",
 			left: 20,
 			top: 20,
 			fill: "#111",
@@ -132,6 +133,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addSquare = () => {
 		const square = new fabric.Rect({
+			objName: "Square",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -149,6 +151,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 		const heart = new fabric.Path(
 			"M50 85 A20 20 0 0 1 90 85 Q100 130 50 175 Q0 130 10 85 A20 20 0 0 1 50 85",
 			{
+				objName: "Heart",
 				left: 20,
 				top: 20,
 				fill: selectedColor,
@@ -165,6 +168,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 		const leftArrowPath = new fabric.Path(
 			"M20 0 L0 20 L20 40 L20 30 L40 30 L40 10 L20 10",
 			{
+				objName: "Left Arrow",
 				left: 20,
 				top: 20,
 				fill: selectedColor,
@@ -180,6 +184,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 		const upArrowPath = new fabric.Path(
 			"M0 20 L20 0 L40 20 L30 20 L30 40 L10 40 L10 20",
 			{
+				objName: "Up Arrow",
 				left: 20,
 				top: 20,
 				width: 200,
@@ -206,6 +211,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 				{ x: 25, y: 40 },
 			],
 			{
+				objName: "Down Arrow",
 				left: 20,
 				top: 20,
 				fill: selectedColor,
@@ -231,6 +237,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 				{ x: 0, y: 10 },
 			],
 			{
+				objName: "Right Arrow",
 				left: 20,
 				top: 20,
 				fill: selectedColor,
@@ -244,6 +251,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addTrapezoidal = () => {
 		const trapezoidalPath = new fabric.Path("M0 0 L40 0 L30 40 L10 40 Z", {
+			objName: "Trapezoidal",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -256,6 +264,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addCircle = () => {
 		const circle = new fabric.Circle({
+			objName: "Circle",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -269,6 +278,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addTriangle = () => {
 		const triangle = new fabric.Triangle({
+			objName: "Triangle",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -290,6 +300,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 				{ x: 400, y: 400 },
 			],
 			{
+				objName: "Diamond",
 				left: 20,
 				top: 20,
 				fill: selectedColor,
@@ -316,6 +327,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 		]
 
 		const star = new fabric.Polygon(starPoints, {
+			objName: "Star",
 			left: 20,
 			top: 20,
 			fill: "#cbcac6",
@@ -328,6 +340,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addRoundedRectangle = () => {
 		const roundedRect = new fabric.Rect({
+			objName: "Rounded Rectangle",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -352,6 +365,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 				{ x: 140, y: 200 },
 			],
 			{
+				objName: "Pentagon",
 				fill: selectedColor,
 			}
 		)
@@ -366,6 +380,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 			"M100 0 L200 0 L250 86.6 L200 173.2 L100 173.2 L50 86.6 Z"
 		)
 		hexagonPath.set({
+			objName: "Hexagon",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -387,6 +402,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 				{ x: 150, y: 200 },
 			],
 			{
+				objName: "Heptagon",
 				fill: selectedColor,
 			}
 		)
@@ -401,6 +417,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 			"M100 0 L200 0 L250 50 L250 150 L200 200 L100 200 L50 150 L50 50 Z"
 		)
 		octagonPath.set({
+			objName: "Octagon",
 			left: 20,
 			top: 20,
 			fill: selectedColor,
@@ -412,6 +429,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addLine = () => {
 		const line = new fabric.Line([50, 50, 200, 50], {
+			objName: "Line",
 			stroke: selectedColor,
 			strokeWidth: 2,
 		})
@@ -422,6 +440,7 @@ function DrawerElements({ setSelectNum, setEmojiApiResponce }) {
 
 	const addEmoji = (stickerData) => {
 		const sticker = new fabric.Text(stickerData.character, {
+			objName: "Emoji",
 			left: 20,
 			top: 20,
 			fontSize: 120, // Customize the font size

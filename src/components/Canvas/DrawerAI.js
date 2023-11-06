@@ -341,6 +341,7 @@ function DrawerAI() {
 
 	const addImageToCanvas = (image) => {
 		const fabricImage = new fabric.Image(image, {
+			objName: "Image",
 			type: "image",
 			left: 0,
 			top: 0,
@@ -360,6 +361,7 @@ function DrawerAI() {
 
 		if (tagline) {
 			const text = new fabric.Textbox(tagline, {
+				objName: "Text",
 				left: 10,
 				top: 10,
 				type: "i-text",
