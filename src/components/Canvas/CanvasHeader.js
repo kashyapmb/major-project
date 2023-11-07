@@ -300,6 +300,8 @@ function CanvasHeader({
 	return (
 		<>
 			<Box sx={{ height: "3rem", background: "white" }}>
+
+				{/* For Element */}
 				{objectClicked === 1 && (
 					<>
 						<Box
@@ -358,8 +360,7 @@ function CanvasHeader({
 									p: "0.2rem",
 									border: "1px solid black",
 									borderRadius: "0.3rem",
-									display:'flex',
-
+									display: "flex",
 								}}
 							>
 								<Typography
@@ -434,34 +435,13 @@ function CanvasHeader({
 									<Typography>Backward</Typography>
 								</Box>
 
-								{/* <Button
-									id="basic-button2"
-									aria-controls={open2 ? "basic-menu2" : undefined}
-									aria-haspopup="true"
-									aria-expanded={open2 ? "true" : undefined}
-									onClick={handleClick2}
-								>
-									<RxTransparencyGrid size={25} color="black" />
-								</Button>
-								<Menu
-									id="basic-menu2"
-									anchorEl={anchorE2}
-									open={open2}
-									onClose={handleClose2}
-									MenuListProps={{
-										"aria-labelledby": "basic-button2",
-									}}
-								>
-									<MenuItem>
-										<Box
-											sx={{ display: "flex", flexDirection: "column" }}
-										></Box>
-									</MenuItem>
-								</Menu> */}
+
 							</Box>
 						</Box>
 					</>
 				)}
+
+				{/* For Text */}
 				{objectClicked === 2 && (
 					<Box
 						sx={{
@@ -1297,6 +1277,137 @@ function CanvasHeader({
 						</Menu>
 					</Box>
 				)}
+
+				{/* For Image */}
+				{objectClicked === 3 && (
+					<>
+						<Box
+							sx={{
+								pl: "1rem",
+								height: "3rem",
+								display: "flex",
+								alignItems: "center",
+							}}
+						>
+							<Button
+								id="basic-button"
+								aria-controls={open ? "basic-menu" : undefined}
+								aria-haspopup="true"
+								aria-expanded={open ? "true" : undefined}
+								onClick={handleClick}
+							>
+								<RxTransparencyGrid size={25} color="black" />
+							</Button>
+							<Menu
+								id="basic-menu"
+								anchorEl={anchorEl}
+								open={open}
+								onClose={handleClose}
+								MenuListProps={{
+									"aria-labelledby": "basic-button",
+								}}
+							>
+								<MenuItem>
+									<Box sx={{ display: "flex", flexDirection: "column" }}>
+										<Typography>Transparency</Typography>
+										<input
+											type="range"
+											id="opacitySlider"
+											min="0"
+											max="1"
+											step="0.01"
+											value={selectedOpacity}
+											onChange={handleOpacityChange}
+										/>
+									</Box>
+								</MenuItem>
+							</Menu>
+
+						
+							<Box
+								sx={{
+									width: "4rem",
+									p: "0.2rem",
+									border: "1px solid black",
+									borderRadius: "0.3rem",
+									display: "flex",
+								}}
+							>
+								<Typography
+									onClick={() => shapeChanged("circle")}
+									sx={{ cursor: "pointer" }}
+								>
+									Circle
+								</Typography>
+							</Box>
+						
+
+					
+							<Box
+								sx={{
+									ml: "0.8rem",
+									height: "2rem",
+									width: "4.6rem",
+									cursor: "pointer",
+									p: "0.2rem",
+									border: "1px solid black",
+									borderRadius: "0.3rem",
+								}}
+								onClick={() => setSelectNum(8)}
+							>
+								<Typography>Position</Typography>
+							</Box>
+
+							<Box sx={{ display: "flex" }}>
+								<Box
+									sx={{
+										ml: "0.8rem",
+										height: "2rem",
+										width: "5rem",
+										cursor: "pointer",
+										p: "0.2rem",
+										border: "1px solid black",
+										borderRadius: "0.3rem",
+									}}
+									onClick={bringForward}
+								>
+									<Typography>Forward</Typography>
+								</Box>
+								<Box
+									sx={{
+										ml: "0.8rem",
+										height: "2rem",
+										width: "5rem",
+										cursor: "pointer",
+										p: "0.2rem",
+										border: "1px solid black",
+										borderRadius: "0.3rem",
+									}}
+									onClick={sendBackward}
+								>
+									<Typography>Backward</Typography>
+								</Box>
+
+								<Box
+									sx={{
+										ml: "0.8rem",
+										height: "2rem",
+										width: "5rem",
+										cursor: "pointer",
+										p: "0.2rem",
+										border: "1px solid black",
+										borderRadius: "0.3rem",
+									}}
+									onClick={() => setSelectNum(20)}
+								>
+									<Typography>Filter</Typography>
+								</Box>
+
+							</Box>
+						</Box>
+					</>
+				)}
+
 			</Box>
 		</>
 	)

@@ -83,6 +83,8 @@ const CanvasContainer = ({
 					updateObjectClicked(2)
 					setSelectedFontSize(activeObject.fontSize)
 					// setFontSize()
+				} else if (activeObject.objName === "Image") {
+					updateObjectClicked(3)
 				} else {
 					updateObjectClicked(1)
 				}
@@ -102,6 +104,8 @@ const CanvasContainer = ({
 				if (activeObject.type === "i-text") {
 					updateObjectClicked(2)
 					setSelectedFontSize(activeObject.fontSize)
+				} else if (activeObject.objName === "Image") {
+					updateObjectClicked(3)
 				} else {
 					updateObjectClicked(1)
 				}
@@ -120,10 +124,8 @@ const CanvasContainer = ({
 		canvas.current.on("object:modified", function () {
 			saveCanvasState()
 		})
-		
-		
-		//canvas.current.discardActiveObject()
 
+		//canvas.current.discardActiveObject()
 
 		saveCanvasState()
 
@@ -156,7 +158,6 @@ const CanvasContainer = ({
 			})
 		}
 	}
-
 	// Function to redo
 	function redo() {
 		if (currentStateIndex < canvasHistory.length - 1) {
@@ -167,6 +168,46 @@ const CanvasContainer = ({
 			})
 		}
 	}
+
+
+	// Copy And Paste
+	var _clipboard
+	function Copy() {
+		// clone what are you copying since you
+		// may want copy and paste on different moment.
+		// and you do not want the changes happened
+		// later to reflect on the copy.
+		canvas.current.getActiveObject().clone(function (cloned) {
+			_clipboard = cloned
+		})
+	}
+	function Paste() {
+		// clone again, so you can do multiple copies.
+		_clipboard.clone(function (clonedObj) {
+			canvas.current.discardActiveObject()
+			clonedObj.set({
+				left: clonedObj.left + 10,
+				top: clonedObj.top + 10,
+				evented: true,
+			})
+			if (clonedObj.type === "activeSelection") {
+				// active selection needs a reference to the canvas.
+				clonedObj.canvas.current = canvas.current
+				clonedObj.forEachObject(function (obj) {
+					canvas.current.add(obj)
+				})
+				// this should solve the unselectability
+				clonedObj.setCoords()
+			} else {
+				canvas.current.add(clonedObj)
+			}
+			_clipboard.top += 10
+			_clipboard.left += 10
+			canvas.current.setActiveObject(clonedObj)
+			canvas.current.requestRenderAll()
+		})
+	}
+	
 
 	const mouseHandle = () => {
 		// console.log("Mouse Down")
@@ -187,9 +228,13 @@ const CanvasContainer = ({
 		} else if (event.ctrlKey && event.key === "y") {
 			console.log("Redo operations performed")
 			redo()
-		} else if (event.ctrlKey && event.key === 'm'){
+		} else if (event.ctrlKey && event.key === "m") {
 			const activeObject = canvas.current.getObjects()
 			console.log(activeObject)
+		} else if (event.ctrlKey && event.key === "c") {
+			Copy()
+		} else if (event.ctrlKey && event.key === "v") {
+			Paste()
 		}
 	}
 

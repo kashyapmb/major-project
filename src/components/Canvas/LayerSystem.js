@@ -33,13 +33,12 @@ function LayerSystem() {
 
 	useEffect(() => {
 		const obj = canvas.current.getObjects()
-		console.log(obj)
 		setCanvasObjects(obj)
 	}, [canvasObjects])
 	return (
 		<>
 			<Box sx={{ px: "1rem" }}>
-				<Typography sx={{ color: "white", mt: "0.6rem", userSelect: "none", }}>
+				<Typography sx={{ color: "white", mt: "0.6rem", userSelect: "none" }}>
 					Layering System:{" "}
 				</Typography>
 
@@ -111,7 +110,6 @@ function LayerSystem() {
 						Initial Background
 					</Typography>
 				</Box>
-
 			</Box>
 		</>
 	)

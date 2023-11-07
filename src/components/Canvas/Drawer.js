@@ -11,6 +11,7 @@ import Position from "./Editing/Position"
 import EmojiLoad from "./EmojiLoad"
 import BackgroundColorEffect from "./Editing/BackgroundColorEffect"
 import DrawerDrawing from "./DrawerDrawing"
+import BorderInsert from "./ImageFiltering"
 
 function Drawer({ selectNum, setSelectNum, setEmojiApiResponce, emojiApiResponce }) {
 	return (
@@ -27,6 +28,7 @@ function Drawer({ selectNum, setSelectNum, setEmojiApiResponce, emojiApiResponce
 				{selectNum == 10 && <BackgroundColorEffect />}
 				{selectNum == 8 && <Position />}
 				{selectNum == 9 && <EmojiLoad emojiApiResponce={emojiApiResponce} />}
+				{selectNum == 20 && <BorderInsert />}
 			</Box>
 		</>
 	)
